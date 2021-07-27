@@ -1,15 +1,19 @@
-// import logo from './logo.svg';
-import './App.css';
+
+import './App.scss';
+import Header from './components/Header'
+import MainBlock from './components/MainBlock'
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p> Ghbdtn vbh</p>
-
-      
+      <header>
+        <Header/>
+       
       </header>
+
+      <MainBlock/>
+
     </div>
   );
 }
