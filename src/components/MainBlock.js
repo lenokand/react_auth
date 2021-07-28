@@ -1,5 +1,6 @@
 
 import Sidebar from './Sidebar'
+import Guid from './Guid'
 
 function MainBlock() {
     return(
@@ -8,7 +9,13 @@ function MainBlock() {
 
 
         <Sidebar/>
-
+        <div className="main_content">
+      
+        <Guid/>
+      
+        </div>
+      
+        
         </div>
         </section>
         

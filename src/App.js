@@ -2,6 +2,7 @@
 import './App.scss';
 import Header from './components/Header'
 import MainBlock from './components/MainBlock'
+import Footer from './components/Footer'
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 
       <MainBlock/>
 
+    <Footer/>
     </div>
   );
 }

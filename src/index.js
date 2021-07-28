@@ -3,9 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
+// import { Router, Route, hashHistory } from 'react-router';
 
 ReactDOM.render(
+
+  // <Router history={hashHistory}>
+  // <Route path="/" component={App} />
+  // </Router>,
+  // document.getElementById('root')
+
   <React.StrictMode>
+    
     <App />
   </React.StrictMode>,
   document.getElementById('root')

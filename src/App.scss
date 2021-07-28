@@ -51,7 +51,7 @@ menu{
   }
 }
 .main_block{
- 
+ margin-bottom: 150px;
   
   .container{
     background-color: #FFFFFF;
@@ -65,6 +65,117 @@ menu{
     height: 100%;
     width: 71px;
     border-right:1px solid #EEEEEE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px ;
+    
+  }
+  .menu-item{
+    margin-bottom: 40px;
+    cursor: pointer;
+    position: relative;
+    .pointer{
+      width: 14px;
+      height: 14px;
+      border-radius: 120px;
+      background-color: #FF5F46;
+
+      font-weight: bold;
+      font-size: 8px;
+      line-height: 160.7%;
+      color: #FFFFFF;
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    svg{
+      fill:#BCBCBC;
+    }
+    
+    &:hover{
+      svg{
+        fill:  #FF5F46;
+      }
+    }
+
+
+
+  }
+
+ 
+}
+.guid{
+     padding: 67px 29px;
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     .title{
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 114%;
+      color: #202020;
+      margin-bottom: 13px;
+     }
+     .subtitle{
+      font-size: 16px;
+      line-height: 160.7%;
+      color: #7E7E7E;
+      margin-bottom: 33px;
+     }
+     .item_row{
+       display: flex;
+       align-items: flex-start;
+       font-size: 14px;
+        line-height: 160.7%;
+        color: #202020;
+        margin-bottom: 25px;
+        width: 100%; 
+       svg{
+         fill: #202020;
+         margin-right: 12px;
+         flex-basis: 30%;
+         max-width: 20px;
+       }
+     }
+}
+.colored_txt{
+  color: #FF5F46;
+}
+footer{
+  background: #3C3C3C;
+  padding: 50px 0;
+
+  .col_title{
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 124.7%;
+    color: #FFFFFF;
+  }
+  .col_content{
+    display: flex;
+    flex-direction: column;
+
+    &.foter_menu{
+      flex-direction: row;
+    }
+  }
+  .footer_row{
+    display: flex;
+    justify-content: space-between;
+    color: #fff ;
+    margin-bottom: 51px;
+    &:last-child{
+      font-size: 14px;
+    line-height: 124.7%;
+    color: #848484;
+    margin-bottom: 34px;
+    }
+  }
+  .adress{
+    max-width: 160px;
   }
 }
-
