@@ -18,42 +18,44 @@ function Footer() {
             <div className="footer_col logo_white">
                 <img src={logo_white} className="logo_white" alt="logo"/>
             </div>
+
             <div className="footer_col">
                 <div className="col_title">
                 Меню сайта
                 </div>
+
                 <div className="col_content foter_menu">
                 
                 <div className="content_left">
-                    <div className="">
-                    {arrow_right}
-                    <span>Главная </span>
+                    <div className="menu_item">
+                        {arrow_right}
+                        <span>Главная </span>
                     </div>
-                    <div className="">
-                    {arrow_right}
-                    <span>О нас </span>
+                    <div className="menu_item">
+                        {arrow_right}
+                        <span>О нас </span>
                     </div>
-                    <div className="">
-                    {arrow_right}
-                    <span>Портфолио </span>
+                    <div className="menu_item">
+                        {arrow_right}
+                        <span>Портфолио </span>
                     </div>
-                    <div className="">
-                    {arrow_right}
-                    <span>Отзывы </span>
+                    <div className="menu_item">
+                        {arrow_right}
+                        <span>Отзывы </span>
                     </div>
                 
                 </div>
                 <div className="content_right">
                 
-                    <div className="">
+                    <div className="menu_item">
                     {arrow_right}
                     <span>Вакансии </span>
                     </div>
-                    <div className="">
+                    <div className="menu_item">
                     {arrow_right}
                     <span>Блог </span>
                     </div>
-                    <div className="">
+                    <div className="menu_item">
                     {arrow_right}
                     <span>Контакты </span>
                     </div>
@@ -69,23 +71,23 @@ function Footer() {
                 <div className="col_title">
                     Наши услуги
                 </div>
-                <div className="content_right">
+                <div className="col_content">
                 
-                        <div className="">
-                        {arrow_right}
-                        <span>CEO продвижение </span>
+                        <div className="menu_item">
+                            {arrow_right}
+                            <span>CEO продвижение </span>
                         </div>
-                        <div className="">
-                        {arrow_right}
-                        <span>SMM продвижение </span>
+                        <div className="menu_item">
+                            {arrow_right}
+                            <span>SMM продвижение </span>
                         </div>
-                        <div className="">
-                        {arrow_right}
-                        <span>Настройка контекстной рекламы </span>
+                        <div className="menu_item">
+                            {arrow_right}
+                            <span>Настройка контекстной рекламы </span>
                         </div>
-                        <div className="">
-                        {arrow_right}
-                        <span>Разработка сайтов под ключ </span>
+                        <div className="menu_item">
+                            {arrow_right}
+                            <span>Разработка сайтов под ключ </span>
                         </div>
                
 
@@ -96,18 +98,18 @@ function Footer() {
                 <div className="col_title">
                     Наши контакты
                 </div>
-                <div className="content_right">
+                <div className="col_content">
                 
-                        <div className="">
+                        <div className="menu_item">
                         <img src={phone}  alt="phone"/>
                         <a>+7 (499) 403-17-10 </a>
                         </div>
-                        <div className="">
+                        <div className="menu_item">
                         <img src={wapp} alt="logo"/>
                         
                         <a>+7 (925) 957-17-81 </a>
                         </div>
-                        <div className="">
+                        <div className="menu_item">
                         <img src={mail}  alt="mail"/>
                         <a>info@digitalre.ru </a>
                         </div>
@@ -121,14 +123,14 @@ function Footer() {
                 <div className="col_title">
                     Наш офис
                 </div>
-                <div className="content_right">
+                <div className="col_content">
                 
-                        <div className="">
-                        <img src={geo}  alt="geo"/>
-                        <span>г. Москва, 22-ой км.
-                                домовладение 4,
-                                Киевское ш.
-                                БЦ Румянцево </span>
+                        <div className="menu_item">
+                            <img src={geo}  alt="geo"/>
+                            <span>г. Москва, 22-ой км.
+                                    домовладение 4,
+                                    Киевское ш.
+                                    БЦ Румянцево </span>
                         </div>
                         
                         
@@ -155,6 +157,9 @@ function Footer() {
 
         </div>
         
+        </div>
+        <div> 
+            
         </div>
         </footer>
         

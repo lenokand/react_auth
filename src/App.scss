@@ -15,6 +15,12 @@
   text-align: center;
   text-transform: uppercase;
    color: #FFFFFF;
+   transition: 400ms ease;
+  cursor: pointer;
+   &:hover{
+    background: #EE5139;
+    box-shadow: 0px 6px 28px -16px #FF5F46;
+   }
 
 }
 menu{
@@ -148,19 +154,39 @@ menu{
 footer{
   background: #3C3C3C;
   padding: 50px 0;
-
+  svg{
+    margin-right: 8px;
+  }
   .col_title{
     font-weight: 800;
     font-size: 14px;
     line-height: 124.7%;
     color: #FFFFFF;
+    margin-bottom: 23px;
   }
   .col_content{
     display: flex;
     flex-direction: column;
 
+    font-size: 14px;
+    line-height: 124.7%;
+    color: #FFFFFF;
+    .menu_item{
+      margin-bottom: 14px;
+      display: flex;
+      align-items: baseline;
+    }
+    img{
+      margin-right: 8px;
+    }
+
     &.foter_menu{
       flex-direction: row;
+     
+      .content_left{
+        margin-right: 38px;
+      }
+
     }
   }
   .footer_row{
@@ -168,11 +194,14 @@ footer{
     justify-content: space-between;
     color: #fff ;
     margin-bottom: 51px;
+    
     &:last-child{
+      border-top: 1px solid #4B4B4B;
       font-size: 14px;
     line-height: 124.7%;
     color: #848484;
     margin-bottom: 34px;
+    margin-top: 35px;
     }
   }
   .adress{

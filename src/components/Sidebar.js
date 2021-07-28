@@ -39,7 +39,7 @@ function Sidebar() {
                 </div>
                 <div className="menu-item">
                 {dialog}
-                
+                <div className="pointer">3</div>
 
                 </div>
                 <div className="menu-item">
@@ -53,7 +53,7 @@ function Sidebar() {
                 </div>
                 <div className="menu-item">
                 {settings}
-                <div className="pointer">3</div>
+                
 
                 </div>
             </nav>
