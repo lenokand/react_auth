@@ -201,10 +201,36 @@ footer{
     line-height: 124.7%;
     color: #848484;
     margin-bottom: 34px;
-    margin-top: 35px;
+    // margin-top: 35px;
+    padding-top: 35px ;
     }
   }
   .adress{
     max-width: 160px;
+  }
+  .toTop{
+    position: fixed; 
+   
+   left: 90%;
+   bottom: 10%;
+
+   height: 52px;
+   width: 52px;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  
+   z-index: 1;
+   cursor: pointer;
+
+    background: #FF5F46;
+    box-shadow: 0px 12px 32px rgba(255, 95, 70, 0.42);
+    border-radius: 120px;
+    svg{
+      margin-right: 0;
+    }
+
+  
   }
 }

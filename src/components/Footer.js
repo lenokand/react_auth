@@ -1,3 +1,4 @@
+import ScrollButton from './ScrollButton'; 
 import logo_white from '../img/logo_white.svg'; 
 import wapp from '../img/wapp.png'; 
 import phone from '../img/phone.png'; 
@@ -161,6 +162,7 @@ function Footer() {
         <div> 
             
         </div>
+        <ScrollButton />
         </footer>
         
     )}
