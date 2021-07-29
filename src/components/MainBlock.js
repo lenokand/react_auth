@@ -2,6 +2,7 @@
 import Sidebar from './Sidebar'
 import Guid from './Guid'
 import PersonalCabinet from './PersonalCabinet'
+import General from './General'
 
 function MainBlock() {
     return(
@@ -13,7 +14,8 @@ function MainBlock() {
         <div className="main_content">
       
         {/* <Guid/> */}
-        <PersonalCabinet/>
+        {/* <PersonalCabinet/>  */}
+        <General/> 
       
         </div>
       

@@ -379,7 +379,7 @@ footer {
 
     .active_btn {
       border-radius: 10px;
-      padding: 9px 10px;
+      padding: 10px 10px;
 
       font-weight: bold;
       font-size: 14px;
@@ -389,7 +389,7 @@ footer {
       width: 124px;
       max-width: 124px;
       text-align: center;
-
+      text-transform: unset;
 
 
     }
@@ -445,4 +445,31 @@ footer {
     }
   }
 
+}
+.general{
+  padding: 67px 100px 67px 29px ;
+  display: flex;
+  .title{
+    margin-bottom: 19px;
+  }
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    flex-basis: 90%;
+    max-width: 770px;
+  }
+  .general-title{
+    font-size: 16px;
+    line-height: 160.7%;
+    color: #7E7E7E;
+    margin-bottom: 20px;
+  }
+  .general-body{
+    margin-bottom: 37px;
+  }
+  .seo-submenu{
+    flex-basis: 20%;
+    max-width: 170px;
+  }
 }
