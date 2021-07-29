@@ -23,7 +23,7 @@ return(
             <div className="general-block">
 
                      {data.map((item, index )=>
-                         (   <div className="general-progects">
+                         (<div className="general-progects">
                                 <div className="general-title">
                                     {item.title}
                                 </div> 
@@ -33,13 +33,13 @@ return(
                                 </div> 
       
                             </div>
-                            ))}
+                        ))}
 
                
                
             </div>
         </div>
-        
+
         <SeoSubmenu/>
         
        
