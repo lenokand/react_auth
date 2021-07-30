@@ -400,6 +400,8 @@ footer {
 
 }
 .navigation_row {
+  text-decoration: none;
+
   display: flex;
   padding: 13px;
   align-items: center;
@@ -504,4 +506,86 @@ footer {
     }
   } 
   // 
+}
+.dialog{
+  padding: 70px 100px 70px 29px ;
+  display: flex;
+  flex-direction: column;
+  .title{
+    margin-bottom: 19px;
+  }
+  .subtitle{
+    font-size: 16px;
+line-height: 160.7%;
+color: #7E7E7E;
+margin-bottom: 22px;
+  }
+
+
+  .dialog-block{
+    border: 1px solid #EEEEEE;
+    box-sizing: border-box;
+    border-radius: 10px;
+  }
+  .left-block{
+    max-width: 370px;
+    flex-basis: 40%;
+    border-right: 1px solid #EEEEEE;
+  }
+  .right-block{
+    max-width: 600px;
+    flex-basis: 65%;
+  }
+  .dialog-row{
+    padding: 19px 28px;
+    display: flex;
+    border-bottom: 1px solid #EEEEEE;
+    .dialog-preveiw{
+      flex-grow: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    .dialog-info{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    .dialog-avatar{
+      border-radius: 120px;
+      object-fit: cover;
+      object-position: center;
+      margin-right: 15px;
+    }
+
+    .autor-name, .diallog-oponent{
+      font-size: 14px;
+      line-height: 124.3%;
+      color: #202020;
+
+    }
+   .last-message {
+      font-size: 14px;
+      line-height: 124.3%;
+      color: #969696;
+    }
+    .diallog-time{
+      font-size: 14px;
+      line-height: 124.3%;
+      text-align: right;
+      color: #969696;
+    }
+    .diallog-status{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 120px;
+      background-color: #FF5F46;
+      width: 16px;
+      height: 16px;
+      font-size: 8px;
+      line-height: 160.7%;
+      color: #FFFFFF;
+    }
+  }
 }

@@ -1,8 +1,11 @@
 
+import React from "react";
 import Sidebar from './Sidebar'
 import Guid from './Guid'
 import PersonalCabinet from './PersonalCabinet'
 import General from './General'
+import Dialog from './Dialog'
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -12,40 +15,41 @@ import {
 function MainBlock() {
     return(
         <section className="main_block">
-        <div className="container">
-
-
-        <Sidebar/>
-        <div className="main_content">
         <Router >
-            <Switch>
-                <Route exact path='/'>
-                    <Guid />
-                </Route>
-                <Route path='/home'>
-                1
-                </Route>
+            <div className="container">
+                <Sidebar/>
+                <div className="main_content">
+            
+                    <Switch>
+                        <Route exact path='/'>
+                        <Guid />
+                        </Route>
 
-                <Route path='/seo'>
-                    <PersonalCabinet/>
-                </Route>
+                        <Route path='/home'>
+                        <Guid />
+                        </Route>
 
-                <Route path='/dialog'>
-                    <General/> 
-                </Route>
-                    
+                        <Route exact path='/seo'>
+                            <PersonalCabinet/>
+                        </Route>
+
+                        <Route path='/dialog'>
+                             <Dialog/>
+                        </Route>
+                        <Route path='/seo/main'>
+                             <General/> 
+                        </Route>
 
 
-            </Switch>
+                    </Switch>
+                
+                {/* <Guid/> */}
+                {/* <PersonalCabinet/>  */}
+                {/* <General/>  */}
+            
+                </div>
+            </div>
         </Router >
-        {/* <Guid/> */}
-        {/* <PersonalCabinet/>  */}
-        {/* <General/>  */}
-      
-        </div>
-      
-        
-        </div>
         </section>
         
     )}
