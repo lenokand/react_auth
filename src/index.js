@@ -2,21 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 // import reportWebVitals from './reportWebVitals';
-// import { Router, Route, hashHistory } from 'react-router';
+
 
 ReactDOM.render(
 
-  // <Router history={hashHistory}>
-  // <Route path="/" component={App} />
-  // </Router>,
-  // document.getElementById('root')
-
-  <React.StrictMode>
-    
-    <App />
-  </React.StrictMode>,
+  <Router >
+    <Route path="/" component={App} />
+  </Router>,
   document.getElementById('root')
+
+  // <React.StrictMode>
+    
+  //   <App />
+  // </React.StrictMode>,
+  // document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

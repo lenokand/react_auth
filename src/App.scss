@@ -396,55 +396,71 @@ footer {
 
   }
 
-  .navigation_row {
-    display: flex;
-    padding: 13px;
-    align-items: center;
-    background: #F5F5F5;
-    border-radius: 10px;
-    // width: 100%;
-    margin-bottom: 8px;
-    cursor: pointer;
-    transition: 300ms ease;
+ 
 
-    &:hover {
-      background: #f0efef;
+}
+.navigation_row {
+  display: flex;
+  padding: 13px;
+  align-items: center;
+  background: #F5F5F5;
+  border-radius: 10px;
+  // width: 100%;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: 300ms ease;
+  &.active,
+  &:hover {
+    background: #f0efef;
+    .icon{
+      transition: 300ms ease;
+      background-color: #FFFFFF;
+      svg{
+        fill: #FF5F46;
+        transition: 300ms ease;
+      }
     }
 
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      // align-items: center;
-    }
-
-    .item-description {
-      font-size: 12px;
-      line-height: 114%;
-      color: #202020;
-    }
-
-    .item-title {
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 114%;
-      color: #202020;
-      margin-bottom: 3px;
-    }
-
-    .icon {
-      // padding: 9px;
-      background: #FF5F46;
-      border-radius: 6px;
-      width: 38px;
-      height: 38px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-right: 12px;
-
-    }
   }
 
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+  }
+
+  .item-description {
+    font-size: 12px;
+    line-height: 114%;
+    color: #202020;
+  }
+
+  .item-title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 114%;
+    color: #202020;
+    margin-bottom: 3px;
+  }
+
+  .icon {
+    // padding: 9px;
+    background: #FF5F46;
+    border-radius: 6px;
+    max-width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    flex-basis: 40%;
+    transition: 300ms ease;
+    svg{
+      fill: white;
+      transition: 300ms ease;
+    }
+   
+  }
 }
 .general{
   padding: 67px 100px 67px 29px ;
@@ -472,4 +488,20 @@ footer {
     flex-basis: 20%;
     max-width: 170px;
   }
+  // 
+  .seo-navigation{
+    max-width: 170px;
+  }
+  .navigation_row{
+    width: 170px;
+    box-sizing: border-box;
+    
+    .wrapper{
+      margin-right: 0;
+    }
+    .item-description{
+      display: none;
+    }
+  } 
+  // 
 }
