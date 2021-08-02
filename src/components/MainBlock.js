@@ -18,7 +18,7 @@ import Docs from "./Docs";
 function MainBlock() {
     return(
         <section className="main_block">
-        <Router >
+        {/* <Router > */}
             <div className="container">
                 <Sidebar/>
                 <div className="main_content">
@@ -60,7 +60,7 @@ function MainBlock() {
             
                 </div>
             </div>
-        </Router >
+        {/* </Router > */}
         </section>
         
     )}
