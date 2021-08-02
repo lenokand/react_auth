@@ -595,6 +595,7 @@ footer {
         box-sizing: border-box;
         border-radius: 120px;
       }
+     
 
     }
 
@@ -680,6 +681,7 @@ footer {
     }
 
     .status {
+      display: none;
       font-size: 14px;
       line-height: 124.3%;
 
@@ -707,6 +709,7 @@ footer {
 
       .status {
         color: #7ED320;
+        display: block;
       }
     }
   }
@@ -831,5 +834,23 @@ footer {
       outline: none;
       margin-left: 18px;
     }
+  }
+}
+.settings{
+  padding: 67px 29px;
+  .title{
+
+  }
+}
+
+.docs{
+  padding: 67px 100px 67px 30px;
+  .title{
+    margin-bottom: 19px;
+  }
+  .subtitle{
+    font-size: 16px;
+    line-height: 160.7%;
+    color: #7E7E7E;
   }
 }

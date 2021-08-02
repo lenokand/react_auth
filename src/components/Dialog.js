@@ -1,4 +1,5 @@
 import React from 'react';
+import ChatForm from './ChatForm';
 import {
     BrowserRouter as Router,
     Switch,
@@ -65,7 +66,42 @@ export default function Dialog() {
         time: '9:41',
         status: 'oponent'
     },
-]
+    ]
+    function  UserInfo(props) {
+        return(
+            
+                    <div >
+                       
+                        {dialogMenu.map((item, index )=>
+                            (       
+                                <Switch>
+                                    <Route exact path={`/dialog/${index + 1}`}>
+                                    
+                                    <div className={`autor ${item.online}`} >
+                                            
+                                            <img src={item.avatar}  className="dialog-avatar"/>
+                                            <div className="wrapper">
+                                                <div className="autor-name"> {item.name}</div>  
+                                                <div className="status ">В сети</div>
+                                            </div>
+                                    
+                                        </div>
+                                    </Route> 
+                                </Switch>
+
+                                ))}
+                      
+                    </div>
+
+
+
+            
+          
+        )
+       
+    }
+
+
     return (
         <div className="dialog">
             <div className="title">
@@ -84,7 +120,7 @@ export default function Dialog() {
                                          
                     </div>
 
-                    <Router >
+                    {/* <Router > */}
                         {dialogMenu.map((item, index )=>
                                     (  <Link to={`/dialog/${index + 1}`}   key={index} >
 
@@ -106,7 +142,7 @@ export default function Dialog() {
 
                                         </Link>
                                 ))}
-                    </Router>
+                    {/* </Router> */}
 
                     {/* <div className="dialog-row">
 
@@ -126,7 +162,9 @@ export default function Dialog() {
                 </div>
 
                 <div className="right-block">
-                    <div className=" autor online">
+                    <UserInfo/>
+
+                    {/* <div className=" autor online">
                         
                         <img src={avatar1}  className="dialog-avatar"/>
                         <div className="wrapper">
@@ -134,7 +172,8 @@ export default function Dialog() {
                             <div className="status ">В сети</div>
                         </div>
                     
-                    </div>
+                    </div> */}
+                 
 
                     <div className="chat-block ">
 
@@ -178,10 +217,11 @@ export default function Dialog() {
                         
 
                     </div>
-                    <form className="chat-form">
-                            <input placeholder="Напишите сообщение..." />
-                            <button type="submit"> {send}  </button>
-                        </form>
+                    {/* <ChatForm/> */}
+                    <form  className="chat-form">
+                        <input placeholder="Напишите сообщение..."  />
+                        <button type="submit"> {send}  </button>
+                    </form>
 
 
                 </div>

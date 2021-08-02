@@ -36,7 +36,7 @@ function Sidebar() {
     return(
         <div className="sidebar">
             <nav>
-                <Router >
+                {/* <Router > */}
                     <Link to="/home">
                     
                         <div className="menu-item">
@@ -79,7 +79,7 @@ function Sidebar() {
                         </div>
                     </Link>
 
-                </Router>
+                {/* </Router> */}
             </nav>
         </div>
         
