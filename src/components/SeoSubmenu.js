@@ -115,7 +115,7 @@ function SeoSubmenu() {
         <div className="seo-navigation">
                 <Router >
                         {navigation.map((item, index )=>
-                                    (  <Link to={`${url}${item.path}`} className="navigation_row"  key={index} >
+                                    (  <Link to={`seo${item.path}`} className="navigation_row"  key={index} >
                                                 <div className="icon">{item.icon}</div>
                                                 <div className="wrapper">
                                                     <div className="item-title"> {item.title}</div>

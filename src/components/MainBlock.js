@@ -21,12 +21,12 @@ function MainBlock() {
                 <div className="main_content">
             
                     <Switch>
-                        <Route exact path='/'>
-                        <Guid />
+                        <Route exact path='/' component={Guid}>
+                        {/* <Guid /> */}
                         </Route>
 
-                        <Route path='/home'>
-                        <Guid />
+                        <Route path='/home' component={Guid}>
+                        {/* <Guid /> */}
                         </Route>
 
                         <Route exact path='/seo'>
