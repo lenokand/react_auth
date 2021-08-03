@@ -1093,6 +1093,28 @@ footer {
     flex-basis: 90%;
     max-width: 770px;
   }
+  .seo-submenu {
+    flex-basis: 20%;
+    max-width: 170px;
+  }
+
+  // 
+  .seo-navigation {
+    max-width: 170px;
+  }
+
+  .navigation_row {
+    width: 170px;
+    box-sizing: border-box;
+
+    .wrapper {
+      margin-right: 0;
+    }
+
+    .item-description {
+      display: none;
+    }
+  }
 }
 
 

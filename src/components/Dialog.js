@@ -101,7 +101,7 @@ export default class Dialog  extends Component {
             id: Date.now(),
             avatar: avatar1,
             message: this.state.newPhrase,
-            time: date.getHours() +":"+ date.getMinutes() ,
+            time: date.getHours() +":"+ (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes() ) ,
             status: 'user'
         }
         let tmp = this.state.chat
