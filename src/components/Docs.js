@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
+import DocsBlock from './DocsBlock'
 
 export default function Docs() {
     const triple = (
@@ -10,13 +11,17 @@ export default function Docs() {
 
     )
 
-    // let [visible, setVisible] = useState(false)
+    // let [show, setVisible] = useState(false)
    
 
-    // let openMenu = () => {
-    //     setVisible(!visible)
+    // let openSettings = () => {
+    //     setVisible(!show)
+      
     //     };
 
+
+       
+       
 
     return (
         <div className="docs">
@@ -28,26 +33,9 @@ export default function Docs() {
                <br/> Сотрудничая с Demis Group, Вы получаете подарки, бонусы и скидки; и чем выше Ваш статус — тем больше возможностей
                 Вы получаете.
             </div> 
-            {/* <div className="submenu"  style={{display: visible ? 'flex' : 'none'}}>Submenu</div> */}
-            <div className="docs-block">
-                <div className="block-item">
-                    <div className="item-title">
-                        Категория документов №1
-                    </div>
-                    <div className="item-rows">
-                        <div className="item-row">
-                            <div>Имя документа №1</div> 
-                            <div>Номер документа</div> 
-                            <div>Дата документа</div>
-                            <buttom> {triple} </buttom>
-                            
-                        </div>
-                    </div>
+            <DocsBlock/>  
 
-                </div>
-                
-            </div>
-
+           
         </div>
     )
 }

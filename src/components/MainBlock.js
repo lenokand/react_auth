@@ -14,22 +14,26 @@ import General from './General'
 import Dialog from './Dialog'
 import Settings from "./Settings";
 import Docs from "./Docs";
+import SeoPosition from "./SeoPosition";
+import SeoIndex from "./SeoIndex";
+import SeoReport from "./SeoReport";
+import SeoServices from "./SeoServices";
 
 function MainBlock() {
     return(
         <section className="main_block">
-        {/* <Router > */}
+       
             <div className="container">
                 <Sidebar/>
                 <div className="main_content">
             
                     <Switch>
                         <Route exact path='/' component={Guid}>
-                        {/* <Guid /> */}
+                     
                         </Route>
 
                         <Route path='/home' component={Guid}>
-                        {/* <Guid /> */}
+                       
                         </Route>
 
                         <Route exact path='/seo'>
@@ -38,6 +42,18 @@ function MainBlock() {
 
                         <Route path='/seo/main'>
                              <General/> 
+                        </Route>
+                        <Route path='/seo/position'>
+                             <SeoPosition/>
+                        </Route>
+                        <Route path='/seo/index'>
+                             <SeoIndex/>
+                        </Route>
+                        <Route path='/seo/report'>
+                             <SeoReport/>
+                        </Route>
+                        <Route path='/seo/services'>
+                             <SeoServices/>
                         </Route>
 
                         <Route path='/dialog'>
@@ -54,13 +70,11 @@ function MainBlock() {
 
                     </Switch>
                 
-                {/* <Guid/> */}
-                {/* <PersonalCabinet/>  */}
-                {/* <General/>  */}
+              
             
                 </div>
             </div>
-        {/* </Router > */}
+       
         </section>
         
     )}

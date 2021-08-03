@@ -1,6 +1,8 @@
 .container {
   max-width: 1170px;
   margin: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .active_btn {
@@ -809,6 +811,8 @@ footer {
     padding-top: 5px;
     padding-left: 33px;
     padding-right: 27px;
+    padding-bottom: 30px;
+
     // width: 100%;
     // position: absolute;
   
@@ -857,6 +861,7 @@ footer {
   .block-item{
     display: flex;
     flex-direction: column;
+    margin-bottom: 30px;
     .item-title{
       font-weight: bold;
     font-size: 18px;
@@ -868,6 +873,8 @@ footer {
       
     }
     .item-row{
+      margin-bottom: 14px;
+      position: relative;
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid #EEEEEE;
@@ -878,5 +885,253 @@ footer {
         border-bottom: 1px solid #e6e4e4;
       }
     }
+    button{
+      background: none;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      padding-right: 9px;
+    }
   }
+  .docs-block{
+    .settings{
+      position: absolute;
+      top: -16px;
+      right: 26px;
+      flex-direction: column;
+      padding: 0 ;
+      background: #F5F5F5;
+      border-radius: 10px;
+      a{
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 160.7%;
+        color: #7E7E7E;
+      }
+    
+      div{
+        padding: 8px 18px;
+        border-bottom: 1px solid #EEEEEE;
+        &:last-child{
+          border-bottom:none;
+        }
+      }
+    }
+  }
+}
+
+
+.position{
+
+  padding: 63px 100px 63px 29px;
+  display: flex;
+
+  .title {
+    margin-bottom: 19px;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    flex-basis: 90%;
+    max-width: 770px;
+  }
+
+  .general-title {
+    font-size: 16px;
+    line-height: 160.7%;
+    color: #7E7E7E;
+    margin-bottom: 20px;
+  }
+
+  .general-body {
+    margin-bottom: 37px;
+  }
+
+  .seo-submenu {
+    flex-basis: 20%;
+    max-width: 170px;
+  }
+
+  // 
+  .seo-navigation {
+    max-width: 170px;
+  }
+
+  .navigation_row {
+    width: 170px;
+    box-sizing: border-box;
+
+    .wrapper {
+      margin-right: 0;
+    }
+
+    .item-description {
+      display: none;
+    }
+  }
+}
+
+
+
+.index{
+  padding: 63px 100px 63px 29px;
+  display: flex;
+
+  .title {
+    margin-bottom: 19px;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    flex-basis: 90%;
+    max-width: 770px;
+  }
+
+  .general-title {
+    font-size: 16px;
+    line-height: 160.7%;
+    color: #7E7E7E;
+    margin-bottom: 20px;
+  }
+
+  .general-body {
+    margin-bottom: 37px;
+  }
+
+  .seo-submenu {
+    flex-basis: 20%;
+    max-width: 170px;
+  }
+
+  // 
+  .seo-navigation {
+    max-width: 170px;
+  }
+
+  .navigation_row {
+    width: 170px;
+    box-sizing: border-box;
+
+    .wrapper {
+      margin-right: 0;
+    }
+
+    .item-description {
+      display: none;
+    }
+  }
+}
+.report{
+  padding: 63px 100px 63px 29px;
+  display: flex;
+
+  .title {
+    margin-bottom: 19px;
+  }
+  .subtitle {
+    font-size: 16px;
+    line-height: 160.7%;
+    color: #7E7E7E;
+    margin-bottom: 22px;
+
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    flex-basis: 90%;
+    max-width: 770px;
+  }
+
+  .general-title {
+    font-size: 16px;
+    line-height: 160.7%;
+    color: #7E7E7E;
+    margin-bottom: 20px;
+  }
+
+  .general-body {
+    margin-bottom: 37px;
+  }
+
+  .seo-submenu {
+    flex-basis: 20%;
+    max-width: 170px;
+  }
+
+  // 
+  .seo-navigation {
+    max-width: 170px;
+  }
+
+  .navigation_row {
+    width: 170px;
+    box-sizing: border-box;
+
+    .wrapper {
+      margin-right: 0;
+    }
+
+    .item-description {
+      display: none;
+    }
+  }
+}
+
+.services{
+  padding: 63px 100px 63px 29px;
+  display: flex;
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    flex-basis: 90%;
+    max-width: 770px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen  and (max-width:1200px){
+
+}
+@media screen  and (max-width:991px){
+  .docs{
+    .docs-block{
+      overflow: auto;
+      .block-item{
+        width: 725px;
+      }
+    }
+  }
+  footer .footer_row{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    .footer_col {
+      margin-right: 20px;
+      margin-left: 20px;
+      margin-bottom: 30px;
+    }
+  }
+
+
 }

@@ -37,7 +37,7 @@ function SeoSubmenu() {
             </svg>),
             title: 'Позиции',
             description: 'Отчеты по позициям и деньгам',
-            path:'/main'
+            path:'/position'
         },
         {
             icon: (<svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@ function SeoSubmenu() {
             ),
             title: 'Показатели',
             description: 'Данные из сервисов статистики',
-            path:'/main'
+            path:'/index'
         },
         {
             icon: (<svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +59,7 @@ function SeoSubmenu() {
             </svg>),
             title: 'Отчеты',
             description: 'Ежемесячные отчеты за последние 12 месяцев ',
-            path:'/main'
+            path:'/report'
         },
         {
             icon: (<svg width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@ function SeoSubmenu() {
             </svg>),
             title: 'Услуги',
             description: 'Дополнительные услуги продвижения',
-            path:'/main'
+            path:'/services'
         },
         {
             icon: (<svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
