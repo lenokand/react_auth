@@ -13,7 +13,7 @@ export default function UserInfo(props) {
             <div >
                      {props.dialogMenu.map((item, index )=>
                                               (       
-                                                  <Switch>
+                                                  <Switch key={index}>
                                                       <Route exact path={`/dialog/${index + 1}`}>
                                                       
                                                       <div className={`autor ${item.online}`} >

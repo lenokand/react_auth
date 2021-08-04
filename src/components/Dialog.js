@@ -96,12 +96,13 @@ export default class Dialog  extends Component {
     handleFormSubmit(e) {
         e.preventDefault()
         let date= new Date()
+        let usertime = date.getHours() +":"+ (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes() )
        
         let phrase = {
             id: Date.now(),
             avatar: avatar1,
             message: this.state.newPhrase,
-            time: date.getHours() +":"+ (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes() ) ,
+            time: usertime ,
             status: 'user'
         }
         let tmp = this.state.chat

@@ -18,6 +18,7 @@ import SeoPosition from "./SeoPosition";
 import SeoIndex from "./SeoIndex";
 import SeoReport from "./SeoReport";
 import SeoServices from "./SeoServices";
+import SeoInspection from "./SeoInspection";
 
 function MainBlock() {
     return(
@@ -54,6 +55,9 @@ function MainBlock() {
                         </Route>
                         <Route path='/seo/services'>
                              <SeoServices/>
+                        </Route>
+                        <Route path='/seo/inspection'>
+                             <SeoInspection/>
                         </Route>
 
                         <Route path='/dialog'>

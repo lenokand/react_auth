@@ -23,7 +23,7 @@ return(
             <div className="general-block">
 
                      {data.map((item, index )=>
-                         (<div className="general-progects">
+                         (<div className="general-progects" key={index}>
                                 <div className="general-title">
                                     {item.title}
                                 </div> 

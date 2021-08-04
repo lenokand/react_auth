@@ -22,7 +22,7 @@ export default function SeoIndex() {
                      
                         {data.map((item, index )=>
                          (
-                                <div className="general-body">
+                                <div className="general-body" key={index}>
                                 {item.data}
                                 </div> 
       
