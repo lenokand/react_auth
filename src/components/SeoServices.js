@@ -33,38 +33,21 @@ export default function SeoServices() {
                 
                 <div className="services-block">
 
-                    {/* <div className="services-block_item">
-                        <img src={img} alt="img"/>
-
-                        <div className="services-block_right">
-                            <div className="services-block_title">
-                                Дополнительные регионы продвижения 
-                            </div>
-                            <div className="services-block_info">
-                            Дополнительные регионы продвижения — услуга, направленная на привлечение дополнительных целевых посетителей за счет продвижения в поисковой выдаче Вашего сайта в соответствующих регионах.
-                            Особенно актуально при необходимости привлечения большего количества посетителей; при открытии новых офисов и филиалов; при расширении географии деятельности. 
-                            </div>
-                            <div className="services-block_action">
-                                <button className="learnmore">Узнать больше</button>
-                                <button className="order_btn">Заказать</button>
-                            </div>
-
-                        </div>
-
-                    </div>  */}
-
                     {data.map((item, index )=>
                             (
                                     <div className="services-block_item" key={`${item.id}`}>
                                             <img src={item.img} alt="img"/>
 
                                             <div className="services-block_right">
-                                                <div className="services-block_title">
-                                                    {item.title}
+                                                <div className="services-block_right">
+                                                    <div className="services-block_title">
+                                                        {item.title}
+                                                    </div>
+                                                    <div className="services-block_info">
+                                                        {item.text}
+                                                    </div>
                                                 </div>
-                                                <div className="services-block_info">
-                                                {item.text}
-                                                </div>
+                                                
                                                 <div className="services-block_action">
                                                     <Link to={`${item.link}`}  className="learnmore"> Узнать больше </Link>
                                                     <button className="order_btn">Заказать</button>

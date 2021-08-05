@@ -88,7 +88,7 @@ function SeoSubmenu() {
             </svg>),
             title: 'Новости',
             description: 'Будьте в курсе событий',
-            path:'/main'
+            path:'/news'
         },
         {
             icon: (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +98,7 @@ function SeoSubmenu() {
             </svg>),
             title: 'Важно',
             description: 'Материалы необходимые для ознакомления',
-            path:'/main'
+            path:'/details'
         },
         {
             icon: (<svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +108,7 @@ function SeoSubmenu() {
             ),
             title: 'Контакты',
             description: 'Свяжитесь с нами',
-            path:'/main'
+            path:'/contacts'
         },
     ]
     return(

@@ -31,6 +31,7 @@ menu {
   display: flex;
   justify-content: space-between;
   margin-bottom: 23px;
+  padding-left: 0;
 
 }
 
@@ -100,6 +101,10 @@ menu {
     flex-direction: column;
     align-items: center;
     padding-top: 100px;
+    nav{
+      position: sticky;
+      top: 15px;
+    }
 
   }
 
@@ -569,7 +574,12 @@ footer {
     display: flex;
     border-bottom: 1px solid #EEEEEE;
     position: relative;
-
+    img{
+      width: 48px ;
+      height: 48px ;
+      object-fit: cover;
+      object-position: center;
+    }
     &:hover {
       background-color: #f0efef;
     }
@@ -1113,7 +1123,8 @@ footer {
     font-size: 18px;
     line-height: 160.7%;
     color: #202020;
-    div{
+
+    div {
       margin-right: 15px;
     }
   }
@@ -1131,7 +1142,7 @@ footer {
     color: #7E7E7E;
   }
 
-  
+
 }
 
 select {
@@ -1206,6 +1217,7 @@ select {
     .services-block_right {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
     }
 
     .services-block_title {
@@ -1372,10 +1384,177 @@ select {
   }
 }
 
+.news {
+  padding: 63px 100px 63px 29px;
+  display: flex;
+
+  .title {
+    margin-bottom: 30px;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    flex-basis: 90%;
+    max-width: 770px;
+  }
+
+  .seo-submenu {
+    flex-basis: 20%;
+    max-width: 170px;
+  }
+
+  // 
+  .seo-navigation {
+    max-width: 170px;
+  }
+
+  .navigation_row {
+    width: 170px;
+    box-sizing: border-box;
+
+    .wrapper {
+      margin-right: 0;
+    }
+
+    .item-description {
+      display: none;
+    }
+  }
+
+  .services-block_item {
+    display: flex;
+    margin-bottom: 30px;
+
+    img {
+      margin-right: 30px;
+    }
+
+    .services-block_right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .services-block_title {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 160.7%;
+      color: #202020;
+      margin-bottom: 11px;
+    }
+
+    .services-block_info {
+      font-size: 14px;
+      line-height: 130.7%;
+      color: #7E7E7E;
+      margin-bottom: 22px;
+
+    }
 
 
 
+    .order_btn {
+      width: 115px;
+    }
 
+    .services-block_action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .time {
+        font-size: 14px;
+        line-height: 130.7%;
+        color: #7E7E7E;
+      }
+    }
+  }
+}
+
+.contacts {
+  padding: 63px 100px 63px 29px;
+  display: flex;
+
+
+  .title {
+    margin-bottom: 30px;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+    flex-basis: 90%;
+    max-width: 770px;
+  }
+
+  .seo-submenu {
+    flex-basis: 20%;
+    max-width: 170px;
+  }
+
+  // 
+  .seo-navigation {
+    max-width: 170px;
+  }
+
+  .navigation_row {
+    width: 170px;
+    box-sizing: border-box;
+
+    .wrapper {
+      margin-right: 0;
+    }
+
+    .item-description {
+      display: none;
+    }
+  }
+
+  .contacts-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 17px;
+    font-weight: bold;
+    max-width: 500px;
+    font-size: 18px;
+    line-height: 160.7%;
+    color: #000000;
+
+    .image {
+      margin-right: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    a {
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 160.7%;
+      color: #000000;
+
+    }
+
+    &.adres {
+      align-items: flex-start;
+      font-weight: normal;
+
+    }
+
+  }
+  .map-row{
+   
+    position: relative;
+    overflow: hidden;
+    width: 770px;
+    height: 395px;
+
+  }
+
+}
 
 
 
@@ -1389,19 +1568,44 @@ select {
 
 
 @media screen and (max-width:1200px) {
-  .services, .inspection  {
+  .docs{
+    padding: 45px 15px 45px 15px;
+  }
+  .services,
+  .inspection, .guid, .dialog, .general, .position, .index, .report, .news, .contacts {
     padding: 45px 0px 45px 15px;
   }
+  .main_block{
+    margin-bottom: 120px;
+  }
+  .autherisationnav{
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  menu{
+    margin-bottom: 15px;
+  }
+  .contacts{
+    .map-row{
+      width: 100%;
+      overflow: hidden;
+    }
+  }
+ 
 }
 
 @media screen and (max-width:991px) {
-  .docs {
+  .main_content .docs {
     .docs-block {
       overflow: auto;
 
       .block-item {
         width: 725px;
       }
+    }
+    .subtitle{
+      margin-bottom: 30px;
+      font-style: 14px;
     }
   }
 
@@ -1420,7 +1624,7 @@ select {
     font-size: 24px
   }
 
-  .services {
+  .services, .news {
     .services-block_item {
       flex-direction: column;
 
@@ -1438,23 +1642,162 @@ select {
       }
     }
   }
-
-  .inspection{
-    .form-row{
+  .news {
+    .services-block_action {
+      flex-direction: column;
+      .time{
+        order: 1;
+        margin-bottom: 15px;
+      }
+      .order_btn{
+        order: 2;
+      }
+    }
+  }
+  .inspection {
+    .form-row {
       flex-wrap: wrap;
-      button{
+
+      button {
         flex-basis: 100%;
         margin-right: 0;
         margin-bottom: 15px;
       }
     }
   }
+  .main_block .sidebar{
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .main_block .container{
+    padding-left: 0;
+  }
+  .personal-cabinet{
+    padding: 45px 0px 45px 15px;
+    .content-block{
+      flex-direction: column;
+      // align-items: center;
+    }
+    .seo-navigation{
+      flex-basis: 100%;
+      max-width: none;
+      margin-right: 0px;
+    }
+    .seo-subnavigation{
+      flex-basis: 100%;
+      max-width: none;
+      grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+    }
+  }
+  .dialog{
+    .chat-block {
+      padding: 15px;
+    }
+    .left-block{
+      max-width: 165px;
+    flex-basis: 40%;
+    }
+    .dialog-row{
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 0;
+      &.autor{
+        // align-items: start;
+        padding: 15px;
+      }
+      img{
+        margin-bottom: 10px;
+      }
+      .diallog-oponent{
+        margin-bottom: 7px;
+      }
+      .last-message{
+        margin-bottom: 10px;
+      }
+      .dialog-info {
+        align-items: flex-start;
+        justify-content: start;
+        flex-direction: row;
+        .diallog-time{
+        text-align: start;
+        margin-right: 10px;
+        }
+      }
+    }
+    .right-block{
+      .autor{
+        height: 67px;
+      }
+    }
+    
+  }
+.contacts .contacts-row{
+  font-size: 14px;
+  a{
+    font-size: 14px;
+  }
+}
+}
 
+@media screen and (max-width:660px) {
+  .main_block .sidebar{
+    max-width: 31px;
+    flex-basis: 40%;
+  }
+  .main_content{
+    width: 95%;
+  }
+  .dialog{
+    .chat-form{
+      padding: 5px 0 0px;
+      input {
+        padding: 17px;
+      }
+      button{
+        margin-left: 5px;
+      }
+    }
+    .dialog-block{
+      flex-direction: column;
+      width: 100%;
+    }
+    .left-block{
+      max-width: none;
+      flex-basis: 100%;
+      display: flex;
+      flex-direction: row;
+      overflow-y: auto;
+      flex-basis: auto;
 
+      scrollbar-color: rgb(190, 190, 190) #d4d4d4 ;
+      scrollbar-width: thin;
+      
+    }
+    
+    .left-block::-webkit-scrollbar-track {border-radius: 4px;}
+    .left-block::-webkit-scrollbar {width: 2px;}
+    .left-block::-webkit-scrollbar-thumb {border-radius: 4px;background: #f0f2f5;}
+
+    .dialog-row{
+      padding: 15px;
+      border-right: 1px solid #EEEEEE;
+      min-width: 150px;
+    }
+     .dialog-row.autor{
+       display: none;
+     }
+     .right-block{
+       .autor{
+         border-top: 1px solid #EEEEEE;
+       }
+     }
+  } 
 }
 
 @media screen and (max-width:600px) {
-  .services, .inspection  {
+
+  .services, .news,
+  .inspection, .general, .position, .index, .report, .contacts  {
     .navigation_row {
       width: 48px;
       padding: 5px;
@@ -1471,10 +1814,43 @@ select {
 
 
   }
+  .report .general-progects_row{
+    flex-direction: column;
+    align-items: flex-start;
+    div{
+      margin-bottom: 7px;
+    }
+  }
+  .autherisationnav .active_btn{
+    margin-top: 15px;
+  }
+  .main_block{
+    margin-bottom: 45px;
+  }
+  .main_content .title{
+    font-size: 20px;
+  }
+
+  .guid{
+    .subtitle{
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .item_row{
+      svg{
+        display: block;
+        flex-basis: 45%;
+        max-width: 20px;
+        }
+    }
+  } 
+  .contacts .map-row{
+    height: 250px;
+  }
 }
 
 @media screen and (max-width:450px) {
-  .services {
+  .services, .news {
     .services-block_action {
       flex-direction: column;
 
@@ -1483,6 +1859,10 @@ select {
         margin-bottom: 15px;
       }
     }
+    .wrapper{
+      margin-right: 15px;
+      max-width: calc( 95% - 48px);
 
+    }
   }
 }

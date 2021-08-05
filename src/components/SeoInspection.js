@@ -32,11 +32,11 @@ export default function SeoInspection() {
                    <div className="form-row">
                        <button type="submit" className="order_btn"> Заказать </button>
                        <div> за период: </div>
-                       <select>
-                            <option>
+                       <select defaultValue={'DEFAULT'}>
+                            <option value="За прошедшие 3 месяца">
                             За прошедшие 3 месяца
                            </option>
-                           <option>
+                           <option value="DEFAULT">
                             За прошедшие 6 месяцев
                            </option>
                        </select>
@@ -46,16 +46,16 @@ export default function SeoInspection() {
                         Вывести закрывающие документы (акт выполненных работ и счет-фактура):
                    </div>
 
-                   <select>
-                            <option>
+                   <select defaultValue={'DEFAULT'}>
+                            <option value="Заказать акт сверки">
                             Заказать акт сверки
-                           </option>
-                           <option>
+                           </option >
+                           <option value="DEFAULT">
                             Счет фактура
                            </option>
 
                           
-                       </select>
+                    </select>
                </form>
                <div className="form-result">За выбранный период документов не найдено. </div>
 

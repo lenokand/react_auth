@@ -11,15 +11,6 @@ export default function Docs() {
 
     )
 
-    // let [show, setVisible] = useState(false)
-   
-
-    // let openSettings = () => {
-    //     setVisible(!show)
-      
-    //     };
-
-
        
        
 

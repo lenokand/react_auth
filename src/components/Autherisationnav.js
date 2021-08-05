@@ -36,12 +36,12 @@ function Autherisationnav() {
 
             </div>
 
-            <div className="subbutton" onClick={openMenu}>
+            {/* <div className="subbutton" onClick={openMenu}>
 
                 <img src={arrow_down} alt="arrow_down"/>
                
 
-            </div>
+            </div> */}
             <div className="submenu"  style={{display: visible ? 'flex' : 'none'}}>Submenu</div>
             <button className="active_btn">
                 выйти

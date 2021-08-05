@@ -49,6 +49,24 @@ export default class Dialog  extends Component {
                     online:''
         
                 },
+                {
+                    avatar: avatar1,
+                    name: 'Сергей Скударнов',
+                    lastMessege: 'Так, я не понял..?',
+                    time: "8:42",
+                    status: '1',
+                    online:''
+        
+                },
+                {
+                    avatar: avatar1,
+                    name: 'Сергей Скударнов',
+                    lastMessege: 'Так, я не понял..?',
+                    time: "8:42",
+                    status: '1',
+                    online:''
+        
+                },
         
         
             ],
