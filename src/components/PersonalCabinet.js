@@ -39,7 +39,7 @@ function PersonalCabinet() {
             img: supportImg,
             subtitle: 'Быстро решаем возникшие проблемы',
             butonSign: 'Обратиться',
-            route: ''
+            route: '/dialog'
         },
         {
             title: 'Привелегии',
@@ -72,22 +72,24 @@ function PersonalCabinet() {
 
                                
                                 </div>
-                                    <div className="active_btn">Связаться</div>
+                                    <a href="#">
+                                        <div className="active_btn">Связаться</div>
+                                    </a>
                                
                             </div>
                        {subnavigation.map((item, index )=>
                             (<div className="subnavigation_item"  key={index} >
-                                <div className="wrapper">
-                                    <div className="block-title">{item.title}</div>
-                                    <img src={item.img} className="block-image" alt="admin"/>
-                                    {/* <div className="block-image"></div> */}
-                                    <div className="block-subtitle">{item.subtitle}</div>
+                                    <div className="wrapper">
+                                        <div className="block-title">{item.title}</div>
+                                        <img src={item.img} className="block-image" alt="admin"/>
+                                        {/* <div className="block-image"></div> */}
+                                        <div className="block-subtitle">{item.subtitle}</div>
 
-                               
-                                </div>
-                                    <div className="active_btn">{item.butonSign}</div>
-                               
-                        </div>
+                                
+                                    </div>
+                                    <Link to={item.route}><div className="active_btn">{item.butonSign}</div></Link> 
+                                
+                            </div>
                         ))}
 
                         

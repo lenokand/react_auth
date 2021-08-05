@@ -1,11 +1,7 @@
 import React from "react";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams,
-    useRouteMatch
+     Link,
+     useRouteMatch
   } from "react-router-dom";
 
 function SeoSubmenu() {
@@ -113,8 +109,7 @@ function SeoSubmenu() {
     ]
     return(
         <div className="seo-navigation">
-                {/* <Router > */}
-                        {navigation.map((item, index )=>
+                               {navigation.map((item, index )=>
                                     (  <Link to={`/seo${item.path}`} className="navigation_row"  key={index} >
                                                 <div className="icon">{item.icon}</div>
                                                 <div className="wrapper">
@@ -123,7 +118,7 @@ function SeoSubmenu() {
                                                 </div>
                                             </Link>
                                 ))}
-                {/* </Router> */}
+               
 
             
             
