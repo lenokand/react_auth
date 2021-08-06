@@ -7,9 +7,11 @@ export default function DocsItem(props) {
                 <div>{props.name}</div> 
                 <div>{props.number}</div> 
                 <div>{props.date}  </div>
+                {/* <button onClick={() => props.handleShow(props.id)}> {props.triple} </button> */}
                 <button onClick={() => props.handleShow(props.id)}> {props.triple} </button>
 
-                    <div className="settings" style={{display: (props.show) ? 'flex' : 'none'}}>
+                    {/* <div className="settings" style={{display: (props.show) ? 'flex' : 'none'}}> */}
+                    <div className="settings" style={{display: (props.showModal === props.id) ? 'flex' : 'none'}}>
                         <div>
                             <a href="props.link">Посмотреть</a>
                             

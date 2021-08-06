@@ -14,7 +14,8 @@ export default class DocsBlock extends Component {
     constructor(props) {
         super(props)
         this.state = {
-          
+            
+            showModal: 0,
             docsList: [
                 {
                     id: 1,
@@ -53,31 +54,44 @@ export default class DocsBlock extends Component {
             ]
     
         }
-        this.handleShow = this.handleShow.bind(this)
-        this.handleShow2 = this.handleShow2 .bind(this)
+        // this.handleShow = this.handleShow.bind(this)
+        // this.handleShow2 = this.handleShow2.bind(this)
+        this.handleShowBlock = this.handleShowBlock.bind(this)
         
     }
 
-    handleShow(id) {
-        let tmp = this.state.docsList
+    // handleShow(id) {
+    //     let tmp = this.state.docsList
 
-        let foundIndex = tmp.findIndex((item, index) => item.id === id)
-        tmp[foundIndex].show = !tmp[foundIndex].show
+    //     let foundIndex = tmp.findIndex((item, index) => item.id === id)
+    //     tmp[foundIndex].show = !tmp[foundIndex].show
        
-        this.setState({
-            docsList: tmp,
-        })
-    }
-    handleShow2(id) {
-        console.log(this.state.docsList2)
-        let tmp2 = this.state.docsList2
+    //     this.setState({
+    //         docsList: tmp,
+    //     })
+    // }
+    // handleShow2(id) {
+    //     console.log(this.state.docsList2)
+    //     let tmp2 = this.state.docsList2
 
-        let foundIndex = tmp2.findIndex((item, index) => item.id === id)
-        tmp2[foundIndex].show = !tmp2[foundIndex].show
+    //     let foundIndex = tmp2.findIndex((item, index) => item.id === id)
+    //     tmp2[foundIndex].show = !tmp2[foundIndex].show
        
-        this.setState({
-            docsList2: tmp2,
-        })
+    //     this.setState({
+    //         docsList2: tmp2,
+    //     })
+    // }
+    handleShowBlock(id) {
+        
+       
+
+        if (this.state.showModal == id) {
+            this.setState({showModal : 0 })
+        }
+        else{
+            this.setState({showModal : id})
+        }
+      
     }
 
 
@@ -94,7 +108,7 @@ export default class DocsBlock extends Component {
 
                         {this.state.docsList.map((item, index )=>
                                         (   
-                                    <DocsItem item={item} id={item.id} name={item.name} number={item.number} date={item.date} link={item.link}  show={item.show} handleShow={this.handleShow} key={item.id} triple={triple} />
+                                    <DocsItem item={item} showModal={this.state.showModal} id={item.id} name={item.name} number={item.number} date={item.date} link={item.link}  show={item.show} handleShow={this.handleShowBlock} key={item.id} triple={triple} />
 
                                     ))}
 
@@ -108,7 +122,7 @@ export default class DocsBlock extends Component {
 
                         {this.state.docsList2.map((item, index )=>
                                         (   
-                                    <DocsItem item={item} id={item.id} name={item.name} number={item.number} date={item.date} link={item.link}  show={item.show} handleShow={this.handleShow2} key={item.id} triple={triple} />
+                                    <DocsItem item={item} showModal={this.state.showModal} id={item.id}  name={item.name} number={item.number} date={item.date} link={item.link}  show={item.show} handleShow={this.handleShowBlock} key={item.id} triple={triple} />
 
                                     ))}
                     </div>
