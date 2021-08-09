@@ -22,6 +22,7 @@ import SeoInspection from "./SeoInspection";
 import SeoNews from "./SeoNews";
 import SeoDatails from "./SeoDetails";
 import SeoContacts from "./SeoContacts";
+import Notification from "./Notification";
 
 function MainBlock() {
     return(
@@ -77,6 +78,9 @@ function MainBlock() {
                         </Route>
                         <Route path='/docs'>
                              <Docs/>
+                        </Route>
+                        <Route path='/notification'>
+                             <Notification/>
                         </Route>
                         <Route path='/settings'>
                              <Settings/>

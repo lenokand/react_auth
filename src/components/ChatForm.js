@@ -17,7 +17,7 @@ export default class ChatForm extends Component {
       }
 
       handleSubmit(event) {
-        alert('Сообщение ' + this.state.value);
+        // alert('Сообщение ' + this.state.value);
         event.preventDefault();
       }
       render() {
