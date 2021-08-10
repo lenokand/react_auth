@@ -1047,6 +1047,13 @@ footer {
   .title {
     margin-bottom: 19px;
   }
+  .subtitle {
+    margin-bottom: 19px;
+    font-size: 16px;
+    line-height: 160.7%;
+    color: #7E7E7E;
+    margin-bottom: 20px;
+  }
 
   .wrapper {
     display: flex;
@@ -1088,6 +1095,60 @@ footer {
     .item-description {
       display: none;
     }
+  }
+  .index-block_title{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .my-tooltip{
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .index-block_traffic{
+    // max-width: 100%;
+  }
+  .recharts-wrapper{
+    // width: 100%;
+  }
+  table{
+    margin-top: 20px;
+    border-collapse: collapse;
+    th{
+      color: #202020;
+      padding: 5px;
+      background-color: #F5F5F5;
+      &:first-child{
+        border-radius: 13px 0 0 0 ;
+      }
+      &:last-child{
+        border-radius: 0 13px  0 0 ;
+      }
+    }
+    td{
+      padding: 5px;
+    }
+    tr{
+      // &::nth-child(even){
+      //   background-color: #eb7f1a;
+      // }
+        &:first-child{
+          background-color: none;
+        }
+     
+      
+      text-align: center;
+     
+      &:hover{
+        background-color: #f5f5f5d5;
+      }
+    }
+    tr:nth-child(odd){
+        background-color: #ffe2dc;
+        // color: #fff;
+      }
   }
 }
 
