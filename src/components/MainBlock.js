@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+//     Link
   } from "react-router-dom";
 
 import React from "react";
@@ -19,9 +19,9 @@ import SeoIndex from "./SeoIndex";
 import SeoReport from "./SeoReport";
 import SeoServices from "./SeoServices";
 import SeoInspection from "./SeoInspection";
-import SeoNews from "./SeoNews";
+import SeoNews from "./SeoSubmenu/SeoNews";
 import SeoDatails from "./SeoDetails";
-import SeoContacts from "./SeoContacts";
+import SeoContacts from "./SeoSubmenu/SeoContacts";
 import Notification from "./Notification";
 
 function MainBlock() {

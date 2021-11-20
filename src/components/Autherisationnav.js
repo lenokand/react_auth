@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext  } from 'react';
 import avatar from '../img/avatar.png'; 
 import arrow_down from '../img/arrow_down.svg';
+import { Context } from '..';
+import {  signOut } from 'firebase/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 let user = {
             firstName: 'Мишустин',
             patronymic: 'Виктор' ,
@@ -13,6 +16,7 @@ function formatName(user) {
 
 
 function Autherisationnav() {
+    const {auth} = useContext(Context)
 
     let [visible, setVisible] = useState(false)
    
@@ -20,7 +24,10 @@ function Autherisationnav() {
     let openMenu = () => {
         setVisible(!visible)
         };
-
+    const logout = () => {
+        console.log('logout')
+            signOut(auth)
+          };
 
     return(
         <div className="autherisationnav">
@@ -43,7 +50,7 @@ function Autherisationnav() {
 
             </div> */}
             <div className="submenu"  style={{display: visible ? 'flex' : 'none'}}>Submenu</div>
-            <button className="active_btn">
+            <button className="active_btn" onClick={logout}>
                 выйти
             </button>
 

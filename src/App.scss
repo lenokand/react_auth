@@ -971,6 +971,10 @@ footer {
         font-size: 14px;
         line-height: 160.7%;
         color: #7E7E7E;
+        transition: 300ms ease;
+        &:hover{
+          text-decoration: underline;
+        }
       }
 
       div {
@@ -1771,7 +1775,10 @@ select {
 
       font-size: 14px;
       line-height: 112.7%;
-      text-transform: uppercase;
+      &::placeholder{
+        text-transform: uppercase;
+      }
+      
       color: #7E7E7E;
       margin-bottom: 8px ;
 

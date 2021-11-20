@@ -1,6 +1,6 @@
 import React from 'react'
-import SeoSubmenu from './SeoSubmenu'
-import img from '../img/servece_img.png'
+import SeoSubmenu from '.././SeoSubmenu'
+import img from '../../img/servece_img.png'
 import { Link } from 'react-router-dom'
 
 export default function SeoNews() {

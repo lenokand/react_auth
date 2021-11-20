@@ -1,6 +1,6 @@
 import React from 'react'
-import SeoSubmenu from './SeoSubmenu'
-import SimpleMap from './SimpleMap'
+import SeoSubmenu from '.././SeoSubmenu'
+import SimpleMap from '.././SimpleMap'
 // import { YMaps, Map, Placemark } from "react-yandex-maps";
 
 const location = (<svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">

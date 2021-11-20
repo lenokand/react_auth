@@ -5,6 +5,8 @@ import Header from './components/Header'
 import MainBlock from './components/MainBlock'
 import Footer from './components/Footer'
 import Autorisation from './components/Autorisation';
+import AppRouter from './components/AppRouter';
+import MainPage from './components/MainPage';
 
 
 function App() {
@@ -13,16 +15,11 @@ function App() {
 
 
       {/* <Autorisation/> */}
+    <AppRouter/>
+
+    {/* <MainPage/> */}
 
 
-      <header>
-        <Header/>
-       
-      </header>
-
-      <MainBlock/>
-
-    <Footer/>
     </div>
   );
 }
