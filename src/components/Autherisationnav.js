@@ -17,7 +17,7 @@ function formatName(user) {
 
 function Autherisationnav() {
     const {auth} = useContext(Context)
-
+    // console.log(auth.currentUser)
     let [visible, setVisible] = useState(false)
    
 

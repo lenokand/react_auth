@@ -6,16 +6,17 @@ import {
   BrowserRouter as Router,
   
 } from "react-router-dom";
+
 import reportWebVitals from './reportWebVitals';
 // import { initializeApp } from "firebase/app";
 import { initializeApp } from 'firebase/app';
 // import { FirebaseApp } from '@firebase/app';
 // import firebase from "firebase";
 import { getAuth, onAuthStateChanged, getRedirectResult } from 'firebase/auth';
-import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
+import { collection, doc, getDoc } from 'firebase/firestore/lite';
+import { getFirestore } from 'firebase/firestore';
 // Initialize Firebase
 // const firebaseApp = initializeApp({ /* config */ });
-
 
 
 // const app = initializeApp(
@@ -30,36 +31,67 @@ import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
 //   }
 
 // );
-const firebaseApp = initializeApp(  {
-  apiKey: "AIzaSyDsHf-1oWVFGo2CcSg1CnuBV1sAEZdJ9bg",
-  authDomain: "seo-kabinet.firebaseapp.com",
-  projectId: "seo-kabinet",
-  storageBucket: "seo-kabinet.appspot.com",
-  messagingSenderId: "525063468100",
-  appId: "1:525063468100:web:da85810b59ce5b43a6b811",
-  measurementId: "G-FFCHQQE6ED"
-});
+// Import the functions you need from the SDKs you need
 
-export const Context = createContext(null)
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAlwXuyZ7pnFql0mVhdq7HxmdnhSuTQri8",
+  authDomain: "seo-cabinet-next.firebaseapp.com",
+  databaseURL: "https://seo-cabinet-next-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "seo-cabinet-next",
+  storageBucket: "seo-cabinet-next.appspot.com",
+  messagingSenderId: "1038801052701",
+  appId: "1:1038801052701:web:3348e928e1bbbd838c12f4",
+  measurementId: "${config.measurementId}"
+};
+
+// Initialize Firebase
+const firebaseApp = initializeApp(firebaseConfig);
+
+
+
+
+
+// const firebaseApp = initializeApp(  {
+//   // apiKey: "AIzaSyDsHf-1oWVFGo2CcSg1CnuBV1sAEZdJ9bg",
+//   // authDomain: "seo-kabinet.firebaseapp.com",
+//   // projectId: "seo-kabinet",
+//   // storageBucket: "seo-kabinet.appspot.com",
+//   // messagingSenderId: "525063468100",
+//   // appId: "1:525063468100:web:da85810b59ce5b43a6b811",
+//   // measurementId: "G-FFCHQQE6ED"
+
+//   apiKey: "AIzaSyAlwXuyZ7pnFql0mVhdq7HxmdnhSuTQri8",
+//   authDomain: "seo-cabinet-next.firebaseapp.com",
+//   databaseURL: "https://seo-cabinet-next-default-rtdb.europe-west1.firebasedatabase.app",
+//   projectId: "seo-cabinet-next",
+//   storageBucket: "seo-cabinet-next.appspot.com",
+//   messagingSenderId: "1038801052701",
+//   appId: "1:1038801052701:web:3348e928e1bbbd838c12f4",
+//   measurementId: "G-JB7DCTJ8QH"
+// });
+
+export const Context = createContext(null);
 
 const auth = getAuth();
 
-const firestore = getFirestore(firebaseApp);
-
+const db = getFirestore(firebaseApp);
+console.log(db)
+// console.log(firestore.collection, 1)
 // const auth = firebase.auth()
 // const firestore = firebase.firestore()
 
-
+// console.log(db)
 ReactDOM.render(
 
-  // <Router >
-  //   <Route path="/" component={App} />
-  // </Router>,
-  // document.getElementById('root')
-<Context.Provider value={{
+  <Context.Provider value={{
         firebaseApp,
         auth,
-        firestore,
+        db,
         
       } }>
         <React.StrictMode>

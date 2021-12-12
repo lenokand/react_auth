@@ -11,7 +11,7 @@ const AppRouter = () => {
 //  let userlogin2 = ['user', false, 'error']
  const {auth} = useContext(Context)
  let [userlogin2] = useAuthState(auth)
- console.log(userlogin2)
+//  console.log(userlogin2)
 
     
 
@@ -31,7 +31,7 @@ const AppRouter = () => {
     // });
 
 
-console.log(userlogin2)
+// console.log(userlogin2)
 
 
 
