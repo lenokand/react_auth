@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Context } from "..";
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -8,11 +8,19 @@ import Loader from './Loader';
 
 // import firebase from "firebase"
 import firebase from 'firebase/compat/app';
-import { getFirestore, collection, getDocs, addDoc, firestore} from 'firebase/firestore';
+// import firebase from 'firebase/app';
+// import * as firebase from 'firebase'
+
+
+import { getFirestore, collection, getDocs, addDoc, firestore, Timestamp, serverTimestamp } from 'firebase/firestore';
 // import { Firestore } from 'firebase/firestore/lite';
 
 export default function DialogForm(props) {
 
+    // useEffect(() => {
+    //     getMessageMetod(db)
+    //    });
+console.log(firebase)
     const {auth, db} = useContext(Context)
     const [user] = useAuthState(auth)
     const [value, setValue ] = useState('')
@@ -61,20 +69,34 @@ export default function DialogForm(props) {
         // db.collection('messages').orderBy('createdAt')
     )
 
+    
+    let messageList = []
+
      async function getMessageMetod(db) {
+
             const messageCol = collection(db, 'messages');
             const messageSnapshot = await getDocs(messageCol);
-            const messageList = messageSnapshot.docs.map(doc => doc.data());
-           
+             messageList = messageSnapshot.docs.map(doc => doc.data(
+                console.log(doc.data().text)
+
+
+            ));
+
+            
+            // const querySnapshot = await getDocs(collection(db, "messages"));
+            // querySnapshot.forEach((doc) => {
+            //   console.log((doc.id), doc.data());
+            // });
+
             return messageList;
           }
          
+          
 
-
-          let messagesL = getMessageMetod(db)
+        //   let messagesL = getMessageMetod(db)
           
             // console.log(getMessageMetod(db))
-            console.log(getMessageMetod(db));
+            // console.log(getMessageMetod(db));
             // messageSnapshot.this._snapshot.docs.forEach(n => {
             //     {n.}
             // })
@@ -94,8 +116,10 @@ export default function DialogForm(props) {
                 displayName: user.displayName,
                 photoURL: user.photoURL,
                 text: value,
+                // createdAt: [ firebase.db.FieldValue.serverTimestamp()]
         });
         console.log("Document written with ID: ", docRef.id);
+        
 
       } catch (e) {
         console.error("Error adding document: ", e);
@@ -111,8 +135,10 @@ export default function DialogForm(props) {
         //     // createdAt: firebase.db.FieldValue.serverTimestamp()
         // })
         setValue('')
+        getMessageMetod(db) 
     }
-
+    
+    
 
     return (
         <form  className="chat-form" onSubmit={sendMessage}>

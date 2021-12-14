@@ -236,10 +236,11 @@ export default class Dialog  extends Component {
                         </div>
                         {/* <ChatForm/> */}
                         <DialogForm
-                            newPhrase={this.state.newPhrase} 
-                            handleNewPhraseChange={this.handleNewPhraseChange} 
-                            handleFormSubmit={this.handleFormSubmit} 
-                            send={this.state.send} />
+                            // newPhrase={this.state.newPhrase} 
+                            // handleNewPhraseChange={this.handleNewPhraseChange} 
+                            // handleFormSubmit={this.handleFormSubmit} 
+                            send={this.state.send} 
+                            />
                        
     
     

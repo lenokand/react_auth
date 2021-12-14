@@ -11,9 +11,9 @@ import reportWebVitals from './reportWebVitals';
 // import { initializeApp } from "firebase/app";
 import { initializeApp } from 'firebase/app';
 // import { FirebaseApp } from '@firebase/app';
-// import firebase from "firebase";
+// import firebase from "@firebase/app";
 import { getAuth, onAuthStateChanged, getRedirectResult } from 'firebase/auth';
-import { collection, doc, getDoc } from 'firebase/firestore/lite';
+import {  collection, doc, getDoc } from 'firebase/firestore/lite';
 import { getFirestore } from 'firebase/firestore';
 // Initialize Firebase
 // const firebaseApp = initializeApp({ /* config */ });
