@@ -40,6 +40,14 @@ import { getFirestore } from 'firebase/firestore';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
+  // apiKey: "AIzaSyD6zwi9Lreh7PTle5ZBQ3ZekTDjLipW-1s",
+  // authDomain: "seo-cabinet-nextnext.firebaseapp.com",
+  // projectId: "seo-cabinet-nextnext",
+  // storageBucket: "seo-cabinet-nextnext.appspot.com",
+  // messagingSenderId: "269110138067",
+  // appId: "1:269110138067:web:1630f0db51195677157026",
+  // measurementId: "G-V23MB901BW"
+
   apiKey: "AIzaSyAlwXuyZ7pnFql0mVhdq7HxmdnhSuTQri8",
   authDomain: "seo-cabinet-next.firebaseapp.com",
   databaseURL: "https://seo-cabinet-next-default-rtdb.europe-west1.firebasedatabase.app",
