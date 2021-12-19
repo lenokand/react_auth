@@ -9,6 +9,7 @@ import {
 
 import reportWebVitals from './reportWebVitals';
 // import { initializeApp } from "firebase/app";
+// import firebase from "firebase";
 import { initializeApp } from 'firebase/app';
 // import { FirebaseApp } from '@firebase/app';
 // import firebase from "@firebase/app";
@@ -53,6 +54,7 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 
 
+// firebase.initializeApp(firebaseConfig)
 
 
 
@@ -80,7 +82,7 @@ export const Context = createContext(null);
 const auth = getAuth();
 
 const db = getFirestore(firebaseApp);
-console.log(db)
+// console.log(db)
 // console.log(firestore.collection, 1)
 // const auth = firebase.auth()
 // const firestore = firebase.firestore()
@@ -91,7 +93,7 @@ ReactDOM.render(
   <Context.Provider value={{
         firebaseApp,
         auth,
-        db,
+        db
         
       } }>
         <React.StrictMode>

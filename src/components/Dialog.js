@@ -11,6 +11,7 @@ import {
   } from "react-router-dom";
 import avatar1 from '../img/avatar1.png'; 
 import DialogForm from './DialogForm';
+import { getFirestore, collection, getDocs, addDoc, firestore, Timestamp, serverTimestamp } from 'firebase/firestore';
 // import { initializeApp } from 'firebase/app';
 // import { getDatabase } from "firebase/database";
 
@@ -108,6 +109,7 @@ export default class Dialog  extends Component {
         
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
         this.handleNewPhraseChange = this.handleNewPhraseChange.bind(this)
+        // this.getMessageMetod = this.getMessageMetod.bind(this)
 
     }
     handleNewPhraseChange(e) {
@@ -145,6 +147,34 @@ export default class Dialog  extends Component {
 
     }
 
+
+
+
+    //  getMessageMetod(e) {
+    //     let messageList = []
+    //        const messageCol = collection(e, 'messages');
+    //        const messageSnapshot =  getDocs(messageCol);
+    //         messageList = messageSnapshot.docs.map(doc => doc.data(
+    //            console.log(doc.data().text)
+
+
+    //        ));
+
+           
+    //        // const querySnapshot = await getDocs(collection(db, "messages"));
+    //        // querySnapshot.forEach((doc) => {
+    //        //   console.log((doc.id), doc.data());
+    //        // });
+
+    //        return messageList;
+    //      }
+         
+        //  componentDidMount(){
+        //     console.log("componentDidMount");
+            
+        //     getMessageMetod(db) 
+        // }
+         
     render() {
 
      
