@@ -19,6 +19,7 @@ import DialogForm from './DialogForm';
 
 // import { getAuth } from "firebase/auth";
 // import { Firestore, getFirestore } from '@firebase/firestore/dist/lite';
+import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom'
 import {
     getFirestore,
     collection,
@@ -38,6 +39,7 @@ const send = (<svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns=
 export default class Dialog  extends Component {
 
     constructor(props) {
+        
         super(props)
         this.state = {
             send : (<svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -164,7 +166,8 @@ export default class Dialog  extends Component {
    
     // getMessage()
             getMessage(tmp) {
-
+            
+                // ScrollToBottom()
                 // console.log(1)
                 this.setState({
                     msg: tmp
@@ -227,8 +230,8 @@ export default class Dialog  extends Component {
                     <div className="right-block">
                         <UserInfo dialogMenu={this.state.dialogMenu}/>
     
-                        <div className="chat-block ">
-    
+                        {/* <div className="chat-block "> */}
+                        <ScrollToBottom className="chat-block" >
                                     {/* {this.state.chat.map((item, index )=>
                                                 (   
                                                     <div className={`chat-row ${item.status}`} key={item.id}>
@@ -279,9 +282,12 @@ export default class Dialog  extends Component {
                                     <div className="time-message ">9:35</div>
                                 </div>
                             </div> */}
+        </ScrollToBottom>
                           
-                        </div>
+                        {/* </div> */}
                         {/* <ChatForm/> */}
+                        
+
                         <DialogForm
                             // newPhrase={this.state.newPhrase} 
                             // handleNewPhraseChange={this.handleNewPhraseChange} 

@@ -60,7 +60,7 @@ export default function DialogForm(props) {
 
     const q = query(chatRef, orderBy("timestamp", "asc"), limit(100));
     
-    // const scrollToBottom = useScrollToBottom();
+    const scrollToBottom = useScrollToBottom();
     // const [sticky] = useSticky();
 
     const sendMsg = async (e) => {
@@ -74,7 +74,7 @@ export default function DialogForm(props) {
             photoURL: user.photoURL,
             timestamp: moment.utc().valueOf()
           });
-          // ScrollToBottom()
+          
         } catch (e) {
           console.error("Error adding document: ", e);
         }
