@@ -4,23 +4,47 @@ import arrow_down from '../img/arrow_down.svg';
 import { Context } from '..';
 import {  signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-let user = {
-            firstName: 'Мишустин',
-            patronymic: 'Виктор' ,
-             lastName: 'Андреевич'}
+import { getAuth } from "firebase/auth";
+import {    getFirestore, getDoc,    doc} from 'firebase/firestore';
 
 
-function formatName(user) {
-                return user.firstName + ' '+ user.patronymic + ' ' + user.lastName;
-         }
+// let user = {
+//             firstName: 'Мишустин',
+//             patronymic: 'Виктор' ,
+//              lastName: 'Андреевич'}
 
 
-function Autherisationnav() {
+// function formatName(user) {
+//                 return user.firstName + ' '+ user.patronymic + ' ' + user.lastName;
+//          }
+
+ function Autherisationnav() {
+
     const {auth} = useContext(Context)
-    // console.log(auth.currentUser)
-    let [visible, setVisible] = useState(false)
-   
+    const [user1] = useAuthState(auth)
+    // console.log(user1.uid)
+    const db = getFirestore()
 
+    try {
+    const userRef = doc(db, 'users', user1.uid );
+    getDoc(userRef).then(docSnap => {
+        if (docSnap.exists()) {
+        //   console.log("Document data:", docSnap.data().name);
+            setuserName(docSnap.data().name)
+        } else {
+          console.log("No such document!");
+        }
+      })
+} catch (error) {
+     const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorMessage)
+
+}
+
+    let [visible, setVisible] = useState(false)
+    let [userName, setuserName] = useState('')
+   
     let openMenu = () => {
         setVisible(!visible)
         };
@@ -32,8 +56,8 @@ function Autherisationnav() {
     return(
         <div className="autherisationnav">
             <div className="name">
-
-            {formatName(user)}
+        {userName}
+           
 
             </div>
 

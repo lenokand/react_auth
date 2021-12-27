@@ -2,12 +2,12 @@
 import './App.scss';
 import React, {useContext } from "react";
 
-import Header from './components/Header'
-import MainBlock from './components/MainBlock'
-import Footer from './components/Footer'
-import Autorisation from './components/Autorisation';
+// import Header from './components/Header'
+// import MainBlock from './components/MainBlock'
+// import Footer from './components/Footer'
+// import Autorisation from './components/Autorisation';
 import AppRouter from './components/AppRouter';
-import MainPage from './components/MainPage';
+// import MainPage from './components/MainPage';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Context } from '.';
 import Loader from './components/Loader';

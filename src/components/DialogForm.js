@@ -29,8 +29,9 @@ import avatarNull from '../img/avatar.png';
 import {
     getFirestore,
     collection,
-    // getDocs,
+    getDocs,
     addDoc,
+    where, 
     // firestore,
     // Timestamp,
     orderBy,
@@ -45,56 +46,78 @@ export default function DialogForm(props) {
     // const [messages, setMessages] = useState([])
     const {  auth  } = useContext(Context)
     const [user] = useAuthState(auth)
-    // const [value, setValue] = useState('')
-
-    // const chatRef = collection(db, 'message')
-    // const q = query(chatRef, orderBy("timestamp", "asc"), limit(100));
-
-
 
     const [newMsg, setNewMsg] = useState('')
-    const [messages, setMessages] = useState([])
+    // const [messages, setMessages] = useState([])
 
     const db = getFirestore()
-    const chatRef = collection(db, 'chat')
-
-    const q = query(chatRef, orderBy("timestamp", "asc"), limit(100));
+      
+    // const scrollToBottom = useScrollToBottom();
+   
     
-    const scrollToBottom = useScrollToBottom();
-    // const [sticky] = useSticky();
+    const chatRef = collection(db, 'chat')
+ 
+    const u = query(collection(db, 'users'), where("uid", "==", user.uid) );
+
+
 
     const sendMsg = async (e) => {
       e.preventDefault();
-        setNewMsg('')
-        try {
-          await addDoc(collection(db, "chat"), {
+        // let bd_name = 'support1_' + user.uid
+        // let bd_name = user.uid
+        // const currentUser = []
+        const querySnapshot = await getDocs(u);
+        querySnapshot.forEach((doc) => {
+        //  currentUser = doc.data()
+         
+
+         try {
+         
+           addDoc(chatRef, {
+          // await addDoc(collection(db, 'support1_' + user.uid), {
             message: newMsg,
-            uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
+            uid: doc.data().uid,
+            fileUpload: null,
+            displayName: doc.data().name,
+            photoURL: doc.data().photoURL,
             timestamp: moment.utc().valueOf()
           });
-          
+                   
         } catch (e) {
           console.error("Error adding document: ", e);
         }
+
+        });
+        
+        setNewMsg('')
+       
       }
+
+
+    // const chatRef = collection(db, 'support1_' + user.uid)
+
+    const q = query(chatRef, orderBy("timestamp", "asc"), limit(150));
+
     
       useEffect(() => { 
-        const unsub = onSnapshot(q, (snapshot) => {
+          const unsub = onSnapshot(q, (snapshot) => {
           const tmp = []
           snapshot.forEach(doc => {
             const utc = doc.data().timestamp
 
             // const uid = 'oponent'
             const uid = (user.uid == doc.data().uid) ? 'user' : 'oponent'
+
             const local = moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
             const avatar = user.photoURL ? 'user.photoURL' : avatarNull
             const msg = {
               id: doc.id,
               message: doc.data().message,
+              fileUpload:  doc.data().fileUpload,
               timestamp: local,
               photoURL: avatar,
+              fileUpload: doc.data().fileUpload,
+              displayName: doc.data().displayName,
               uid: uid,
               
             }
@@ -107,56 +130,7 @@ export default function DialogForm(props) {
           
         });
       })
-
-
-
-
-//     useEffect(() => { 
-//         const unsub = onSnapshot(q, (snapshot) => {
-//           const tmp = []
-//         snapshot.forEach(doc => {
-//             const utc = doc.data().createdAt
-//             const local = moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
-//             const msg = {
-//               id: doc.id,
-//               text: doc.data().text,
-//               createdAt: local
-//             }
-//             tmp.push(msg)
-//             // console.log(tmp)
-//           })
-//           setMessages(tmp)
-          
-//         });
-//       })
-
-
-
-// const sendMessage = async (e) => {
-//     e.preventDefault();
-//     try {
-//         const docRef = await addDoc(collection(db, "messages"), {
-//             uid: user.uid,
-//             displayName: user.displayName,
-//             photoURL: user.photoURL,
-//             text: value,
-//             // createdAt: [ firebase.db.FieldValue.serverTimestamp()]
-//             // createdAt: serverTimestamp()
-//             createdAt: moment.utc().valueOf()
-//         });
-//         console.log("Document written with ID: ", docRef.id);
-
-
-//     } catch (e) {
-//         console.error("Error adding document: ", e);
-//     }
-
-
-//     setValue('')
-   
-// }
-
-
+     
 
 return ( 
 

@@ -13,8 +13,8 @@ import reportWebVitals from './reportWebVitals';
 import { initializeApp } from 'firebase/app';
 // import { FirebaseApp } from '@firebase/app';
 // import firebase from "@firebase/app";
-import { getAuth, onAuthStateChanged, getRedirectResult } from 'firebase/auth';
-import {  collection, doc, getDoc } from 'firebase/firestore/lite';
+import { getAuth} from 'firebase/auth';
+// import {  collection, doc, getDoc } from 'firebase/firestore/lite';
 import { getFirestore } from 'firebase/firestore';
 // Initialize Firebase
 // const firebaseApp = initializeApp({ /* config */ });
@@ -90,6 +90,7 @@ export const Context = createContext(null);
 const auth = getAuth();
 
 const db = getFirestore(firebaseApp);
+// const dbfirebaseApp = initializeApp(firebaseConfig);
 // console.log(db)
 // console.log(firestore.collection, 1)
 // const auth = firebase.auth()

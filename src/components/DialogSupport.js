@@ -129,8 +129,8 @@ export default class Dialog  extends Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
         this.handleNewPhraseChange = this.handleNewPhraseChange.bind(this)
         this.getMessage = this.getMessage.bind(this)
-        // this.getUserInfo = this.getUserInfo.bind(this)
-        // this.getChatSupport = this.getChatSupport.bind(this)
+        this.getUserInfo = this.getUserInfo.bind(this)
+        this.getChatSupport = this.getChatSupport.bind(this)
         // this.getMessageMetod = this.getMessageMetod.bind(this)
 
     }
@@ -173,84 +173,84 @@ export default class Dialog  extends Component {
 
    
     // getMessage()
-            getMessage(tmp) {
+            getMessage(tmp, user) {
             
                 // ScrollToBottom()
                 // console.log(1)
                 this.setState({
                     msg: tmp,
-                    // currentUserInfo: user
+                    currentUserInfo: user
                    
                 })
                 // console.log(this.state.currentUserInfo.name);
             }
            
-            // getUserInfo(){
-            //     // const auth = getAuth()
-            //     // const db = getFirestore()
-            //     // const user = auth.currentUser;
-            //     // // const userRef = doc(db, 'users', user.uid );
+            getUserInfo(){
+                const auth = getAuth()
+                const db = getFirestore()
+                const user = auth.currentUser;
+                // const userRef = doc(db, 'users', user.uid );
 
-            //     // try {
-            //     //     const userRef = doc(db, 'users', user.uid );
-            //     //     getDoc(userRef).then(docSnap => {
-            //     //         if (docSnap.exists()) {
-            //     //         //   console.log("Document data:", docSnap.data().name);
+                try {
+                    const userRef = doc(db, 'users', user.uid );
+                    getDoc(userRef).then(docSnap => {
+                        if (docSnap.exists()) {
+                        //   console.log("Document data:", docSnap.data().name);
 
-            //     //                 this.setState({
-            //     //                     currentUserRole: docSnap.data().role,
+                                this.setState({
+                                    currentUserRole: docSnap.data().role,
                                    
                                 
-            //     //                 })
+                                })
 
-            //     //             // this.state.currentUserRole = docSnap.data().role
-            //     //         // console.log(this.state.currentUserRole);
-            //     //             // setuserName(docSnap.data().name)
+                            // this.state.currentUserRole = docSnap.data().role
+                        // console.log(this.state.currentUserRole);
+                            // setuserName(docSnap.data().name)
                         
-            //     //         } else {
-            //     //           console.log("No such document!");
-            //     //         }
-            //     //       })
-            //     // } catch (error) {
-            //     //      const errorCode = error.code;
-            //     //     const errorMessage = error.message;
-            //     //     console.log(errorMessage)
+                        } else {
+                          console.log("No such document!");
+                        }
+                      })
+                } catch (error) {
+                     const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorMessage)
                 
-            //     // }
+                }
                 
-            //     // console.log(userRef.uid);
-            // }
+                // console.log(userRef.uid);
+            }
 
-            // componentDidMount() {
-            //     // this.getUserInfo()
-            //     // this.getChatSupport()
+            componentDidMount() {
+                this.getUserInfo()
+                this.getChatSupport()
 
-            // }
-            // getChatSupport(){
-            // //  if (this.state.currentUserRole !== 'user') {
-            // //                     console.log('support')
-            // //                     const db = getFirestore()
-            // //                     const supportRef = doc(db, 'users' );
-            // //                     getDoc(supportRef).then(docSnap => {
-            // //                         if (docSnap.exists()) {
+            }
+            getChatSupport(){
+            //  if (this.state.currentUserRole !== 'user') {
+            //                     console.log('support')
+            //                     const db = getFirestore()
+            //                     const supportRef = doc(db, 'users' );
+            //                     getDoc(supportRef).then(docSnap => {
+            //                         if (docSnap.exists()) {
                                                                         
-            // //                             console.log(docSnap.data().uid);          
+            //                             console.log(docSnap.data().uid);          
                                         
-            // //                         } else {
-            // //                           console.log("No such document!");
-            // //                         }
-            // //                       })
+            //                         } else {
+            //                           console.log("No such document!");
+            //                         }
+            //                       })
 
-            // //                 }
+            //                 }
 
-            // }
+            }
                 
                 
            
          
     render() {
 // console.log(this.state.currentUserRole);
-
+if (this.state.currentUserRole == 'user') {
         return (
             <div className="dialog">
                 <div className="title">
@@ -271,11 +271,10 @@ export default class Dialog  extends Component {
     
                        
                             {this.state.dialogMenu.map((item, index )=>
-                                        ( 
-                                            //  <Link to={`/dialog/${index + 1}`}   key={index} >
+                                        (  <Link to={`/dialog/${index + 1}`}   key={index} >
     
     
-                                            <div className={`dialog-row ${item.online}`} key={index}>
+                                            <div className={`dialog-row ${item.online}`}>
                                                                     
                                                 <img src={item.avatar}  className="dialog-avatar"/>
     
@@ -285,12 +284,12 @@ export default class Dialog  extends Component {
                                                     </div>
                                                 <div className="dialog-info">
                                                     <div className="diallog-time">{item.time} </div>
-                                                    {/* <div className="diallog-status"> {item.status}</div> */}
+                                                    <div className="diallog-status"> {item.status}</div>
                                                 </div>
     
                                             </div>
     
-                                            // </Link>
+                                            </Link>
                                     ))}
                       
     
@@ -321,9 +320,7 @@ export default class Dialog  extends Component {
                                             <img src={`${message.photoURL}`}  className="chat-avatar"/>
     
                                             <div className="wrapper">
-                                                <div className="chat-message"> 
-                                                <div className='chat-message-name'>{message.displayName}</div>
-                                                {message.message}</div>  
+                                                <div className="chat-message"> {message.message}</div>  
                                                 <div className="time-message ">{message.timestamp}</div>
                                             </div>
                                             </div>
@@ -385,4 +382,26 @@ export default class Dialog  extends Component {
 
 
 } 
+else{
+    return (
+        <div className="dialog">
+            <div className="title">
+                Диалог с поддержкой проекта
+            </div>
+          
+            
+
+
+
+
+        </div>
+    )
+
+}
+
+
+     
+       
+    }
+   
 }

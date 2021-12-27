@@ -808,6 +808,8 @@ footer {
           max-width: 444px;
         }
 
+        
+
         .chat-message {
           background: #F1F1F1;
           border-radius: 8px 8px 8px 0px;
@@ -817,6 +819,7 @@ footer {
           color: #202020;
           margin-bottom: 9px;
           max-width: 444px;
+
         }
 
         .time-message {
@@ -827,7 +830,11 @@ footer {
           padding-left: 15px;
         }
       }
-
+      .chat-message-name {
+        background: none;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
 
       &.user {
         // align-items: flex-end;
@@ -2569,4 +2576,38 @@ select {
 
 .circle {
   background: red;
+}
+.settings_form{
+  margin-top: 30px;
+}
+.settings_row input{
+  border: 1px solid;
+    outline: none;
+    background: #FFFFFF;
+    border-radius: 60px;
+    padding: 24px 20px;
+    font-size: 14px;
+    line-height: 112.7%;
+    color: #7E7E7E;
+    margin-bottom: 8px;
+    width: 285px;
+}
+
+.drug_img{
+  border: 1px dashed #FF5F46;
+  background: none;
+  padding: 20px 35px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 112.7%;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 400ms ease;
+    color: #202020;
+    cursor: pointer;
+    margin-bottom: 30px;
+
+}
+.image-item__btn-wrapper{
+  margin-bottom: 30px;
 }

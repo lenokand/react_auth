@@ -15,6 +15,7 @@ export const SEO_INSPECTION_ROUTE = '/seo/inspection'
 export const SEO_NEWS_ROUTE = '/seo/news'
 export const SEO_DETAILS_ROUTE = '/seo/details'
 export const SEO_CONTACTS_ROUTE = '/seo/contacts'
+export const CHAT_ROUTE_SUPPORT = '/dialog_support'
 
 // export const SEO_ROUTE = '/seo'
 // export const SEO_ROUTE = '/seo'

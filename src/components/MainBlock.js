@@ -23,6 +23,7 @@ import SeoNews from "./SeoSubmenu/SeoNews";
 import SeoDatails from "./SeoDetails";
 import SeoContacts from "./SeoSubmenu/SeoContacts";
 import Notification from "./Notification";
+import DialogSupport from "./DialogSupport";
 
 function MainBlock() {
     return(
@@ -73,6 +74,10 @@ function MainBlock() {
                              <SeoContacts/>
                         </Route>
 
+                        <Route path='/dialog_support'>
+                             
+                             <DialogSupport/>
+                        </Route>
                         <Route path='/dialog'>
                              <Dialog/>
                         </Route>
