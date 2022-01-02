@@ -52,6 +52,9 @@ menu {
 .autherisationnav .avatar img {
   object-fit: cover;
   object-position: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 120%;
 }
 .autherisationnav .subbutton {
   cursor: pointer;
@@ -639,6 +642,7 @@ footer .toTop svg {
   object-fit: cover;
   object-position: center;
   margin-right: 16px;
+  border-radius: 120%;
 }
 .dialog .chat-block .chat-row.oponent .wrapper {
   display: flex;
@@ -677,6 +681,7 @@ footer .toTop svg {
   object-fit: cover;
   object-position: center;
   margin-left: 16px;
+  border-radius: 120%;
 }
 .dialog .chat-block .chat-row.user .wrapper {
   order: 1;
@@ -852,6 +857,7 @@ footer .toTop svg {
   padding: 0;
   background: #F5F5F5;
   border-radius: 10px;
+  z-index: 1;
 }
 .docs .docs-block .settings a {
   text-decoration: none;
@@ -863,11 +869,12 @@ footer .toTop svg {
 .docs .docs-block .settings a:hover {
   text-decoration: underline;
 }
-.docs .docs-block .settings div {
+.docs .docs-block .settings .settings_item {
   padding: 8px 18px;
   border-bottom: 1px solid #EEEEEE;
+  display: block;
 }
-.docs .docs-block .settings div:last-child {
+.docs .docs-block .settings .settings_item:last-child {
   border-bottom: none;
 }
 

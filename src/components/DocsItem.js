@@ -12,18 +12,18 @@ export default function DocsItem(props) {
 
                     {/* <div className="settings" style={{display: (props.show) ? 'flex' : 'none'}}> */}
                     <div className="settings" style={{display: (props.showModal === props.id) ? 'flex' : 'none'}}>
-                        <div>
-                            <a href="props.link">Посмотреть</a>
+                        <a className='settings_item' href={props.link} target="_blank">
+                           Посмотреть
+                           
+                        </a>
+                        <a className='settings_item' href="#" download={props.link}>
+                       
+                            Скачать
+                        </a>
+                        <a className='settings_item' href="props.link" >
+                        Отправить 
                             
-                        </div>
-                        <div>
-                        <a href="props.link">
-                            Скачать</a>
-                        </div>
-                        <div>
-                        <a href="props.link">Отправить </a>
-                            
-                        </div>
+                        </a>
                     </div>
 
             </div>

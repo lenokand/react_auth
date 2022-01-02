@@ -5,7 +5,7 @@ import { Context } from '..';
 import {  signOut } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { getAuth } from "firebase/auth";
-import {    getFirestore, getDoc,    doc} from 'firebase/firestore';
+import {    getFirestore, getDoc, setDoc,    doc} from 'firebase/firestore';
 
 
 // let user = {
@@ -20,6 +20,10 @@ import {    getFirestore, getDoc,    doc} from 'firebase/firestore';
 
  function Autherisationnav() {
 
+    let [visible, setVisible] = useState(false)
+    let [userName, setuserName] = useState('')
+    let [userAvatar, setuserAvatar] = useState('')
+
     const {auth} = useContext(Context)
     const [user1] = useAuthState(auth)
     // console.log(user1.uid)
@@ -31,8 +35,21 @@ import {    getFirestore, getDoc,    doc} from 'firebase/firestore';
         if (docSnap.exists()) {
         //   console.log("Document data:", docSnap.data().name);
             setuserName(docSnap.data().name)
+            if(docSnap.data().photoURL){
+                (docSnap.data().photoURL.length > 0) ? setuserAvatar(docSnap.data().photoURL) :  setuserAvatar(avatar)
+            } else {
+                setuserAvatar(avatar)
+            }
+            
         } else {
           console.log("No such document!");
+
+           setDoc(doc(db, "users", user1.uid ), {
+            uid: user1.uid,
+            role: "user"
+            
+         });
+
         }
       })
 } catch (error) {
@@ -42,8 +59,7 @@ import {    getFirestore, getDoc,    doc} from 'firebase/firestore';
 
 }
 
-    let [visible, setVisible] = useState(false)
-    let [userName, setuserName] = useState('')
+   
    
     let openMenu = () => {
         setVisible(!visible)
@@ -56,13 +72,13 @@ import {    getFirestore, getDoc,    doc} from 'firebase/firestore';
     return(
         <div className="autherisationnav">
             <div className="name">
-        {userName}
+            {userName? userName : "User"  }
            
 
             </div>
 
             <div className="avatar">
-                <img src={avatar} alt="avatar"/>
+                <img src={userAvatar} alt="avatar"/>
 
 
             </div>

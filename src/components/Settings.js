@@ -32,7 +32,7 @@ import ImageUploading from 'react-images-uploading';
 import Uploady from "@rpldy/uploady";
 import { asUploadButton } from "@rpldy/upload-button";
 
-import { getStorage, ref, uploadBytesResumable  } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function Settings() {
     const {  auth  } = useContext(Context)
@@ -66,22 +66,83 @@ export default function Settings() {
     //     console.log(errorMessage)
     
     // }
-
-
         
 
 
     const sendSettings = async (e) => {
         e.preventDefault();
-        setNewImg('')
+        
         try {
 
             const userRef = doc(db, 'users', user.uid );
+            
 
-            if(newImg.length > 0){
-                await   updateDoc(userRef, { photoURL: newImg});
-                setNewImg('')
+            if(newImg){
+                
+                // console.log(newImg.name, newImg);
+
+
+                const storage = getStorage();
+                const storageRef = ref(storage);     
+                // Points to 'images'
+                const imagesRef = ref(storageRef, user.uid);
+                const fileName = newImg.name;
+
+                // const spaceRef = ref(imagesRef, fileName);
+                const spaceRef = ref(imagesRef, 'avatar.jpg');
+
+                uploadBytes(spaceRef, newImg).then((snapshot) => {
+                  console.log('Uploaded a file!');
+                  // console.log(newImg.name, newImg);
+                  setNewImg('')
+
+                });
+                // console.log(user.uid + `/avatar.jpg`)
+
+              
+                getDownloadURL(ref(storage, user.uid + `/avatar.jpg`))
+                  .then((url) => {
+                    // `url` is the download URL for 'images/stars.jpg'
+                    // console.log(url);
+                       updateDoc(userRef, { photoURL: url});
+                  })
+                  .catch((error) => {
+                    // Handle any errors
+                    console.log('getDownloadURL error');
+                  });
+                
+                
+                // const mountainImagesRef = ref(storage, 'images/mountains4.jpg');
+                // const uploadTask = uploadBytesResumable(storageRef, newImg);
             }
+
+            // плагин
+            // if(images.length > 0){
+            //     await   updateDoc(userRef, { photoURL: images});
+            
+            //         const storage = getStorage();
+
+            //         const storageRef = ref(storage);     
+            //     //     // Points to 'images'
+            //         const imagesRef = ref(storageRef, 'images');
+            //         const fileName = images[0].file.name;
+    
+            //         const spaceRef = ref(imagesRef, fileName);
+    
+            //         uploadBytes(spaceRef, newImg).then((snapshot) => {
+            //           console.log('Uploaded a blob or file!');
+            //           console.log(images[0].file.name, images[0]);
+    
+            //         });
+
+
+
+            //     // const storage = getStorage();
+            //     // const storageRef = ref(storage, `images/${images[0].file.name}`);
+            //     // const mountainImagesRef = ref(storage, `images/${images[0].file.name}`);
+            //     // const uploadTask = uploadBytesResumable(storageRef, images);
+            //     setImages('')
+            // }
             if(newName.length > 0){
                 await   updateDoc(userRef, { name: newName});
                 setNewName('')
@@ -91,56 +152,48 @@ export default function Settings() {
                 setNewTel('')
             }
             
-         
-
+           
             console.log("Document written with ID: ", userRef.id)
         //   ScrollToBottom()
+
+
+
+
         } catch (e) {
-            await setDoc(doc(db, "users", user.uid ), {
-               uid: user.uid,
-            //    photoURL: (newImg.length > 0)? newImg:''
-       
-            });
+            
 
             console.log('заполните форму повторно');
-            const userRef = doc(db, 'users', user.uid );
-              if(newImg.length > 0){
-                  await   updateDoc(userRef, { photoURL: newImg});
-                  setNewImg('')
-              }
-              
-            if(newName.length > 0){
-                await   updateDoc(userRef, { name: newName});
-                setNewName('')
-
-            }
-            if(newTel.length > 0){
-                await   updateDoc(userRef, { phone: newTel});
-                setNewTel('')
-            }
-          console.error("Error adding document: ", docRef.id);
+            console.error("Error adding document: ", docRef.id);
 
 
         }
       }
 
     
-
+      // ImageUploading
     const [images, setImages] = useState(null);
-    const maxNumber = 69;
+    const maxNumber = 1;
   
     const onChange = (imageList, addUpdateIndex) => {
       // data for submit
-      // console.log(imageList, addUpdateIndex);
+      console.log(imageList, addUpdateIndex);
+      // console.log(imageList[0].file.name);
       setImages(imageList);
+
+    };
+
+    const onChangeImg = (e) => {
+           if (e.target.files[0]) {
+            setNewImg(e.target.files[0]);
+
+            // console.log( newImg.name == '851880-3.jpg', newImg.name, newImg, e.target.files[0])
+           }
+     
+      
     };
 
 
-    // загрузка в сторедж
-    // const storage = getStorage();
-    // const storageRef = ref(storage, 'images/mountains.jpg');
-    // const mountainImagesRef = ref(storage, 'images/mountains.jpg');
-    // const uploadTask = uploadBytesResumable(storageRef, images);
+   
 
 
 
@@ -160,50 +213,58 @@ export default function Settings() {
 
 
             
-            <form className = "settings_form"  onSubmit={sendSettings}  >
-                {/* <div className='settings_row'>
-                <input placeholder = "Укажите путь аватарки..." type="file"   value={newImg}    onChange={(e) => setNewImg(e.target.value)}/>
-                </div> */}
+            <form className = "settings_form"  
+            // onSubmit={sendSettings}
+             >
+
+                <div className='settings_row'>
+                <input placeholder = "Укажите путь аватарки..." type="file"   
+                // value={newImg}    
+                // onChange={(e) => setNewImg(e.target.value)}
+                onChange={onChangeImg}
+                />
+                </div>
                  <div className='settings_row'>
                     
-                    <ImageUploading
-            multiple
-            value={images}
-            onChange={onChange}
-            maxNumber={maxNumber}
-            dataURLKey="data_url"
-          >
-            {({
-              imageList,
-              onImageUpload,
-              // onImageRemoveAll,
-              onImageUpdate,
-              onImageRemove,
-              isDragging,
-              dragProps,
-            }) => (
-              // write your building UI
-              <div className="upload__image-wrapper">
-                <button className='drug_img'
-                  style={isDragging ? { color: 'red' } : undefined}
-                  onClick={onImageUpload}
-                  {...dragProps}
-                >
-                  Нажмите или перетащите сюда картинку
-                </button>
-                &nbsp;
-                {imageList.map((image, index) => (
-                  <div key={index} className="image-item">
-                    <img src={image['data_url']} alt="" width="100" />
-                    <div className="image-item__btn-wrapper">
-                      <button className='active_btn' onClick={() => onImageUpdate(index)}>Update</button>
-                      <button className='active_btn' onClick={() => onImageRemove(index)}>Remove</button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </ImageUploading>
+                    {/* <ImageUploading
+                      multiple
+                      value={images}
+                      onChange={onChange}
+                      maxNumber={maxNumber}
+                      dataURLKey="data_url" 
+                    >
+                          {({
+                            imageList,
+                            onImageUpload,
+                            onImageRemoveAll,
+                            onImageUpdate,
+                            onImageRemove,
+                            isDragging,
+                            dragProps,
+                          }) => (
+                            // write your building UI
+                            <div className="upload__image-wrapper">
+                              <button className='drug_img'
+                                style={isDragging ? { color: 'red' } : undefined}
+                                onClick={onImageUpload}
+                                {...dragProps}
+                              >
+                                Нажмите или перетащите сюда картинку
+                              </button>
+                              &nbsp;
+                              {imageList.map((image, index) => (
+                                <div key={index} className="image-item">
+                                  <img src={image['data_url']} alt="" width="100" />
+                                  <div className="image-item__btn-wrapper">
+                                    <button className='active_btn' onClick={() => onImageUpdate(index)}>Обновить</button>
+                                    <button className='active_btn' onClick={() => onImageRemove(index)}>Очистить</button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+          </ImageUploading> */}
+          
                     </div>
                 <div className='settings_row'>
                 <input placeholder = "Укажите имя"    value={newName}    onChange={(e) => setNewName(e.target.value)}/>
@@ -216,7 +277,7 @@ export default function Settings() {
                 
                 
 
-                <button className='active_btn' type = "submit"  disabled={!newImg & !newName & !newTel}> Сохранить </button>
+                <button className='active_btn' type = "submit"  disabled={!newImg & !newName & !newTel} onClick={sendSettings}> Сохранить </button>
 
                     < div > 
                     

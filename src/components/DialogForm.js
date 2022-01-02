@@ -69,17 +69,17 @@ export default function DialogForm(props) {
         const querySnapshot = await getDocs(u);
         querySnapshot.forEach((doc) => {
         //  currentUser = doc.data()
-         
+        const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
 
          try {
-         
+          
            addDoc(chatRef, {
           // await addDoc(collection(db, 'support1_' + user.uid), {
             message: newMsg,
             uid: doc.data().uid,
             fileUpload: null,
             displayName: doc.data().name,
-            photoURL: doc.data().photoURL,
+            photoURL: avatar,
             timestamp: moment.utc().valueOf()
           });
                    
@@ -109,7 +109,8 @@ export default function DialogForm(props) {
             const uid = (user.uid == doc.data().uid) ? 'user' : 'oponent'
 
             const local = moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
-            const avatar = user.photoURL ? 'user.photoURL' : avatarNull
+            const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
+            
             const msg = {
               id: doc.id,
               message: doc.data().message,
