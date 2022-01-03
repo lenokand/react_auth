@@ -126,125 +126,56 @@ export default class Dialog  extends Component {
 
         }
         
-        this.handleFormSubmit = this.handleFormSubmit.bind(this)
-        this.handleNewPhraseChange = this.handleNewPhraseChange.bind(this)
+        // this.handleFormSubmit = this.handleFormSubmit.bind(this)
+        // this.handleNewPhraseChange = this.handleNewPhraseChange.bind(this)
         this.getMessage = this.getMessage.bind(this)
-        // this.getUserInfo = this.getUserInfo.bind(this)
-        // this.getChatSupport = this.getChatSupport.bind(this)
-        // this.getMessageMetod = this.getMessageMetod.bind(this)
+       
 
     }
-    handleNewPhraseChange(e) {
-        this.setState({
-            newPhrase: e.target.value
-        })
-    }
+    // handleNewPhraseChange(e) {
+    //     this.setState({
+    //         newPhrase: e.target.value
+    //     })
+    // }
  
 
 
-    handleFormSubmit(e) {
-        e.preventDefault()
-        let date= new Date()
-        let usertime = date.getHours() +":"+ (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes() )
+    // handleFormSubmit(e) {
+    //     e.preventDefault()
+    //     let date= new Date()
+    //     let usertime = date.getHours() +":"+ (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes() )
        
-        let phrase = {
-            id: Date.now(),
-            avatar: avatar1,
-            message: this.state.newPhrase,
-            time: usertime ,
-            status: 'user'
-        }
-        let tmp = this.state.chat
-        tmp.push(phrase)
-        this.setState({
-            chat: tmp,
-            newPhrase: ''
-        })
-        // const {auth} = useContext(Context)
-        // const auth = getAuth();
-        // const [value, setValue] = useState('')
-        // const[ message, loading ] =useCollectionData()
+    //     let phrase = {
+    //         id: Date.now(),
+    //         avatar: avatar1,
+    //         message: this.state.newPhrase,
+    //         time: usertime ,
+    //         status: 'user'
+    //     }
+    //     let tmp = this.state.chat
+    //     tmp.push(phrase)
+    //     this.setState({
+    //         chat: tmp,
+    //         newPhrase: ''
+    //     })
+       
 
-        // Firestore
-        // const firestore = getFirestore(firebaseApp);
-
-
-    }
+    // }
 
    
-    // getMessage()
+   
             getMessage(tmp) {
             
-                // ScrollToBottom()
-                // console.log(1)
+              
                 this.setState({
                     msg: tmp,
-                    // currentUserInfo: user
+                 
                    
                 })
-                // console.log(this.state.currentUserInfo.name);
+               
             }
            
-            // getUserInfo(){
-            //     // const auth = getAuth()
-            //     // const db = getFirestore()
-            //     // const user = auth.currentUser;
-            //     // // const userRef = doc(db, 'users', user.uid );
-
-            //     // try {
-            //     //     const userRef = doc(db, 'users', user.uid );
-            //     //     getDoc(userRef).then(docSnap => {
-            //     //         if (docSnap.exists()) {
-            //     //         //   console.log("Document data:", docSnap.data().name);
-
-            //     //                 this.setState({
-            //     //                     currentUserRole: docSnap.data().role,
-                                   
-                                
-            //     //                 })
-
-            //     //             // this.state.currentUserRole = docSnap.data().role
-            //     //         // console.log(this.state.currentUserRole);
-            //     //             // setuserName(docSnap.data().name)
-                        
-            //     //         } else {
-            //     //           console.log("No such document!");
-            //     //         }
-            //     //       })
-            //     // } catch (error) {
-            //     //      const errorCode = error.code;
-            //     //     const errorMessage = error.message;
-            //     //     console.log(errorMessage)
-                
-            //     // }
-                
-            //     // console.log(userRef.uid);
-            // }
-
-            // componentDidMount() {
-            //     // this.getUserInfo()
-            //     // this.getChatSupport()
-
-            // }
-            // getChatSupport(){
-            // //  if (this.state.currentUserRole !== 'user') {
-            // //                     console.log('support')
-            // //                     const db = getFirestore()
-            // //                     const supportRef = doc(db, 'users' );
-            // //                     getDoc(supportRef).then(docSnap => {
-            // //                         if (docSnap.exists()) {
-                                                                        
-            // //                             console.log(docSnap.data().uid);          
-                                        
-            // //                         } else {
-            // //                           console.log("No such document!");
-            // //                         }
-            // //                       })
-
-            // //                 }
-
-            // }
-                
+          
                 
            
          
@@ -254,7 +185,7 @@ export default class Dialog  extends Component {
         return (
             <div className="dialog">
                 <div className="title">
-                    Диалог с поддержкой проекта
+                    Диалог проекта
                 </div>
                 {/* <div className="subtitle">
                     Ваши диалоги:

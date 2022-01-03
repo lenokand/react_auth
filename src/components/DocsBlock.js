@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DocsItem from './DocsItem'
-import {    getFirestore, getDoc, setDoc, getDocs, collection,    doc} from 'firebase/firestore';
+import {    getFirestore, getDoc, setDoc, getDocs, collection, query,    doc} from 'firebase/firestore';
 const triple = (
     <svg width="3" height="13" viewBox="0 0 3 13" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="1.5" cy="1.5" r="1.5" fill="#C4C4C4"/>
@@ -52,7 +52,8 @@ export default class DocsBlock extends Component {
                     link:'/#',
                     show: false
                 },
-            ]
+            ],
+            docList0: []
     
         }
         // this.handleShow = this.handleShow.bind(this)
@@ -62,9 +63,17 @@ export default class DocsBlock extends Component {
         
     }
 
-    componentDidMount(){
+     componentDidMount(){
       console.log(1);
-      this.getDocsFirebase()
+      
+    
+        this.getDocsFirebase()
+        
+     
+        // console.log(this.state.docList0, 1);  
+    }
+    //    this.getDocsFirebase()
+
     //   const db = getFirestore()
 
     //   const querySnapshot =  getDocs(collection(db, 'docs')).then(querySnapshot.forEach((doc) => {
@@ -73,37 +82,47 @@ export default class DocsBlock extends Component {
     //   })      
     //   );
       
+     getDocsFirebase = async () => {
+        const tmp = []
+        const db = getFirestore()
 
+        const q = query(collection(db, "docs"));
 
-
-
-    //   const docRef = doc(db, 'docs');
-    //   const docSnap =  getDoc(docRef);
-
-    //   if (docSnap.exists()) {
-    //   console.log("Document data:", docSnap.data().name);
-    //   } else {
-    //   // doc.data() will be undefined in this case
-    //   console.log("No such document!");
-    //   }
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+         
+            let doc1 = {
+                id: doc.data().id,
+                name: doc.data().name,
+                number: doc.data().number,
+                date: doc.data().date,
+                link: doc.data().url,
+                show: false
+            }
+          tmp.push(doc1)
+         console.log(doc1);
+         
+        });
+        console.log(tmp, 22);
+        this.setState({docsList0 : tmp })
+        console.log(this.state.docsList0, "fff");
     }
     
-    getDocsFirebase(){
-        // const db = getFirestore()
-        // const docRef = collection(db, 'docs')
+     
+    //     const docRef = collection(db, 'docs')
 
-        // getDoc(docRef).then(docSnap => {
-        //                             if (docSnap.exists()) {
+    //    const bbb = await getDoc(docRef).then(docSnap => {
+    //                                 if (docSnap.exists()) {
                                                                         
-        //                                 console.log(docSnap.data().name);          
+    //                                     console.log(docSnap.data().name);          
                                         
-        //                             } else {
-        //                               console.log("No such document!");
-        //                             }
-        //                           })
+    //                                 } else {
+    //                                   console.log("No such document!");
+    //                                 }
+    //                               })
 
        
-    }
+    // }
     // handleShow(id) {
     //     let tmp = this.state.docsList
 
@@ -150,7 +169,7 @@ export default class DocsBlock extends Component {
                             Категория документов №1
                         </div>
 
-                        {this.state.docsList.map((item, index )=>
+                        {this.state.docsList.length > 0 &&this.state.docsList.map((item, index )=>
                                         (   
                                     <DocsItem item={item} showModal={this.state.showModal} id={item.id} name={item.name} number={item.number} date={item.date} link={item.link}  show={item.show} handleShow={this.handleShowBlock} key={item.id} triple={triple} />
 
