@@ -4,9 +4,9 @@ export default function DocsItem(props) {
     return (
         <div className="item-rows" >
             <div className="item-row">
-                <div>{props.name}</div> 
-                <div>{props.number}</div> 
-                <div>{props.date}  </div>
+                <div className='doc-item-col'>{props.name}</div> 
+                <div className='doc-item-col'>{props.number}</div> 
+                <div className='doc-item-col'>{props.date}  </div>
                 {/* <button onClick={() => props.handleShow(props.id)}> {props.triple} </button> */}
                 <button onClick={() => props.handleShow(props.id)}> {props.triple} </button>
 

@@ -195,7 +195,7 @@ export default class AutorisationWrapper extends Component {
     handleShowBlock(e) {
       
        this.setState({showModal : !this.state.showModal})
-       console.log();
+    //    console.log();
     }
     render() {
        

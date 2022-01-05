@@ -13,6 +13,7 @@ import {
 
 import avatar1 from '../img/avatar1.png'; 
 import DialogForm from './DialogForm';
+import avatarNull from '../img/avatar.png'; 
 // import { getFirestore, collection, getDocs, addDoc, firestore, Timestamp, serverTimestamp } from 'firebase/firestore';                
 // import { initializeApp } from 'firebase/app';
 // import { getDatabase } from "firebase/database";
@@ -26,6 +27,9 @@ import {
     collection,
     getDoc, 
     getDocs,
+    orderBy,
+    limit,
+     query,
     addDoc,
     firestore,
     Timestamp,
@@ -161,20 +165,97 @@ export default class Dialog  extends Component {
        
 
     // }
-
+    
    
-   
-            getMessage(tmp) {
+            getMessage() {
+                const auth = getAuth();
+                const userUid = auth.currentUser.uid
+                // console.log(auth.currentUser.uid);
+                const db = getFirestore()
+                const chatRef = collection(db, 'chat')
+                const q = query(chatRef, orderBy("timestamp", "asc"), limit(150));
+                const  unsub = onSnapshot(q, (snapshot) => {
+                    const tmp = []
+                        snapshot.forEach(doc => {
+                        const utc = doc.data().timestamp
             
-              
-                this.setState({
-                    msg: tmp,
-                 
-                   
-                })
+                        //   const uid = 'oponent'
+                        const uid = (userUid == doc.data().uid) ? 'user' : 'oponent'
+            
+                        const local = moment(utc).local().format('HH:mm:ss YYYY-MM-DD ')
+                        const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
+                        
+                        const msg = {
+                            id: doc.id,
+                            message: doc.data().message,
+                            fileUpload:  doc.data().fileUpload,
+                            timestamp: local,
+                            photoURL: avatar,
+                            fileUpload: doc.data().fileUpload,
+                            displayName: doc.data().displayName,
+                            uid: uid,
+                            
+                        }
+                        tmp.push(msg)
+                        
+                        })
+                  //   props.chat = tmp
                
+                  this.setState({
+                    msg: tmp,})
+                    // setMessages(tmp)
+                    
+                });
+                  
             }
-           
+            
+            
+            componentDidMount(){
+              
+
+                this.getMessage()
+            }
+            componentWillUnmount(){
+                const auth = getAuth();
+                const userUid = auth.currentUser.uid
+                // console.log(auth.currentUser.uid);
+                const db = getFirestore()
+                const chatRef = collection(db, 'chat')
+                const q = query(chatRef, orderBy("timestamp", "asc"), limit(150));
+                const  unsub = onSnapshot(q, (snapshot) => {
+                    const tmp = []
+                        snapshot.forEach(doc => {
+                        const utc = doc.data().timestamp
+            
+                        //   const uid = 'oponent'
+                        const uid = (userUid == doc.data().uid) ? 'user' : 'oponent'
+            
+                        const local = moment(utc).local().format('HH:mm:ss YYYY-MM-DD ')
+                        const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
+                        
+                        const msg = {
+                            id: doc.id,
+                            message: doc.data().message,
+                            fileUpload:  doc.data().fileUpload,
+                            timestamp: local,
+                            photoURL: avatar,
+                            fileUpload: doc.data().fileUpload,
+                            displayName: doc.data().displayName,
+                            uid: uid,
+                            
+                        }
+                        tmp.push(msg)
+                        
+                        })
+                  //   props.chat = tmp
+               
+                  this.setState({
+                    msg: tmp,})
+                    // setMessages(tmp)
+                    
+                });
+                unsub()
+            }
           
                 
            

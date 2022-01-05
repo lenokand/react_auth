@@ -10,7 +10,22 @@ import {
     Link
   } from "react-router-dom";
 
-
+  import { getAuth } from 'firebase/auth';
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+   
+    getDoc,
+    // addDoc,
+    // firestore,
+    // Timestamp,
+    doc,
+    query,
+    // orderBy,
+    // limit,
+    // onSnapshot, query, 
+    setDoc, updateDoc} from 'firebase/firestore';
   import ModalProps from "./ModalProps";
  
    
@@ -34,7 +49,7 @@ import {
 
     function PersonalCabinet() {
       let [showModal, setVisible] = useState(false)
-      
+      let [mngName, setmngName] = useState({})
       function toggleModal(e) {
         return (
             setVisible(!showModal),
@@ -70,13 +85,39 @@ import {
             title: 'Привелегии',
             img: privelegiiImg,
             subtitle: 'Программа Привилегий для наших постоянных Клиентов',
-            butonSign: 'Ознакомиться',
+            // butonSign: 'Ознакомиться',
             route: ''
         },
     ]
+        const getDocFromFb = async () =>{
+            const auth = getAuth();
+            const userUid = auth.currentUser.uid
+            const db = getFirestore()
+            const docRef = doc(db, 'users', userUid )
+            const docSnap = await getDoc(docRef);
+        
+            if (docSnap.exists()) {
+                // console.log("Document data:", docSnap.data());
 
-    
+                const managerId = docSnap.data().manager
+                const mngRef = doc(db, 'managers', managerId )
+                const mngSnap = await getDoc(mngRef);
+                const tmp = {
+                    name: mngSnap.data().name,
+                    tel: mngSnap.data().tel,
+                    photo: mngSnap.data().photo,
+                    id: mngSnap.id,
 
+                }
+                setmngName(tmp)
+                // console.log(tmp );
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+    }
+    getDocFromFb() 
+    // console.log(mngName, 1 );
     return(
         <section className="personal-cabinet">
             <div className="title">Личный кабинет по SEO</div>
@@ -89,21 +130,22 @@ import {
                                     <div className="block-title">
                                     Ваш менеджер
                                     </div>
-
-                                    <img src={managerAvatar} className="block-image" alt="admin"/>
+                                    {mngName.photo ? <img src={mngName.photo} className="block-image" alt="admin"/> : ''}
+                                    
                                     
                                     <div className="block-subtitle ">
-                                        <span className="bold_txt">Скударнов</span>
+                                    <span className="bold_txt">   {mngName.name? mngName.name : '' }</span>
+                                        {/* <span className="bold_txt">Скударнов</span>
                                         <br/> Сергей
-                                        <br/> Александрович    
+                                        <br/> Александрович     */}
                                     </div>
 
                                
                                 </div>
-                                    <a href="#">
-                                        
+                                {mngName.tel? <a href={'tel:'+mngName.tel} target="_blank">                                        
                                         <div className="active_btn" >Связаться</div>
-                                    </a>
+                                    </a> : ''}
+                                    
                                
                             </div>
                             <ModalProps showModal={showModal} toggleModal={toggleModal}/>
@@ -131,7 +173,7 @@ import {
 
                                 
                                     </div>
-                                    <Link to={item.route}><div className="active_btn">{item.butonSign}</div></Link> 
+                                    {item.butonSign? <Link to={item.route}><div className="active_btn">{item.butonSign}</div></Link> : ''}  
                                 
                             </div>
                         ))}

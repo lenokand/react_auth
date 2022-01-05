@@ -25,7 +25,7 @@ return(
                         {data.map((item, index )=>
                          (
                                 <div className="general-body" key={index}>
-                                {item.data}
+                                {item.data}111
                                 </div> 
       
                         ))}    

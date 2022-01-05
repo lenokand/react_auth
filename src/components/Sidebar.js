@@ -55,7 +55,7 @@ function Sidebar() {
                     <Link to="/dialog">
                         <div className="menu-item">
                             {dialog}
-                            <div className="pointer">3</div>
+                            {/* <div className="pointer">3</div> */}
                         </div>
                     </Link>
                     <Link to="/docs">
@@ -68,7 +68,7 @@ function Sidebar() {
                     <Link to="/notification">
                         <div className="menu-item">
                             {notif}
-                            <div className="pointer">3</div> 
+                            {/* <div className="pointer">3</div>  */}
                         </div>
                     </Link>
                     <Link to="/settings">

@@ -15,38 +15,53 @@ import InputMask from "react-input-mask";
 import {
     getFirestore,
     collection,
-    // getDocs,
+    getDocs,
+   
     getDoc,
     // addDoc,
     // firestore,
     // Timestamp,
     doc,
+    query,
     // orderBy,
     // limit,
     // onSnapshot, query, 
     setDoc, updateDoc} from 'firebase/firestore';
+    import { getAuth } from 'firebase/auth';
+    // import moment from 'moment';
+
+
 // import { Firestore } from 'firebase/firestore/lite';
 // import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom'
 import ImageUploading from 'react-images-uploading';
 
 import Uploady from "@rpldy/uploady";
+
 import { asUploadButton } from "@rpldy/upload-button";
 
 import { getStorage, ref, uploadBytesResumable, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function Settings() {
-    const {  auth  } = useContext(Context)
-    const { firebaseApp   } = useContext(Context)
+    // const {  auth  } = useContext(Context)
+    // const { firebaseApp   } = useContext(Context)
     
-    const [user] = useAuthState(auth)
+    // const [user] = useAuthState(auth)
+    
+    const auth2 = getAuth();
+    const userUid = auth2.currentUser.uid
+    // console.log(auth.currentUser.uid);
+    // const db = getFirestore()
 
     // const [imageList, setimageList] = useState('')
     const [newImg, setNewImg] = useState('')
     const [newName, setNewName] = useState('')
     const [newTel, setNewTel] = useState('')
+    const [newUserInfo, setNewUserInfo] = useState({})
     // const [messages, setMessages] = useState([])
     const db = getFirestore()
     const docRef = collection(db, 'users')
+
+
     
     // const storage = getStorage(firebaseApp);
 
@@ -66,15 +81,74 @@ export default function Settings() {
     //     console.log(errorMessage)
     
     // }
+   
+    const getSettingsFirebase = async () => {
+       
+    
+      
+      const q = query(docRef);
+
+
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        const tmp ={
+                    userName: doc.data().name,
+                    photoURL: doc.data().photoURL,
+                    phone: doc.data().phone,
+                    role: doc.data().role,
+                  }
+               
+                  setNewUserInfo(tmp)
+
+          
+       
+      });
+  
+  }
+
+  getSettingsFirebase()
+
         
+    // const getSettings = async () => {
+       
+        
+    //   try {
 
+    //       const userRef = doc(db, 'users', userUid );
+    //       const docSnap = await getDoc(userRef);
+    //       if (docSnap.exists()) {
+    //         // console.log("Document data:", docSnap.data());
 
+    //         const tmp ={
+    //           userName: docSnap.data().name,
+    //           photoURL: docSnap.data().photoURL,
+    //           phone: docSnap.data().phone,
+    //           role: docSnap.data().role,
+    //         }
+
+    //         setNewUserInfo(tmp)
+
+    //       } else {
+    //         // doc.data() will be undefined in this case
+    //         console.log("No such document!");
+    //       }
+        
+    //   } catch (e) {
+          
+         
+    //       console.error("Error getting document: ", docRef.id);
+
+    //   }
+    // }
+    // getSettings()
+    // console.log(newUserInfo);
+    // console.log(newUserInfo.role == "user" );
     const sendSettings = async (e) => {
         e.preventDefault();
         
         try {
 
-            const userRef = doc(db, 'users', user.uid );
+            const userRef = doc(db, 'users', userUid );
             
 
             if(newImg){
@@ -85,7 +159,7 @@ export default function Settings() {
                 const storage = getStorage();
                 const storageRef = ref(storage);     
                 // Points to 'images'
-                const imagesRef = ref(storageRef, user.uid);
+                const imagesRef = ref(storageRef, userUid);
                 const fileName = newImg.name;
 
                 // const spaceRef = ref(imagesRef, fileName);
@@ -100,11 +174,10 @@ export default function Settings() {
                 // console.log(user.uid + `/avatar.jpg`)
 
               
-                getDownloadURL(ref(storage, user.uid + `/avatar.jpg`))
+                getDownloadURL(ref(storage, userUid + `/avatar.jpg`))
                   .then((url) => {
                     // `url` is the download URL for 'images/stars.jpg'
-                    // console.log(url);
-                       updateDoc(userRef, { photoURL: url});
+                   updateDoc(userRef, { photoURL: url});
                   })
                   .catch((error) => {
                     // Handle any errors
@@ -168,19 +241,19 @@ export default function Settings() {
 
         }
       }
-
+  
     
       // ImageUploading
-    const [images, setImages] = useState(null);
-    const maxNumber = 1;
+    // const [images, setImages] = useState(null);
+    // const maxNumber = 1;
   
-    const onChange = (imageList, addUpdateIndex) => {
-      // data for submit
-      console.log(imageList, addUpdateIndex);
-      // console.log(imageList[0].file.name);
-      setImages(imageList);
+    // const onChange = (imageList, addUpdateIndex) => {
+    //   // data for submit
+    //   // console.log(imageList, addUpdateIndex);
+    //   // console.log(imageList[0].file.name);
+    //   setImages(imageList);
 
-    };
+    // };
 
     const onChangeImg = (e) => {
            if (e.target.files[0]) {
@@ -195,7 +268,7 @@ export default function Settings() {
 
    
 
-
+    
 
 
     return (
@@ -204,7 +277,7 @@ export default function Settings() {
                 Настройки
             </div>
             <div className='subtitle'>
-            Текущие настройки 
+           
             </div>
 
             <div>
@@ -217,15 +290,50 @@ export default function Settings() {
             // onSubmit={sendSettings}
              >
 
+                <div className='settings_row row_title'>
+                    <div className='settings_col'>
+                    Текущие настройки 
+                    </div>
+                    <div className='settings_col'>
+                      Введите новые данные для изменения
+                    </div>
+
+                </div>
                 <div className='settings_row'>
-                <input placeholder = "Укажите путь аватарки..." type="file"   
-                // value={newImg}    
-                // onChange={(e) => setNewImg(e.target.value)}
-                onChange={onChangeImg}
-                />
+                  <div className='settings_col'>
+                  <div className='settings_wrapper'>
+                    {newUserInfo.photoURL ? <img src={newUserInfo.photoURL} alt="avatar"/> : "Добавьте фото"}
+                  
+                  <div>
+                  {newUserInfo.role == "user" ? 'Клиент' : ''}
+                  {newUserInfo.role == "support" ? 'Администратор' : ''}
+                  </div>
+                  
+                    
+                  </div>
+                    
+
+                 
+                    {/* <img src="" className="current-avatar" alt=""> */}
+
+
+                  </div>
+                  <div className='settings_col'>
+
+
+                  <input placeholder = "Укажите путь аватарки..." type="file"   
+                  // value={newImg}    
+                  // onChange={(e) => setNewImg(e.target.value)}
+                  onChange={onChangeImg}
+                  />
+                  
+                  </div>
+        
+
+
                 </div>
                  <div className='settings_row'>
-                    
+               
                     {/* <ImageUploading
                       multiple
                       value={images}
@@ -267,28 +375,53 @@ export default function Settings() {
           
                     </div>
                 <div className='settings_row'>
-                <input placeholder = "Укажите имя"    value={newName}    onChange={(e) => setNewName(e.target.value)}/>
+                <div className='settings_col'>
+                 {newUserInfo.userName? newUserInfo.userName : "Укажите имя"}
+
+
+                  </div>
+                  <div className='settings_col'>
+                  <input placeholder = "Укажите имя"    value={newName}    onChange={(e) => setNewName(e.target.value)}/>
+                    
+                  </div>
+                
                 </div>
                 <div className='settings_row'>
-                {/* <input placeholder = "Телефон"  mask="99/99/9999"    value={newTel}    onChange={(e) => setNewTel(e.target.value)}/> */}
-                <InputMask placeholder = "Телефон"  mask="+7 (999) 99-99-999" onChange={(e) => setNewTel(e.target.value)} value={newTel} />
+                <div className='settings_col'>
+                 {newUserInfo.phone ? newUserInfo.phone : "Укажите телефон"}
+
+
+                  </div>
+                  <div className='settings_col'>
+                  <InputMask placeholder = "Телефон"  mask="+7 (999) 99-99-999" onChange={(e) => setNewTel(e.target.value)} value={newTel} />
+
+
+                  </div>
+               
                 </div>
                
-                
+                <div className='settings_row'>
+                  
+                  <button className='active_btn' type = "submit"  disabled={!newImg & !newName & !newTel} onClick={sendSettings}> Сохранить изменения</button>
+
+
+                  
+               
+                </div>
                 
 
-                <button className='active_btn' type = "submit"  disabled={!newImg & !newName & !newTel} onClick={sendSettings}> Сохранить </button>
+               
 
-                    < div > 
-                    
-            
-                    </div> 
 
 
 
                 </form>
 
 
+                < div  className='settings_instraction'> 
+                    
+            После изменения личных данных необходимо обновить страницу
+                </div> 
 
 
         </div>

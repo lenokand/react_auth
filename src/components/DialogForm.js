@@ -32,13 +32,9 @@ import {
     getDocs,
     addDoc,
     where, 
-    // firestore,
-    // Timestamp,
-    orderBy,
-    limit,
-    onSnapshot, query} from 'firebase/firestore';
+     query} from 'firebase/firestore';
 // import { Firestore } from 'firebase/firestore/lite';
-import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom'
+// import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom'
 export default function DialogForm(props) {
 
   
@@ -96,41 +92,47 @@ export default function DialogForm(props) {
 
     // const chatRef = collection(db, 'support1_' + user.uid)
 
-    const q = query(chatRef, orderBy("timestamp", "asc"), limit(150));
+    // const q = query(chatRef, orderBy("timestamp", "asc"), limit(150));
 
     
-      useEffect(() => { 
-          const unsub = onSnapshot(q, (snapshot) => {
-          const tmp = []
-          snapshot.forEach(doc => {
-            const utc = doc.data().timestamp
-
-            // const uid = 'oponent'
-            const uid = (user.uid == doc.data().uid) ? 'user' : 'oponent'
-
-            const local = moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
-            const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
-            
-            const msg = {
-              id: doc.id,
-              message: doc.data().message,
-              fileUpload:  doc.data().fileUpload,
-              timestamp: local,
-              photoURL: avatar,
-              fileUpload: doc.data().fileUpload,
-              displayName: doc.data().displayName,
-              uid: uid,
-              
-            }
-            tmp.push(msg)
-          })
-        //   props.chat = tmp
-        props.getMessage(tmp)
+    //   useEffect(
         
-          // setMessages(tmp)
+        
+    //     () => { 
+    //       const unsub = onSnapshot(q, (snapshot) => {
+    //       const tmp = []
+    //       snapshot.forEach(doc => {
+    //         const utc = doc.data().timestamp
+
+    //         // const uid = 'oponent'
+    //         const uid = (user.uid == doc.data().uid) ? 'user' : 'oponent'
+
+    //         const local = moment(utc).local().format('YYYY-MM-DD HH:mm:ss')
+    //         const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
+            
+    //         const msg = {
+    //           id: doc.id,
+    //           message: doc.data().message,
+    //           fileUpload:  doc.data().fileUpload,
+    //           timestamp: local,
+    //           photoURL: avatar,
+    //           fileUpload: doc.data().fileUpload,
+    //           displayName: doc.data().displayName,
+    //           uid: uid,
+              
+    //         }
+    //         tmp.push(msg)
+    //       })
+    //     //   props.chat = tmp
+    //     props.getMessage(tmp)
+        
+    //       // setMessages(tmp)
           
-        });
-      })
+    //     });
+
+        
+
+    //   })
      
 
 return ( 
