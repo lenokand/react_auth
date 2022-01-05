@@ -129,12 +129,14 @@ export default function SeoReport() {
                             <div className="general-progects_row">
                                 <div className="">Выберите домен </div>
                                 <select  value={choseDomen} onChange={changeDomenName}>
+                                <option disabled ></option>
+
                                 {(report.length > 0)  ?  report.map((item, index )=>
                                     (
                                         <option value={item.domen}  key={`${item.id}`}> {item.domen}</option>
                                             
 
-                                    )) : `  `}  
+                                    )) : <option  > нет доменов </option>}  
                                    
                                    
                                    
