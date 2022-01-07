@@ -1156,7 +1156,7 @@ footer {
 .index {
   padding: 63px 100px 63px 29px;
   display: flex;
-
+  justify-content: space-between;
   .title {
     margin-bottom: 19px;
   }
@@ -1175,6 +1175,7 @@ footer {
     margin-right: 30px;
     flex-basis: 90%;
     max-width: 770px;
+    max-width: calc(100% - 230px);
   }
 
   .general-title {
@@ -1235,7 +1236,7 @@ footer {
   table {
     margin-top: 20px;
     border-collapse: collapse;
-
+    width: 100%;
     th {
       color: #202020;
       padding: 5px;
@@ -1261,6 +1262,19 @@ footer {
       // }
       &:first-child {
         background-color: none;
+        td{
+          color: #202020;
+          padding: 5px;
+          background-color: #F5F5F5;
+    
+          &:first-child {
+            border-radius: 13px 0 0 0;
+          }
+    
+          &:last-child {
+            border-radius: 0 13px 0 0;
+          }
+        }
       }
 
 
@@ -2076,7 +2090,27 @@ select {
     }
   }
 }
+.fancy-img img{
+  max-width: 100%;
+}
+.table-block{
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-color: #6a7d9b #f0f2f5;
+  scrollbar-width: thin;
+}
 
+// .table-block {height: 70px;width: 340px;background: whitesmoke;overflow-y: scroll;border:1px solid;}
+.table-block::-webkit-scrollbar-track {border-radius: 2px;}
+.table-block::-webkit-scrollbar {width: 1px;}
+.table-block::-webkit-scrollbar-thumb {border-radius: 2px;background: #f0f2f5;}
+.table-block:hover::-webkit-scrollbar-thumb {background: #6a7d9b;}
+
+
+
+.recharts-responsive-container{
+  overflow-x: auto;
+}
 @media screen and (max-width:1300px) {
   .autorisation {
 
@@ -2474,7 +2508,9 @@ select {
 
 
   }
-
+  .index .wrapper{
+    max-width: calc(100% - 90px);
+  }
   .report .general-progects_row {
     flex-direction: column;
     align-items: flex-start;
@@ -2659,6 +2695,13 @@ select {
     display: flex;
     flex-direction: column;
     align-items: center;
+    img{
+      border-radius: 120%;
+      object-fit: cover;
+      object-position: center;
+      height: 100px;
+      width: 100px;
+    }
   }
   .settings_col{
     width: 50%;

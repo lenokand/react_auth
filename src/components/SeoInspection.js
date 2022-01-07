@@ -29,6 +29,9 @@ import {
     const [formType, setFormType] = useState('')
     const [acts, setActs] = useState([])
     const auth = getAuth();
+    if (auth){
+        
+    }
     const userUid = auth.currentUser.uid
 
 
@@ -164,7 +167,7 @@ import {
                                         </button> 
                                     </div> 
         
-                            )) : ` <div className="form-result">За выбранный период документов не найдено. </div>`}   
+                            )) : `За данный период документов не найдено. `}   
                             
 
                           

@@ -1,7 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import SeoSubmenu from './SeoSubmenu'
 import { ResponsiveContainer, AreaChart, Area, Tooltip, LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import Fancybox from "./fancybox.js";
+// import { Fancybox, Fancybox as NativeFancybox } from "@fancyapps/ui/dist/fancybox.esm.js";
+import "@fancyapps/ui/dist/fancybox.css";
 
+import {
+    getFirestore,
+    collection,
+    query,
+    addDoc,
+    doc,
+    getDocs,
+    where
+   } from 'firebase/firestore';
+    import { getAuth } from 'firebase/auth';
 
 export default function SeoIndex() {
     const data = [
@@ -38,122 +51,178 @@ export default function SeoIndex() {
     
         },
     ]
-    let thead = [
-        {
-            name: 'Период'
-        },
-        {
-            name: 'Визиты'
-        },
-        {
-            name: 'Просмотры'
-        },
-        {
-            name: 'Посетители'
-        },
-        {
-            name: 'Новые'
-        },
-        {
-            name: 'Отказы'
-        },
-        {
-            name: 'Глубина просмотра'
-        },
-        {
-            name: 'Время на сайте'
-        },
-    ]
-    let tr = [
-        {
-            name: 'Период',
-            data1: 7661,
-            data2: 7662,
-            data3: 7663,
-            data4: 7664,
-            data5: 7665,
-            data6: 7666,
-            data7: 767
+    // let thead = [
+    //     {
+    //         name: 'Период'
+    //     },
+    //     {
+    //         name: 'Визиты'
+    //     },
+    //     {
+    //         name: 'Просмотры'
+    //     },
+    //     {
+    //         name: 'Посетители'
+    //     },
+    //     {
+    //         name: 'Новые'
+    //     },
+    //     {
+    //         name: 'Отказы'
+    //     },
+    //     {
+    //         name: 'Глубина просмотра'
+    //     },
+    //     {
+    //         name: 'Время на сайте'
+    //     },
+    // ]
+    // let tr = [
+    //     {
+    //         name: 'янв 2021',
+    //         data1: 7661,
+    //         data2: 7662,
+    //         data3: 7663,
+    //         data4: 7664,
+    //         data5: 7665,
+    //         data6: 7666,
+    //         data7: 767
 
-        },
-        {
-            name: 'Визиты',
-            data1: 7661,
-            data2: 7662,
-            data3: 7663,
-            data4: 7664,
-            data5: 7665,
-            data6: 7666,
-            data7: 767
+    //     },
+    //     {
+    //         name: 'фев 2021',
+    //         data1: 7661,
+    //         data2: 7662,
+    //         data3: 7663,
+    //         data4: 7664,
+    //         data5: 7665,
+    //         data6: 7666,
+    //         data7: 767
 
-        },
-        {
-            name: 'Просмотры',
-            data1: 7661,
-            data2: 7662,
-            data3: 7663,
-            data4: 7664,
-            data5: 7665,
-            data6: 7666,
-            data7: 767
+    //     },
+    //     {
+    //         name: 'мар 2021',
+    //         data1: 7661,
+    //         data2: 7662,
+    //         data3: 7663,
+    //         data4: 7664,
+    //         data5: 7665,
+    //         data6: 7666,
+    //         data7: 767
 
-        },
-        {
-            name: 'Посетители',
-            data1: 7661,
-            data2: 7662,
-            data3: 7663,
-            data4: 7664,
-            data5: 7665,
-            data6: 7666,
-            data7: 767
+    //     },
+    //     {
+    //         name: 'апр 2021',
+    //         data1: 7661,
+    //         data2: 7662,
+    //         data3: 7663,
+    //         data4: 7664,
+    //         data5: 7665,
+    //         data6: 7666,
+    //         data7: 767
 
-        },
-        {
-            name: 'Новые',
-            data1: 7661,
-            data2: 7662,
-            data3: 7663,
-            data4: 7664,
-            data5: 7665,
-            data6: 7666,
-            data7: 767
+    //     },
+    //     {
+    //         name: 'май 2021',
+    //         data1: 7661,
+    //         data2: 7662,
+    //         data3: 7663,
+    //         data4: 7664,
+    //         data5: 7665,
+    //         data6: 7666,
+    //         data7: 767
 
-        },
-        {
-            name: 'Отказы',
-            data1: 7661,
-            data2: 7662,
-            data3: 7663,
-            data4: 7664,
-            data5: 7665,
-            data6: 7666,
-            data7: 767
+    //     },
+    //     {
+    //         name: 'июнь 2021',
+    //         data1: 7661,
+    //         data2: 7662,
+    //         data3: 7663,
+    //         data4: 7664,
+    //         data5: 7665,
+    //         data6: 7666,
+    //         data7: 767
 
-        },
-        {
-            name: 'Глубина просмотра',
-            data1: 7661,
-            data2: 7662,
-            data3: 7663,
-            data4: 7664,
-            data5: 7665,
-            data6: 7666,
-            data7: 767
+    //     },
+    //     {
+    //         name: 'июль 2021 ',
+    //         data1: 7661,
+    //         data2: 7662,
+    //         data3: 7663,
+    //         data4: 7664,
+    //         data5: 7665,
+    //         data6: 7666,
+    //         data7: 767
 
-        },
-        {
-            name: 'Время на сайте',
-            data1: 7661,
-            data2: 7662,
-            data3: 7663,
-            data4: 7664,
-            data5: 7665,
-            data6: 7666,
-            data7: 767
+    //     },
+    //     {
+    //         name: 'авг 2021',
+    //         data1: 7661,
+    //         data2: 7662,
+    //         data3: 7663,
+    //         data4: 7664,
+    //         data5: 7665,
+    //         data6: 7666,
+    //         data7: 767
 
-        },
-    ]
+    //     },
+    // ]
+
+
+    const [report, setReport] = useState([])
+    const [grafic, setGrafic] = useState([])
+    // const [choseDomen, setChoseDomen] = useState('')
+
+    const db = getFirestore()
+    // const chatRef = collection(db, 'ticket')
+    const auth = getAuth();
+    if (auth){ 
+        const userUid = auth.currentUser.uid
+        const getActs = async () => {
+            try {
+                const chatRef = collection(db, 'users', userUid, 'seoindex')
+                const graficRef = collection(db, 'users', userUid, 'seoindex')
+                // const chatRef = doc(db, 'users', userUid, 'seoreport', choseDomen)
+                const q = query(chatRef);
+                const querySnapshot = await getDocs(q);
+                let tmp = []
+                let tmpgrafic = []
+                let tempstring = []
+                let graficstring = []
+                querySnapshot.forEach((doc) => {
+                    // const utc = doc.data().time
+                    // console.log(utc);
+                    // const local = moment(utc).local().format('YYYY-MM-DD')
+                   
+                    tempstring = doc.data().data
+                    graficstring = doc.data().grafic
+                    
+                   
+                   
+                   
+                 
+                });
+                // console.log(tempstring);
+                tmp = JSON.parse(tempstring)
+                tmpgrafic = JSON.parse(graficstring)
+                // tmp = tempstring
+    
+    
+                setReport(tmp)
+                setGrafic(tmpgrafic)
+                // console.log(tmp[0]);
+               
+                        
+             } catch (e) {
+               console.error("Error getting document: ", e);
+             }
+        }
+        getActs()
+    
+    }
+
+    
+
 
     // function TableGenerate(row)  {
     //     return <td> {row.name} </td>
@@ -188,7 +257,7 @@ export default function SeoIndex() {
     const renderLineChart = (
         <ResponsiveContainer  width="100%" height={450}>
             
-            <AreaChart data={data}>
+            <AreaChart data={grafic}>
                 <defs>
                     <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#FF5F46" stopOpacity={0.6}></stop>
@@ -196,17 +265,17 @@ export default function SeoIndex() {
 
                     </linearGradient>
                 </defs>
-                <Area dataKey="value" stroke="#FF5F46" fill="url(#color)"/>
+                <Area dataKey="col2" stroke="#FF5F46" fill="url(#color)"/>
 
                 <XAxis 
-                  dataKey="date"
+                  dataKey="col1"
                   
                  axisLine={false} 
                  tickLine={false} 
                   />
 
                 <YAxis 
-                dataKey="value"
+                dataKey="col3"
                  axisLine={false} 
                  tickLine={false} 
                  tickCount={5}
@@ -244,10 +313,13 @@ export default function SeoIndex() {
             </div>
 
            
-            {renderLineChart}
-          
+            {grafic.length >0 && renderLineChart}
+          <div className='table-block'>
+            
           <table>
-              <tr>
+          <tbody>
+
+              {/* <tr>
               {thead.map((item, index )=>
                          (
                                 <th key={index}>
@@ -255,27 +327,31 @@ export default function SeoIndex() {
                                 </th> 
       
                         ))} 
-              </tr>
-              {tr.map((row, index )=>
+              </tr> */}
+              {report.length > 0 && report.map((row, index )=>
                          (
-                                <tr key={index}>
-                                {/* {TableGenerate(row)} */}
 
-                                    <td>{row.name}</td>
-                                    <td>{row.data1}</td>
-                                    <td>{row.data2}</td>
-                                    <td>{row.data3}</td>
-                                    <td>{row.data4}</td>
-                                    <td>{row.data5}</td>
-                                    <td>{row.data6}</td>
-                                    <td>{row.data7}</td>
+
+                                <tr key={index}>
+                                    
+
+                                    <td>{row.col1}</td>
+                                    <td>{row.col2}</td>
+                                    <td>{row.col3}</td>
+                                    <td>{row.col4}</td>
+                                    <td>{row.col5}</td>
+                                    <td>{row.col6}</td>
+                                    <td>{row.col7}</td>
+                                    
                                    
                                    
                                 </tr> 
       
                         ))} 
-
+ </tbody>
           </table>
+          </div>
+     
          
             
             <div className="general-block">

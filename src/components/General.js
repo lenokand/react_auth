@@ -1,5 +1,17 @@
-import SeoSubmenu from './SeoSubmenu'
+import React, {useState} from 'react'
 
+import SeoSubmenu from './SeoSubmenu'
+import "@fancyapps/ui/dist/fancybox.css";
+import Fancybox from "./fancybox.js";
+
+import {
+    getFirestore,
+    collection,
+    query,
+    addDoc,
+    getDocs
+   } from 'firebase/firestore';
+    import { getAuth } from 'firebase/auth';
 function General() {
     const data = [
         { 
@@ -13,6 +25,53 @@ function General() {
     
         },
     ]
+
+    const db = getFirestore()
+
+    const [acts, setActs] = useState([])
+    const auth = getAuth();
+    const userUid = auth.currentUser.uid
+
+
+    const getActs = async () => {
+        try {
+            const chatRef = collection(db, 'users', userUid, 'seogeneral')
+            const q = query(chatRef);
+            const querySnapshot = await getDocs(q);
+            const tmp = []
+
+            querySnapshot.forEach((doc) => {
+                // const utc = doc.data().time
+                // console.log(utc);
+                // const local = moment(utc).local().format('YYYY-MM-DD')
+                
+                
+                const msg = {
+                    id: doc.id,
+                    title: doc.data().title,
+                    dinamic: doc.data().dinamic
+                    
+                    
+                   
+                  
+                  
+                }
+               
+                tmp.push(msg)
+             
+            });
+            setActs(tmp)
+            // console.log(acts);
+            
+                    
+         } catch (e) {
+           console.error("Error reading a document: ", e);
+           const docRef = await addDoc(collection(db, 'users', userUid, 'seogeneral'), { });
+          console.log("Document written with ID: ", docRef.id);
+         }
+    }
+    getActs()
+
 return(
     <div className="general">
         <div className="wrapper">
@@ -21,19 +80,44 @@ return(
             </div>
             
             <div className="general-block">
+            <Fancybox options={{ infinite: false }}>
 
-                     {data.map((item, index )=>
-                         (<div className="general-progects" key={index}>
+                       
+                               
+
+                                                    
+                {(acts.length > 0)  ?  acts.map((item, index )=>
+                (
+
+                    <div className="general-progects" key={item.id}>
                                 <div className="general-title">
                                     {item.title}
                                 </div> 
 
                                 <div className="general-body">
-                                {item.data}
+                                        <button 
+                                        data-fancybox="gallery"
+                                        data-src={item.dinamic }
+                                        className="fancy-img"
+                                        >
+                                            <img src={item.dinamic}/>
+                                        </button> 
+                                        <div>
+                                        Нажмите, что бы развернуть документ
+                                        </div>
                                 </div> 
       
                             </div>
-                        ))}
+             
+
+                )) : `Документы не найдены.  `}   
+
+
+
+
+                </Fancybox>  
+
+                 
 
                
                

@@ -59,7 +59,7 @@ export default function Settings() {
     const [newUserInfo, setNewUserInfo] = useState({})
     // const [messages, setMessages] = useState([])
     const db = getFirestore()
-    const docRef = collection(db, 'users')
+   
 
 
     
@@ -84,25 +84,36 @@ export default function Settings() {
    
     const getSettingsFirebase = async () => {
        
-    
+      const docRef = doc(db, 'users', userUid)
       
-      const q = query(docRef);
+      // const q = query(docRef);
+      // console.log(q);
 
 
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
+      const querySnapshot = await getDoc(docRef);
+
+      if (querySnapshot.exists()) {
+        // console.log("Document data:", querySnapshot.data());
         const tmp ={
-                    userName: doc.data().name,
-                    photoURL: doc.data().photoURL,
-                    phone: doc.data().phone,
-                    role: doc.data().role,
-                  }
-               
-                  setNewUserInfo(tmp)
+          userName: querySnapshot.data().name,
+          photoURL: querySnapshot.data().photoURL,
+          phone: querySnapshot.data().phone,
+          role: querySnapshot.data().role,
+        }
+     
+        setNewUserInfo(tmp)
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+      
+
+      // querySnapshot.forEach((doc) => {
+        
 
           
        
-      });
+      // });
   
   }
 
@@ -143,13 +154,16 @@ export default function Settings() {
     // getSettings()
     // console.log(newUserInfo);
     // console.log(newUserInfo.role == "user" );
+   
+   
+    
     const sendSettings = async (e) => {
         e.preventDefault();
         
         try {
 
             const userRef = doc(db, 'users', userUid );
-            
+            console.log(newImg);
 
             if(newImg){
                 
@@ -161,28 +175,72 @@ export default function Settings() {
                 // Points to 'images'
                 const imagesRef = ref(storageRef, userUid);
                 const fileName = newImg.name;
+                const checkname = fileName.split('.')
+                const lengthchn = checkname.length - 1
 
-                // const spaceRef = ref(imagesRef, fileName);
-                const spaceRef = ref(imagesRef, 'avatar.jpg');
 
-                uploadBytes(spaceRef, newImg).then((snapshot) => {
+                if (checkname[lengthchn] == 'png'){
+
+                  // console.log('png')
+                  const spaceRef = ref(imagesRef, 'avatar.png');
+                  
+                  uploadBytes(spaceRef, newImg).then((snapshot) => {
                   console.log('Uploaded a file!');
-                  // console.log(newImg.name, newImg);
+                  console.log(newImg.name, newImg);
                   setNewImg('')
 
                 });
+
+
+                getDownloadURL(ref(storage, userUid + `/avatar.png`))
+                .then((url) => {
+                  // `url` is the download URL for 'images/stars.jpg'
+                 updateDoc(userRef, { photoURL: url});
+                 console.log('upl scs', url);
+                })
+                .catch((error) => {
+                  // Handle any errors
+                  console.log('getDownloadURL error');
+                });
+
+                } else {
+
+
+                  const spaceRef = ref(imagesRef, 'avatar.jpg');
+                  
+                uploadBytes(spaceRef, newImg).then((snapshot) => {
+                  console.log('Uploaded a file!');
+                  console.log(newImg.name, newImg);
+                  setNewImg('')
+
+                });
+
+                getDownloadURL(ref(storage, userUid + `/avatar.jpg`))
+                .then((url) => {
+                  // `url` is the download URL for 'images/stars.jpg'
+                 updateDoc(userRef, { photoURL: url});
+                 console.log('upl scs');
+                })
+                .catch((error) => {
+                  // Handle any errors
+                  console.log('getDownloadURL error');
+                });
+                }
+                
+
+                // const spaceRef = ref(imagesRef, fileName);
+                
+
+                // uploadBytes(spaceRef, newImg).then((snapshot) => {
+                //   console.log('Uploaded a file!');
+                //   console.log(newImg.name, newImg);
+                //   setNewImg('')
+
+                // });
                 // console.log(user.uid + `/avatar.jpg`)
 
               
-                getDownloadURL(ref(storage, userUid + `/avatar.jpg`))
-                  .then((url) => {
-                    // `url` is the download URL for 'images/stars.jpg'
-                   updateDoc(userRef, { photoURL: url});
-                  })
-                  .catch((error) => {
-                    // Handle any errors
-                    console.log('getDownloadURL error');
-                  });
+               
                 
                 
                 // const mountainImagesRef = ref(storage, 'images/mountains4.jpg');
@@ -236,7 +294,7 @@ export default function Settings() {
             
 
             console.log('заполните форму повторно');
-            console.error("Error adding document: ", docRef.id);
+            console.error("Error adding document: ", e);
 
 
         }

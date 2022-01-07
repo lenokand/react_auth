@@ -98,7 +98,7 @@ import {
         
             if (docSnap.exists()) {
                 // console.log("Document data:", docSnap.data());
-
+                try {
                 const managerId = docSnap.data().manager
                 const mngRef = doc(db, 'managers', managerId )
                 const mngSnap = await getDoc(mngRef);
@@ -110,6 +110,9 @@ import {
 
                 }
                 setmngName(tmp)
+            } catch (e) {
+                console.error("Error reading a document: ", e);
+            }
                 // console.log(tmp );
             } else {
                 // doc.data() will be undefined in this case
