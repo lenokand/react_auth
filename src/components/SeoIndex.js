@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import SeoSubmenu from './SeoSubmenu'
 import { ResponsiveContainer, AreaChart, Area, Tooltip, LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
 import Fancybox from "./fancybox.js";
@@ -51,135 +51,20 @@ export default function SeoIndex() {
     
         },
     ]
-    // let thead = [
-    //     {
-    //         name: 'Период'
-    //     },
-    //     {
-    //         name: 'Визиты'
-    //     },
-    //     {
-    //         name: 'Просмотры'
-    //     },
-    //     {
-    //         name: 'Посетители'
-    //     },
-    //     {
-    //         name: 'Новые'
-    //     },
-    //     {
-    //         name: 'Отказы'
-    //     },
-    //     {
-    //         name: 'Глубина просмотра'
-    //     },
-    //     {
-    //         name: 'Время на сайте'
-    //     },
-    // ]
-    // let tr = [
-    //     {
-    //         name: 'янв 2021',
-    //         data1: 7661,
-    //         data2: 7662,
-    //         data3: 7663,
-    //         data4: 7664,
-    //         data5: 7665,
-    //         data6: 7666,
-    //         data7: 767
-
-    //     },
-    //     {
-    //         name: 'фев 2021',
-    //         data1: 7661,
-    //         data2: 7662,
-    //         data3: 7663,
-    //         data4: 7664,
-    //         data5: 7665,
-    //         data6: 7666,
-    //         data7: 767
-
-    //     },
-    //     {
-    //         name: 'мар 2021',
-    //         data1: 7661,
-    //         data2: 7662,
-    //         data3: 7663,
-    //         data4: 7664,
-    //         data5: 7665,
-    //         data6: 7666,
-    //         data7: 767
-
-    //     },
-    //     {
-    //         name: 'апр 2021',
-    //         data1: 7661,
-    //         data2: 7662,
-    //         data3: 7663,
-    //         data4: 7664,
-    //         data5: 7665,
-    //         data6: 7666,
-    //         data7: 767
-
-    //     },
-    //     {
-    //         name: 'май 2021',
-    //         data1: 7661,
-    //         data2: 7662,
-    //         data3: 7663,
-    //         data4: 7664,
-    //         data5: 7665,
-    //         data6: 7666,
-    //         data7: 767
-
-    //     },
-    //     {
-    //         name: 'июнь 2021',
-    //         data1: 7661,
-    //         data2: 7662,
-    //         data3: 7663,
-    //         data4: 7664,
-    //         data5: 7665,
-    //         data6: 7666,
-    //         data7: 767
-
-    //     },
-    //     {
-    //         name: 'июль 2021 ',
-    //         data1: 7661,
-    //         data2: 7662,
-    //         data3: 7663,
-    //         data4: 7664,
-    //         data5: 7665,
-    //         data6: 7666,
-    //         data7: 767
-
-    //     },
-    //     {
-    //         name: 'авг 2021',
-    //         data1: 7661,
-    //         data2: 7662,
-    //         data3: 7663,
-    //         data4: 7664,
-    //         data5: 7665,
-    //         data6: 7666,
-    //         data7: 767
-
-    //     },
-    // ]
-
+  
 
     const [report, setReport] = useState([])
     const [grafic, setGrafic] = useState([])
     // const [choseDomen, setChoseDomen] = useState('')
 
-    const db = getFirestore()
-    // const chatRef = collection(db, 'ticket')
-    const auth = getAuth();
-    if (auth){ 
-        const userUid = auth.currentUser.uid
+   
         const getActs = async () => {
             try {
+                const db = getFirestore()
+                // const chatRef = collection(db, 'ticket')
+                const auth = getAuth();
+                
+                    const userUid = auth.currentUser.uid
                 const chatRef = collection(db, 'users', userUid, 'seoindex')
                 const graficRef = collection(db, 'users', userUid, 'seoindex')
                 // const chatRef = doc(db, 'users', userUid, 'seoreport', choseDomen)
@@ -217,9 +102,12 @@ export default function SeoIndex() {
                console.error("Error getting document: ", e);
              }
         }
-        getActs()
+        useEffect(() => {
+            getActs()
+           
+        }, []);
     
-    }
+ 
 
     
 
@@ -313,9 +201,11 @@ export default function SeoIndex() {
             </div>
 
            
-            {grafic.length >0 && renderLineChart}
+            {grafic.length > 0 ? renderLineChart : "Данные не найдены"}
           <div className='table-block'>
             
+          {report.length > 0 ? (
+
           <table>
           <tbody>
 
@@ -328,7 +218,7 @@ export default function SeoIndex() {
       
                         ))} 
               </tr> */}
-              {report.length > 0 && report.map((row, index )=>
+              {report.length > 0 ? report.map((row, index )=>
                          (
 
 
@@ -347,9 +237,10 @@ export default function SeoIndex() {
                                    
                                 </tr> 
       
-                        ))} 
+                        )) : ''} 
  </tbody>
           </table>
+          ) : "Данные не найдены"}
           </div>
      
          

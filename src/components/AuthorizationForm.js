@@ -1,8 +1,8 @@
-import React, {useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { Context } from '..';
-import { FirebaseApp } from '@firebase/app';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+// import { Context } from '..';
+// import { FirebaseApp } from '@firebase/app';
+// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function AuthorizationForm(props) {
 

@@ -1,4 +1,6 @@
-export const LOGIN_ROUTE = '/login'
+export const LOGIN_ROUTE_SET = '/'
+// export const LOGIN_ROUTE = '/login'
+export const LOGIN_ROUTE = '/'
 export const FORGOT_ROUTE = '/forgotpassword'
 export const CHAT_ROUTE = '/dialog'
 export const MAIN_ROUTE = '/home'

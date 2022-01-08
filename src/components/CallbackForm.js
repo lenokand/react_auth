@@ -17,8 +17,7 @@ const exit = (
 
 export default function CallbackForm(props) {
 
-    const db = getFirestore()
-    const chatRef = collection(db, 'ticket')
+ 
 
     const [formName, setFormName] = useState('')
     const [formTel, setFormTel] = useState('')
@@ -30,6 +29,9 @@ export default function CallbackForm(props) {
           // let bd_name = user.uid
           // const currentUser = []
           try {
+            const db = getFirestore()
+            const chatRef = collection(db, 'ticket')
+
             
             addDoc(chatRef, {
            // await addDoc(collection(db, 'support1_' + user.uid), {
@@ -39,7 +41,7 @@ export default function CallbackForm(props) {
 
            });
            console.log('sucsess')
-           props.showModal= !props.showModal
+           props.handleShowBlock()
                     
          } catch (e) {
            console.error("Error adding document: ", e);

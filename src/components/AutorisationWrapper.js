@@ -6,11 +6,13 @@ import AuthorizationForm from './AuthorizationForm';
 import { Switch, Route } from 'react-router';
 import FogotPasswordForm from './FogotPasswordForm';
 import Footer from './Footer';
-import { Context } from '..';
-import { getAuth, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, sendPasswordResetEmail  } from "firebase/auth";
-import {
-    useAuthState
-} from 'react-firebase-hooks/auth';
+// import { Context } from '..';
+import { getAuth, signInWithEmailAndPassword, 
+    // setPersistence, browserSessionPersistence, 
+    sendPasswordResetEmail  } from "firebase/auth";
+// import {
+//     useAuthState
+// } from 'react-firebase-hooks/auth';
 import {
     getFirestore,
   
@@ -32,8 +34,7 @@ export default class AutorisationWrapper extends Component {
             login: "",
             password: "",
             email: "",
-            // uid: "",
-            // user1:""
+        
 
         }
 
@@ -61,15 +62,7 @@ export default class AutorisationWrapper extends Component {
        
     }
 
-    // handleFormSubmit = e => {
-    //     e.preventDefault();
-    //     let data = {
-    //         login: this.login,
-    //         password: this.password
-    //     }
-    //     console.log(data)
-    // }
-    
+      
 
     handleFormSubmit(e) {
         e.preventDefault();
@@ -77,33 +70,7 @@ export default class AutorisationWrapper extends Component {
                     login: this.state.login,
                     password: this.state.password
                 }
-        // console.log(data)
-
-      let passwordSub = this.setState({password: ""});
-      let emailSub = this.setState({login: ""});
-
-        // console.log(data.password, data.login)
-
-     
-        // console.log(this.props.user1 )
-        // console.log(auth)
-        // setPersistence(auth, browserSessionPersistence)
-        //     .then(() => {
-        //     // Existing and future Auth states are now persisted in the current
-        //     // session only. Closing the window would clear any existing state even
-        //     // if a user forgets to sign out.
-        //     // ...
-        //     // New sign-in will be persisted with session persistence.
-        //     return signInWithEmailAndPassword(auth, data.login, data.password);
-        // })
-        // .catch((error) => {
-        //     // Handle Errors here.
-        //     const errorCode = error.code;
-        //     const errorMessage = error.message;
-        //     console.log(errorMessage)
-        // });    
-
-        // let user
+    
         const auth = getAuth();
         
 
@@ -112,18 +79,11 @@ export default class AutorisationWrapper extends Component {
                 
                 let user = userCredential.user;
 
-                // console.log(user.uid);
-
-                // const auth = getAuth();
-                const db = getFirestore()
-                // const user = auth.currentUser;
-
-                // console.log(user.uid)
+                              const db = getFirestore()
+              
                 try {
                     const userRef = doc(db, 'users', user.uid );
-                    // const userChats = doc(db, 'users');
-
-                    // console.log(userChats)
+              
                     console.log('user exist')
                 } catch (e) {
                     setDoc(doc(db, "users", user.uid ), {
@@ -140,7 +100,7 @@ export default class AutorisationWrapper extends Component {
                 
             })
             .catch((error) => {
-                const errorCode = error.code;
+               
                 const errorMessage = error.message;
                 console.log(errorMessage)
                
@@ -186,7 +146,7 @@ export default class AutorisationWrapper extends Component {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          // ..
+            console.log(errorMessage)          // ..
         });
       
 
@@ -237,7 +197,12 @@ export default class AutorisationWrapper extends Component {
                            
 
                             <Switch>
-                                <Route exact path='/login'>
+                                
+
+
+
+                                
+                                <Route exact path='/'>
                                 <div className="main-block_title">Личный кабинет
                               
                                 <br/>  для клиентов 

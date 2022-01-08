@@ -1,4 +1,4 @@
-import {CHAT_ROUTE_SUPPORT, CHAT_ROUTE, DOC_ROUTE, FORGOT_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, NOTIFICSTION_ROUTE, SEO_CONTACTS_ROUTE, SEO_DETAILS_ROUTE, SEO_INDEX_ROUTE, SEO_INSPECTION_ROUTE, SEO_MAIN_ROUTE, SEO_NEWS_ROUTE, SEO_Position_ROUTE, SEO_REPORT_ROUTE, SEO_ROUTE, SEO_SERVICES_ROUTE, SETTINGS_ROUTE } from "./utils/const";
+import {CHAT_ROUTE_SUPPORT, LOGIN_ROUTE_SET, CHAT_ROUTE, DOC_ROUTE, FORGOT_ROUTE, LOGIN_ROUTE, MAIN_ROUTE, NOTIFICSTION_ROUTE, SEO_CONTACTS_ROUTE, SEO_DETAILS_ROUTE, SEO_INDEX_ROUTE, SEO_INSPECTION_ROUTE, SEO_MAIN_ROUTE, SEO_NEWS_ROUTE, SEO_Position_ROUTE, SEO_REPORT_ROUTE, SEO_ROUTE, SEO_SERVICES_ROUTE, SETTINGS_ROUTE } from "./utils/const";
 // import Autorisation from "./component/Autorisation";
 // import Dialog from "./components/Dialog";
 // import Guid from "./components/Guid";
@@ -14,6 +14,13 @@ export const publicRouts = [
         // Component:SeoSubmenu
        
     }
+    // ,
+    // {
+    //     path: LOGIN_ROUTE_SET,
+    //     Component: Autorisation
+    //     // Component:SeoSubmenu
+       
+    // }
     ,
     {
         path: FORGOT_ROUTE,

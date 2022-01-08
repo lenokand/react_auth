@@ -24,7 +24,13 @@ var publicRouts = [{
   path: _const.LOGIN_ROUTE,
   Component: _Autorisation["default"] // Component:SeoSubmenu
 
-}, {
+} // ,
+// {
+//     path: LOGIN_ROUTE_SET,
+//     Component: Autorisation
+//     // Component:SeoSubmenu
+// }
+, {
   path: _const.FORGOT_ROUTE,
   Component: _Autorisation["default"] // Component:SeoSubmenu
 

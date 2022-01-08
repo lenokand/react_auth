@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import SeoSubmenu from './SeoSubmenu'
 import "@fancyapps/ui/dist/fancybox.css";
@@ -26,15 +26,17 @@ function General() {
         },
     ]
 
-    const db = getFirestore()
+  
 
     const [acts, setActs] = useState([])
-    const auth = getAuth();
-    const userUid = auth.currentUser.uid
+   
 
 
     const getActs = async () => {
         try {
+            const db = getFirestore()
+            const auth = getAuth();
+            const userUid = auth.currentUser.uid
             const chatRef = collection(db, 'users', userUid, 'seogeneral')
             const q = query(chatRef);
             const querySnapshot = await getDocs(q);
@@ -66,11 +68,17 @@ function General() {
                     
          } catch (e) {
            console.error("Error reading a document: ", e);
+           const db = getFirestore()
+           const auth = getAuth();
+           const userUid = auth.currentUser.uid
            const docRef = await addDoc(collection(db, 'users', userUid, 'seogeneral'), { });
           console.log("Document written with ID: ", docRef.id);
          }
     }
-    getActs()
+    useEffect(() => {
+        getActs()
+    }, []);
+    
 
 return(
     <div className="general">

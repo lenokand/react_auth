@@ -1,12 +1,12 @@
-import React, {useState, useContext  } from 'react';
+import React, {useState  } from 'react';
 import avatar from '../img/avatar.png'; 
-import arrow_down from '../img/arrow_down.svg';
-import { Context } from '..';
+// import arrow_down from '../img/arrow_down.svg';
+// import { Context } from '..';
 import {  signOut } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { getAuth } from "firebase/auth";
+// import { useAuthState } from 'react-firebase-hooks/auth';
+// import { getAuth } from "firebase/auth";
 import {    getFirestore, getDoc, setDoc,    doc} from 'firebase/firestore';
-
+import { getAuth } from 'firebase/auth';
 
 // let user = {
 //             firstName: 'Мишустин',
@@ -24,13 +24,19 @@ import {    getFirestore, getDoc, setDoc,    doc} from 'firebase/firestore';
     let [userName, setuserName] = useState('')
     let [userAvatar, setuserAvatar] = useState('')
 
-    const {auth} = useContext(Context)
-    const [user1] = useAuthState(auth)
+    // const {auth} = useContext(Context)
+    // const [user1] = useAuthState(auth)
     // console.log(user1.uid)
-    const db = getFirestore()
+  
+    // const chatRef = collection(db, 'ticket')
+    
 
     try {
-    const userRef = doc(db, 'users', user1.uid );
+        const db = getFirestore()
+        const auth = getAuth();
+   
+    const userUid = auth.currentUser.uid
+    const userRef = doc(db, 'users', userUid );
     getDoc(userRef).then(docSnap => {
         if (docSnap.exists()) {
         //   console.log("Document data:", docSnap.data().name);
@@ -44,31 +50,32 @@ import {    getFirestore, getDoc, setDoc,    doc} from 'firebase/firestore';
         } else {
           console.log("No such document!");
 
-           setDoc(doc(db, "users", user1.uid ), {
-            uid: user1.uid,
+           setDoc(doc(db, "users", userUid ), {
+            uid: userUid,
             role: "user"
             
          });
 
         }
       })
-} catch (error) {
-     const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage)
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage)
 
-}
+        }
 
    
    
-    let openMenu = () => {
-        setVisible(!visible)
-        };
-    const logout = () => {
-        console.log('logout')
-            signOut(auth)
-          };
-
+        // let openMenu = () => {
+        //     setVisible(!visible)
+        //     };
+        const logout = () => {
+            console.log('logout')
+            const auth = getAuth();
+                signOut(auth)
+            };
+        
     return(
         <div className="autherisationnav">
             <div className="name">

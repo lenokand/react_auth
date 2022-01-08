@@ -1,6 +1,6 @@
 import React, {
-    useContext,
-    useState,
+   
+    useState, useEffect
     // useEffect
 } from 'react'
 import {
@@ -14,32 +14,35 @@ import {
 import InputMask from "react-input-mask";
 import {
     getFirestore,
-    collection,
-    getDocs,
+    // collection,
+    // getDocs,
    
     getDoc,
     // addDoc,
     // firestore,
     // Timestamp,
     doc,
-    query,
+    // query,
     // orderBy,
     // limit,
     // onSnapshot, query, 
-    setDoc, updateDoc} from 'firebase/firestore';
+    // setDoc,
+     updateDoc} from 'firebase/firestore';
     import { getAuth } from 'firebase/auth';
     // import moment from 'moment';
 
 
 // import { Firestore } from 'firebase/firestore/lite';
 // import ScrollToBottom, { useScrollToBottom, useSticky } from 'react-scroll-to-bottom'
-import ImageUploading from 'react-images-uploading';
+// import ImageUploading from 'react-images-uploading';
 
-import Uploady from "@rpldy/uploady";
+// import Uploady from "@rpldy/uploady";
 
-import { asUploadButton } from "@rpldy/upload-button";
+// import { asUploadButton } from "@rpldy/upload-button";
 
-import { getStorage, ref, uploadBytesResumable, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, 
+  // uploadBytesResumable,
+   uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function Settings() {
     // const {  auth  } = useContext(Context)
@@ -47,8 +50,7 @@ export default function Settings() {
     
     // const [user] = useAuthState(auth)
     
-    const auth2 = getAuth();
-    const userUid = auth2.currentUser.uid
+   
     // console.log(auth.currentUser.uid);
     // const db = getFirestore()
 
@@ -58,7 +60,7 @@ export default function Settings() {
     const [newTel, setNewTel] = useState('')
     const [newUserInfo, setNewUserInfo] = useState({})
     // const [messages, setMessages] = useState([])
-    const db = getFirestore()
+   
    
 
 
@@ -83,29 +85,38 @@ export default function Settings() {
     // }
    
     const getSettingsFirebase = async () => {
-       
-      const docRef = doc(db, 'users', userUid)
+      try{ 
+        const auth2 = getAuth();
+        const userUid = auth2.currentUser.uid
+        const db = getFirestore()
+        const docRef = doc(db, 'users', userUid)
       
-      // const q = query(docRef);
-      // console.log(q);
-
-
-      const querySnapshot = await getDoc(docRef);
-
-      if (querySnapshot.exists()) {
-        // console.log("Document data:", querySnapshot.data());
-        const tmp ={
-          userName: querySnapshot.data().name,
-          photoURL: querySnapshot.data().photoURL,
-          phone: querySnapshot.data().phone,
-          role: querySnapshot.data().role,
+        // const q = query(docRef);
+        // console.log(q);
+  
+  
+        const querySnapshot = await getDoc(docRef);
+  
+        if (querySnapshot.exists()) {
+          // console.log("Document data:", querySnapshot.data());
+          const tmp ={
+            userName: querySnapshot.data().name,
+            photoURL: querySnapshot.data().photoURL,
+            phone: querySnapshot.data().phone,
+            role: querySnapshot.data().role,
+          }
+       
+          setNewUserInfo(tmp)
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
         }
-     
-        setNewUserInfo(tmp)
-      } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
+
+        }  catch (e) {
+        console.error("Error document: ", e);
       }
+       
+    
       
 
       // querySnapshot.forEach((doc) => {
@@ -116,8 +127,10 @@ export default function Settings() {
       // });
   
   }
-
-  getSettingsFirebase()
+  useEffect(() => {
+    getSettingsFirebase()
+  }, []);
+ 
 
         
     // const getSettings = async () => {
@@ -161,9 +174,11 @@ export default function Settings() {
         e.preventDefault();
         
         try {
-
+          const auth2 = getAuth();
+          const userUid = auth2.currentUser.uid
+          const db = getFirestore()
             const userRef = doc(db, 'users', userUid );
-            console.log(newImg);
+            // console.log(newImg);
 
             if(newImg){
                 
@@ -186,7 +201,7 @@ export default function Settings() {
                   
                   uploadBytes(spaceRef, newImg).then((snapshot) => {
                   console.log('Uploaded a file!');
-                  console.log(newImg.name, newImg);
+                  // console.log(newImg.name, newImg);
                   setNewImg('')
 
                 });
@@ -196,11 +211,12 @@ export default function Settings() {
                 .then((url) => {
                   // `url` is the download URL for 'images/stars.jpg'
                  updateDoc(userRef, { photoURL: url});
-                 console.log('upl scs', url);
+                 console.log('get file url');
+                //  console.log('upl scs', url);
                 })
                 .catch((error) => {
                   // Handle any errors
-                  console.log('getDownloadURL error');
+                  console.log('getDownloadURL error', error);
                 });
 
                 } else {
@@ -219,11 +235,11 @@ export default function Settings() {
                 .then((url) => {
                   // `url` is the download URL for 'images/stars.jpg'
                  updateDoc(userRef, { photoURL: url});
-                 console.log('upl scs');
+                 console.log('Uploaded a file!');
                 })
                 .catch((error) => {
                   // Handle any errors
-                  console.log('getDownloadURL error');
+                  console.log('getDownloadURL error', error);
                 });
                 }
                 

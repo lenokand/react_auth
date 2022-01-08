@@ -70,6 +70,23 @@ export default function AutorisationF() {
                                 password={this.state.password}
                                 />
                             </Route>
+{/*                             
+                            <Route exact path='/'>
+                            <div className="main-block_title">Личный кабинет
+                          
+                            <br/>  для клиентов
+                           
+                            <br/> <span className="bold_txt">Digital Rex</span> </div>
+
+
+                                <AuthorizationForm 
+                                handleFormSubmit={this.handleFormSubmit}
+                                handleChangeLogin={this.handleChangeLogin}
+                                handleChangePassword={this.handleChangePassword}
+                                login={this.state.login}
+                                password={this.state.password}
+                                />
+                            </Route> */}
 
 
                             <Route exact path='/forgotpassword'>

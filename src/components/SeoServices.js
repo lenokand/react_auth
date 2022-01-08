@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import SeoSubmenu from './SeoSubmenu'
-import img from '../img/servece_img.png'
-import { Link } from 'react-router-dom'
-import { orderBy,   getFirestore,  getDocs, collection, query, onSnapshot } from 'firebase/firestore';
+// import img from '../img/servece_img.png'
+// import { Link } from 'react-router-dom'
+import { getFirestore,  getDocs, collection, query } from 'firebase/firestore';
 import CallbackForm from './CallbackForm';
 
 export default function SeoServices() {
@@ -26,19 +26,21 @@ export default function SeoServices() {
     //     },
     // ]
 
-    const db = getFirestore()
+ 
 
     
     const [newNews, setNewNews] = useState([])
     const [newShow, setNewShow] = useState('0')
     const [showModal, setshowModal] = useState(false)
 
-    const tmp = []
-    const chatRef = collection(db, 'important')
-    const q = query(chatRef);
+   
 
     const getNewsFirebase = async () => {
-       
+       try{
+        const db = getFirestore()
+        const tmp = []
+        const chatRef = collection(db, 'important')
+        const q = query(chatRef);
         const querySnapshot = await getDocs(q);
         
         querySnapshot.forEach((doc) => {
@@ -63,8 +65,21 @@ export default function SeoServices() {
          
         });
         setNewNews(tmp)
+
+        } catch (e) {
+            
+
+          
+            console.error("Error adding document: ", e);
+
+
+        }
+       
     }
-    getNewsFirebase()
+    useEffect(() => {
+        getNewsFirebase()
+      }, []);
+    
     // useEffect(()=>{
     //     getNewsFirebase()
         

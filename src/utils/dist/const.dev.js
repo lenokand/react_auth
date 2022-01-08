@@ -3,8 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CHAT_ROUTE_SUPPORT = exports.SEO_CONTACTS_ROUTE = exports.SEO_DETAILS_ROUTE = exports.SEO_NEWS_ROUTE = exports.SEO_INSPECTION_ROUTE = exports.SEO_SERVICES_ROUTE = exports.SEO_REPORT_ROUTE = exports.SEO_INDEX_ROUTE = exports.SEO_Position_ROUTE = exports.SEO_MAIN_ROUTE = exports.SEO_ROUTE = exports.SETTINGS_ROUTE = exports.NOTIFICSTION_ROUTE = exports.DOC_ROUTE = exports.MAIN_ROUTE = exports.CHAT_ROUTE = exports.FORGOT_ROUTE = exports.LOGIN_ROUTE = void 0;
-var LOGIN_ROUTE = '/login';
+exports.CHAT_ROUTE_SUPPORT = exports.SEO_CONTACTS_ROUTE = exports.SEO_DETAILS_ROUTE = exports.SEO_NEWS_ROUTE = exports.SEO_INSPECTION_ROUTE = exports.SEO_SERVICES_ROUTE = exports.SEO_REPORT_ROUTE = exports.SEO_INDEX_ROUTE = exports.SEO_Position_ROUTE = exports.SEO_MAIN_ROUTE = exports.SEO_ROUTE = exports.SETTINGS_ROUTE = exports.NOTIFICSTION_ROUTE = exports.DOC_ROUTE = exports.MAIN_ROUTE = exports.CHAT_ROUTE = exports.FORGOT_ROUTE = exports.LOGIN_ROUTE = exports.LOGIN_ROUTE_SET = void 0;
+var LOGIN_ROUTE_SET = '/'; // export const LOGIN_ROUTE = '/login'
+
+exports.LOGIN_ROUTE_SET = LOGIN_ROUTE_SET;
+var LOGIN_ROUTE = '/';
 exports.LOGIN_ROUTE = LOGIN_ROUTE;
 var FORGOT_ROUTE = '/forgotpassword';
 exports.FORGOT_ROUTE = FORGOT_ROUTE;

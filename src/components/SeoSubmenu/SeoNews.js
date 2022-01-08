@@ -36,45 +36,60 @@ export default function SeoNews() {
     
     //     },
     // ]
-    const db = getFirestore()
+   
 
     
     const [newNews, setNewNews] = useState([])
     const [newShow, setNewShow] = useState('0')
 
-    const tmp = []
-    const chatRef = collection(db, 'news')
-    const q = query(chatRef);
+   
+  
 
     const getNewsFirebase = async () => {
        
-        const querySnapshot = await getDocs(q);
-        
-        querySnapshot.forEach((doc) => {
-            // const utc = doc.data().time
-            // console.log(utc);
-            // const local = moment(utc).local().format('YYYY-MM-DD')
-            
-            
-            const msg = {
-                id: doc.id,
-                text: doc.data().text,
-                fulltext: doc.data().fulltext,
-                title: doc.data().title,
-                img: doc.data().img,
-                link: doc.data().link,
-                time: doc.data().time,
-               
+        try{
+            const db = getFirestore()
+            const tmp = []
+            const chatRef = collection(db, 'news')
+            const q = query(chatRef);
+          const querySnapshot = await getDocs(q);
+          
+          querySnapshot.forEach((doc) => {
+              // const utc = doc.data().time
+              // console.log(utc);
+              // const local = moment(utc).local().format('YYYY-MM-DD')
               
               
-            }
+              const msg = {
+                  id: doc.id,
+                  text: doc.data().text,
+                  fulltext: doc.data().fulltext,
+                  title: doc.data().title,
+                  img: doc.data().img,
+                  link: doc.data().link,
+                  time: doc.data().time,
+                 
+                
+                
+              }
+             
+              tmp.push(msg)
            
-            tmp.push(msg)
+          });
+          setNewNews(tmp)
+
+        
+        }  catch (e) {
+            console.error("Error document: ", e);
+          }
          
-        });
-        setNewNews(tmp)
     }
-    getNewsFirebase()
+    
+        useEffect(() => {
+            getNewsFirebase()
+            // console.log('mounted')
+        }, []);
+   
     // useEffect(()=>{
     //     getNewsFirebase()
         

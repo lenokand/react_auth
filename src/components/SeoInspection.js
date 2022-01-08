@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import SeoSubmenu from './SeoSubmenu'
 import moment from 'moment';
 import Fancybox from "./fancybox.js";
@@ -15,28 +15,23 @@ import {
     import { getAuth } from 'firebase/auth';
 
     export default function SeoInspection() {
-    const data = [
-        { 
-            
-            data:'data from backend'
     
-        }
-    ]
-    const db = getFirestore()
-    const chatRef = collection(db, 'ticket')
+ 
 
     const [formDate, setFormDate] = useState('')
     const [formType, setFormType] = useState('')
     const [acts, setActs] = useState([])
-    const auth = getAuth();
-    if (auth){
-        
-    }
-    const userUid = auth.currentUser.uid
+
+   
 
 
     const getActs = async () => {
         try {
+            const db = getFirestore()
+            // const chatRef = collection(db, 'ticket')
+            const auth = getAuth();
+        
+            const userUid = auth.currentUser.uid
             const chatRef = collection(db, 'users', userUid, 'seoinspection')
             const q = query(chatRef);
             const querySnapshot = await getDocs(q);
@@ -69,14 +64,22 @@ import {
            console.error("Error adding document: ", e);
          }
     }
-    getActs()
+    useEffect(() => {
+        getActs()
+        // console.log('mounted')
+    }, []);
+    
     const sendMsg = async (e) => {
         e.preventDefault();
           // let bd_name = 'support1_' + user.uid
           // let bd_name = user.uid
           // const currentUser = []
           try {
-            
+            const db = getFirestore()
+            const chatRef = collection(db, 'ticket')
+            const auth = getAuth();
+        
+            const userUid = auth.currentUser.uid
             addDoc(chatRef, {
            // await addDoc(collection(db, 'support1_' + user.uid), {
              period: formDate,
@@ -154,7 +157,7 @@ import {
                        
 
 
-                        <p>
+                       
                         {(acts.length > 0)  ?  acts.map((item, index )=>
                             (
                                     <div className="inspection-acts" key={`${item.id}`}>
@@ -171,7 +174,7 @@ import {
                             
 
                           
-                        </p>
+                      
                         </Fancybox>
               
 

@@ -64,7 +64,7 @@ export default function SeoContacts() {
                     width="100%"
                     height="100%"
                     frameBorder="0"
-                    allowFullScreen="true" style={{position: 'relative'}} >
+                    allowFullScreen={true} style={{position: 'relative'}} >
 
                     </iframe>
                     </div>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import SeoSubmenu from './SeoSubmenu'; 
 import managerAvatar from '../img/manager.png'; 
 import reveiwImg from '../img/reveiw.png'; 
@@ -13,15 +13,15 @@ import {
   import { getAuth } from 'firebase/auth';
   import {
     getFirestore,
-    collection,
-    getDocs,
+    // collection,
+    // getDocs,
    
     getDoc,
     // addDoc,
     // firestore,
     // Timestamp,
     doc,
-    query,
+    // query,
     // orderBy,
     // limit,
     // onSnapshot, query, 
@@ -119,7 +119,10 @@ import {
                 console.log("No such document!");
             }
     }
-    getDocFromFb() 
+    useEffect(() => {
+        getDocFromFb() 
+    }, []);
+   
     // console.log(mngName, 1 );
     return(
         <section className="personal-cabinet">

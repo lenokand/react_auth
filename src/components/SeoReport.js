@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import SeoSubmenu from './SeoSubmenu'
 import Fancybox from "./fancybox.js";
 // import { Fancybox, Fancybox as NativeFancybox } from "@fancyapps/ui/dist/fancybox.esm.js";
@@ -8,31 +8,26 @@ import {
     getFirestore,
     collection,
     query,
-    addDoc,
-    doc,
+    // addDoc,
+    // doc,
     getDocs,
-    where
+    // where
    } from 'firebase/firestore';
     import { getAuth } from 'firebase/auth';
 
 export default function SeoReport() {
-    // const data = [
-    //     { 
-            
-    //         data:'нет отчетов'
-    
-    //     }
-    // ]
+  
     const [report, setReport] = useState([])
     const [choseDomen, setChoseDomen] = useState('')
 
-    const db = getFirestore()
-    // const chatRef = collection(db, 'ticket')
-    const auth = getAuth();
-    const userUid = auth.currentUser.uid
+   
 
     const getActs = async () => {
         try {
+            const db = getFirestore()
+            // const chatRef = collection(db, 'ticket')
+            const auth = getAuth();
+            const userUid = auth.currentUser.uid
             const chatRef = collection(db, 'users', userUid, 'seoreport')
             // const chatRef = doc(db, 'users', userUid, 'seoreport', choseDomen)
             const q = query(chatRef);
@@ -68,13 +63,17 @@ export default function SeoReport() {
            console.error("Error adding document: ", e);
          }
     }
-    getActs()
+    useEffect(() => {
+        getActs()
+        // console.log('mounted')
+    }, []);
+    // getActs()
     // console.log(choseDomen);
     const changeDomenName = (e) =>{
         setChoseDomen(e.target.value)
         // getChoseActs()
 
-        console.log(choseDomen, report.domen );
+        // console.log(choseDomen, report.domen );
     }
     // const getChoseActs = async () => {
     //     try {

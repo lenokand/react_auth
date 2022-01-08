@@ -4,82 +4,67 @@ import img from '../img/servece_img.png'
 import { Link } from 'react-router-dom'
 
 // import moment from 'moment';
-import { orderBy,   getFirestore,  getDocs, collection, query, onSnapshot } from 'firebase/firestore';
+import { 
+    
+       getFirestore,  getDocs, collection, query} from 'firebase/firestore';
 export default function SeoDatails() {
 
-    // const data = [
-    //     { 
-    //         id: 1,
-    //         img: img,
-    //         title:'Изменились требования к размеру превью для видео',
-    //         text: 'Видео — яркий визуальный контент, с ним ваш сайт будет привлекать больше внимания в поисковой выдаче. Чтобы ваши ролики отобразились в результатах поиска, они должны индексироваться Яндекс.Видео.О том, как улучшить поиск по вашим видеороликам, можно почитать здесь. После загрузки информации о ваших видеоматериалах, они вместе с заголовками, описаниями ... ',
-    //         time: '03.11.2021',
-    //         link: '#'
     
-    //     },
-    //     { 
-    //         id: 3,
-    //         img: img,
-    //         title:'Не зменились требования к размеру превью для видео',
-    //         text: 'Видео — яркий визуальный контент, с ним ваш сайт будет привлекать больше внимания в поисковой выдаче. Чтобы ваши ролики отобразились в результатах поиска, они должны индексироваться Яндекс.Видео.О том, как улучшить поиск по вашим видеороликам, можно почитать здесь. После загрузки информации о ваших видеоматериалах, они вместе с заголовками, описаниями ... ',
-    //         time: '04.11.2021',
-    //         link: '#'
-    
-    //     },
-    //     { 
-    //         id: 2,
-    //         img: img,
-    //         title:'2 Дополнительные регионы продвижения',
-    //         text: '2 Дополнительные регионы продвижения — услуга, направленная на привлечение дополнительных целевых посетителей за счет продвижения в поисковой выдаче Вашего сайта в соответствующих регионах.             Особенно актуально при необходимости привлечения большего количества посетителей; при открытии новых офисов и филиалов; при расширении географии деятельности.',
-    //         time: '06.11.2021',
-    //         link: '#'
-    
-    //     },
-    // ]
 
-    const db = getFirestore()
 
     
     const [newNews, setNewNews] = useState([])
     const [newShow, setNewShow] = useState('0')
 
-    const tmp = []
-    const chatRef = collection(db, 'important')
-    const q = query(chatRef);
+   
 
     const getNewsFirebase = async () => {
-       
-        const querySnapshot = await getDocs(q);
-        
-        querySnapshot.forEach((doc) => {
-            // const utc = doc.data().time
-            // console.log(utc);
-            // const local = moment(utc).local().format('HH:mm:ss YYYY-MM-DD ')
+        try{
+            const db = getFirestore()
+            const tmp = []
+            const chatRef = collection(db, 'important')
+            const q = query(chatRef);
+            const querySnapshot = await getDocs(q);
             
+            querySnapshot.forEach((doc) => {
+                // const utc = doc.data().time
+                // console.log(utc);
+                // const local = moment(utc).local().format('HH:mm:ss YYYY-MM-DD ')
+                
+                
+                const msg = {
+                    id: doc.id,
+                    text: doc.data().text,
+                    fulltext: doc.data().fulltext,
+                    title: doc.data().title,
+                    img: doc.data().img,
+                    link: doc.data().link,
+                    time: doc.data().time,
+                             
+                  
+                }
+               
+                tmp.push(msg)
+             
+            });
+            setNewNews(tmp)
+
+        } catch (e) {
             
-            const msg = {
-                id: doc.id,
-                text: doc.data().text,
-                fulltext: doc.data().fulltext,
-                title: doc.data().title,
-                img: doc.data().img,
-                link: doc.data().link,
-                time: doc.data().time,
-                         
-              
-            }
-           
-            tmp.push(msg)
-         
-        });
-        setNewNews(tmp)
+
+          
+            console.error("Error adding document: ", e);
+
+
+        }
+      
     }
     // getNewsFirebase()
-    useEffect(()=>{
+    useEffect(() => {
         getNewsFirebase()
-        
-        // console.log(11);
-    })
+        // console.log('mounted')
+    }, []);
+    
     const handleShow = ( id) => {
         
         // console.log(id);

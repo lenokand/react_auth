@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import SeoSubmenu from './SeoSubmenu'
 import Fancybox from "./fancybox.js";
 // import { Fancybox, Fancybox as NativeFancybox } from "@fancyapps/ui/dist/fancybox.esm.js";
@@ -14,16 +14,20 @@ import {
     import { getAuth } from 'firebase/auth';
 export default function SeoPosition() {
     
-    const db = getFirestore()
+    
 
     const [acts, setActs] = useState([])
-    const auth = getAuth();
-    if (auth){
-        const userUid = auth.currentUser.uid
+   
+  
+    
 
 
         const getActs = async () => {
             try {
+                const auth = getAuth();
+                const db = getFirestore()
+                const userUid = auth.currentUser.uid
+            
                 const chatRef = collection(db, 'users', userUid, 'seoposition')
                 const q = query(chatRef);
                 const querySnapshot = await getDocs(q);
@@ -56,14 +60,21 @@ export default function SeoPosition() {
                         
              } catch (e) {
                console.error("Error reading a document: ", e);
+               const auth = getAuth();
+               const db = getFirestore()
+               const userUid = auth.currentUser.uid
                const docRef = await addDoc(collection(db, 'users', userUid, 'seoposition'), { });
               console.log("Document written with ID: ", docRef.id);
              }
         }
-        getActs()
+      
+       
 
-    }
     
+    useEffect(() => {
+        getActs()
+        // console.log('mounted')
+    }, []);
 
 return(
     <div className="position">

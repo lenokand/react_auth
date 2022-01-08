@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import NotificationItem from './NotificationItem'
 import { orderBy,   getFirestore,  getDocs, collection, query, onSnapshot } from 'firebase/firestore';
 import moment from 'moment';
@@ -28,7 +28,7 @@ export default function Notification() {
 //     },
 
 // ]
-    const db = getFirestore()
+ 
 
     const [newNtf, setNewNtf] = useState([])
     const tmp = []
@@ -59,9 +59,7 @@ export default function Notification() {
     // }
 
 
-        const chatRef = collection(db, 'alert')
-        // const q = query(chatRef, orderBy("timestamp", "asc"));
-        const q = query(chatRef);
+       
 
     
     //     useEffect(() => { 
@@ -71,7 +69,11 @@ export default function Notification() {
 
     
    const getDocs1Firebase = async () => {
-       
+    try{
+        const db = getFirestore()
+        const chatRef = collection(db, 'alert')
+        // const q = query(chatRef, orderBy("timestamp", "asc"));
+        const q = query(chatRef);
         const querySnapshot = await getDocs(q);
         
         querySnapshot.forEach((doc) => {
@@ -93,8 +95,21 @@ export default function Notification() {
          
         });
         setNewNtf(tmp)
+
+    } catch (e) {
+        
+
+      
+        console.error("Error adding document: ", e);
+
+
     }
-    getDocs1Firebase()
+       
+    }
+    useEffect(() => {
+        getDocs1Firebase()
+    }, []);
+    
 
 
 

@@ -1,7 +1,7 @@
 import React, {
     useContext,
     useState,
-    useEffect
+    // useEffect
 } from 'react'
 import {
     useAuthState
@@ -46,14 +46,7 @@ export default function DialogForm(props) {
     const [newMsg, setNewMsg] = useState('')
     // const [messages, setMessages] = useState([])
 
-    const db = getFirestore()
-      
-    // const scrollToBottom = useScrollToBottom();
-   
-    
-    const chatRef = collection(db, 'chat')
  
-    const u = query(collection(db, 'users'), where("uid", "==", user.uid) );
 
 
 
@@ -62,12 +55,23 @@ export default function DialogForm(props) {
         // let bd_name = 'support1_' + user.uid
         // let bd_name = user.uid
         // const currentUser = []
+        try {
+          const db = getFirestore()
+      
+          // const scrollToBottom = useScrollToBottom();
+         
+          
+          const chatRef = collection(db, 'chat')
+       
+          const u = query(collection(db, 'users'), where("uid", "==", user.uid) );
+
+
         const querySnapshot = await getDocs(u);
         querySnapshot.forEach((doc) => {
         //  currentUser = doc.data()
         const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
-
-         try {
+        try {
+        
           
            addDoc(chatRef, {
           // await addDoc(collection(db, 'support1_' + user.uid), {
@@ -86,6 +90,9 @@ export default function DialogForm(props) {
         });
         
         setNewMsg('')
+      } catch (e) {
+        console.error("Error document: ", e);
+      }
        
       }
 

@@ -3,7 +3,7 @@ import React, {useContext } from "react";
 import { Route, Switch, Redirect } from "react-router";
 import { privateRouts, publicRouts } from "../routs";
 import { LOGIN_ROUTE, MAIN_ROUTE } from "../utils/const";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+// import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { Context } from "..";
 import { useAuthState } from 'react-firebase-hooks/auth';
 
