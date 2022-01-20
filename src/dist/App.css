@@ -1,3 +1,7 @@
+button {
+  cursor: pointer;
+}
+
 .container {
   max-width: 1170px;
   margin: auto;
@@ -184,6 +188,9 @@ footer .col_title {
   color: #FFFFFF;
   margin-bottom: 23px;
 }
+footer .adress .col_content .menu_item:hover {
+  text-decoration: none;
+}
 footer .col_content {
   display: flex;
   flex-direction: column;
@@ -195,6 +202,14 @@ footer .col_content .menu_item {
   margin-bottom: 14px;
   display: flex;
   align-items: center;
+  color: #FFFFFF;
+  transition: 300ms ease;
+}
+footer .col_content .menu_item:hover {
+  text-decoration: underline;
+}
+footer .col_content .menu_item a {
+  color: #FFFFFF;
 }
 footer .col_content img {
   margin-right: 8px;
@@ -2218,4 +2233,19 @@ select option {
 
 .image-item__btn-wrapper {
   margin-bottom: 30px;
+}
+
+.settings_row input.avatar-input {
+  position: absolute;
+  z-index: -4;
+  width: 0;
+  height: 0;
+  border: none;
+  opacity: 0;
+}
+
+@media screen and (max-width: 565px) {
+  .settings_row .settings_col {
+    margin-bottom: 30px;
+  }
 }

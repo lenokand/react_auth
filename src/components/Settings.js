@@ -361,7 +361,7 @@ export default function Settings() {
 
             
             <form className = "settings_form"  
-            // onSubmit={sendSettings}
+            onSubmit={sendSettings}
              >
 
                 <div className='settings_row row_title'>
@@ -394,13 +394,15 @@ export default function Settings() {
                   </div>
                   <div className='settings_col'>
 
-
-                  <input placeholder = "Укажите путь аватарки..." type="file"   
+                  <label className='avatar-label active_btn'>
+                    
+                      <input placeholder = "Укажите путь аватарки..." type="file" className='avatar-input'   accept="image/*"
                   // value={newImg}    
                   // onChange={(e) => setNewImg(e.target.value)}
-                  onChange={onChangeImg}
+                     onChange={onChangeImg}
                   />
-                  
+                  {newImg ? "Вы выбрали: " + newImg.name : "Выберите новую аватарку" } 
+                  </label>
                   </div>
         
 
@@ -476,7 +478,9 @@ export default function Settings() {
                
                 <div className='settings_row'>
                   
-                  <button className='active_btn' type = "submit"  disabled={!newImg & !newName & !newTel} onClick={sendSettings}> Сохранить изменения</button>
+                  <button className='active_btn' type = "submit"  disabled={!newImg & !newName & !newTel} 
+                  // onClick={sendSettings}
+                  > Сохранить изменения</button>
 
 
                   

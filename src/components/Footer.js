@@ -28,38 +28,38 @@ function Footer() {
                 <div className="col_content foter_menu">
                 
                 <div className="content_left">
-                    <div className="menu_item">
+                    <a href='https://digitalrex.kz/' className="menu_item">
                         {arrow_right}
                         <span>Главная </span>
-                    </div>
-                    <div className="menu_item">
+                    </a>
+                    <a href='https://digitalrex.kz/o-nas' className="menu_item">
                         {arrow_right}
                         <span>О нас </span>
-                    </div>
-                    <div className="menu_item">
+                    </a>
+                    <a href='https://digitalrex.kz/portfolio' className="menu_item">
                         {arrow_right}
                         <span>Портфолио </span>
-                    </div>
-                    <div className="menu_item">
+                    </a>
+                    <a href='https://digitalrex.kz/otzyivyi' className="menu_item">
                         {arrow_right}
                         <span>Отзывы </span>
-                    </div>
+                    </a>
                 
                 </div>
                 <div className="content_right">
                 
-                    <div className="menu_item">
+                    <a href='https://digitalrex.kz/vakansii' className="menu_item">
                     {arrow_right}
                     <span>Вакансии </span>
-                    </div>
-                    <div className="menu_item">
+                    </a>
+                    <a href='https://digitalrex.kz/blog/' className="menu_item">
                     {arrow_right}
                     <span>Блог </span>
-                    </div>
-                    <div className="menu_item">
+                    </a>
+                    <a href='https://digitalrex.kz/kontaktyi' className="menu_item">
                     {arrow_right}
                     <span>Контакты </span>
-                    </div>
+                    </a>
                    
 
                 </div>
@@ -74,22 +74,22 @@ function Footer() {
                 </div>
                 <div className="col_content">
                 
-                        <div className="menu_item">
+                        <a href='https://digitalrex.kz/seo' className="menu_item">
                             {arrow_right}
                             <span>CEO продвижение </span>
-                        </div>
-                        <div className="menu_item">
+                        </a>
+                        <a href='https://digitalrex.kz/smm' className="menu_item">
                             {arrow_right}
                             <span>SMM продвижение </span>
-                        </div>
-                        <div className="menu_item">
+                        </a>
+                        <a href='https://digitalrex.kz/kontekstnaya' className="menu_item">
                             {arrow_right}
                             <span>Настройка контекстной рекламы </span>
-                        </div>
-                        <div className="menu_item">
+                        </a>
+                        <a href='https://digitalrex.kz/razrabotka' className="menu_item">
                             {arrow_right}
                             <span>Разработка сайтов под ключ </span>
-                        </div>
+                        </a>
                
 
                 </div>
@@ -103,16 +103,16 @@ function Footer() {
                 
                         <div className="menu_item">
                         <img src={phone}  alt="phone"/>
-                        <a>+7 (499) 403-17-10 </a>
+                        <a href='tel:+7 (499) 403-17-10'>+7 (499) 403-17-10 </a>
                         </div>
                         <div className="menu_item">
                         <img src={wapp} alt="logo"/>
                         
-                        <a>+7 (925) 957-17-81 </a>
+                        <a href='https://wa.me/79259571781' >+7 (925) 957-17-81 </a>
                         </div>
                         <div className="menu_item">
                         <img src={mail}  alt="mail"/>
-                        <a>info@digitalre.ru </a>
+                        <a href='mailto:info@digitalre.ru'>info@digitalre.ru </a>
                         </div>
                         
                
@@ -148,13 +148,13 @@ function Footer() {
 
         <div className="footer_row">
             <div>
-            Digital Rex - Создание сайтов © 2016 - 2021
+            Digital Rex - Создание сайтов © 2016 - 2022
 
             </div>
-            <div>
+            {/* <div>
                 
             Политика конфидециальности
-            </div>
+            </div> */}
 
         </div>
         

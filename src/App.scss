@@ -1,3 +1,7 @@
+
+button{
+  cursor: pointer;
+}
 .container {
   max-width: 1170px;
   margin: auto;
@@ -223,7 +227,11 @@ footer {
     color: #FFFFFF;
     margin-bottom: 23px;
   }
-
+  .adress .col_content .menu_item{
+    &:hover{
+      text-decoration: none;
+    }
+  }
   .col_content {
     display: flex;
     flex-direction: column;
@@ -236,6 +244,14 @@ footer {
       margin-bottom: 14px;
       display: flex;
       align-items: center;
+      color: #FFFFFF;
+      transition: 300ms ease;
+      &:hover{
+        text-decoration: underline;
+      }
+      a{
+        color: #FFFFFF;
+      }
     }
 
     img {
@@ -2756,4 +2772,32 @@ select {
 }
 .image-item__btn-wrapper{
   margin-bottom: 30px;
+}
+
+.settings_row input.avatar-input{
+  position: absolute;
+  z-index: -4;
+  width: 0;
+  height: 0;
+  border: none;
+  opacity: 0;
+}
+.avatar-label{
+// display: flex;
+// align-items: center;
+// justify-content: center;
+// border: 1px solid #7E7E7E;
+// width: 285px;
+// background: #FFFFFF;
+// border-radius: 60px;
+// padding: 24px 0;
+}
+@media screen and (max-width:565px) {
+  .settings_row .active_btn{
+
+  }
+  .settings_row .settings_col{
+    margin-bottom: 30px;
+  }
+  
 }
