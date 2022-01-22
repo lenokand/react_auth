@@ -412,7 +412,7 @@ export default function Settings() {
 
 
                   </div>
-                  <div className='settings_col'>
+                  <div className='settings_col settiongs_avatar'>
 
 
 

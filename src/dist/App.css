@@ -1,6 +1,10 @@
 button {
   cursor: pointer;
 }
+button:disabled {
+  opacity: 0.7;
+  cursor: auto;
+}
 
 .container {
   max-width: 1170px;
@@ -1189,6 +1193,7 @@ select option {
   line-height: 130.7%;
   color: #7E7E7E;
   margin-bottom: 22px;
+  transition: ease 300ms;
 }
 .services .services-block_item .learnmore {
   margin-right: 12px;
@@ -2260,4 +2265,12 @@ select option {
   object-position: center;
   height: 100px;
   width: 100px;
+}
+
+.settiongs_avatar {
+  border: 2px dashed #ee51397a;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  transition: 300ms ease;
 }
