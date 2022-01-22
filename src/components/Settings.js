@@ -56,6 +56,8 @@ export default function Settings() {
 
     // const [imageList, setimageList] = useState('')
     const [newImg, setNewImg] = useState('')
+    // const [newImgUrl, setNewImgUrl] = useState('1')
+    const [newTest, setTest] = useState('1')
     const [newName, setNewName] = useState('')
     const [newTel, setNewTel] = useState('')
     const [newUserInfo, setNewUserInfo] = useState({})
@@ -226,7 +228,7 @@ export default function Settings() {
                   
                 uploadBytes(spaceRef, newImg).then((snapshot) => {
                   console.log('Uploaded a file!');
-                  console.log(newImg.name, newImg);
+                  // console.log(newImg.name, newImg);
                   setNewImg('')
 
                 });
@@ -330,12 +332,30 @@ export default function Settings() {
     // };
 
     const onChangeImg = (e) => {
+    
            if (e.target.files[0]) {
+            
+        
             setNewImg(e.target.files[0]);
+       
+            let file = e.target.files[0]
 
-            // console.log( newImg.name == '851880-3.jpg', newImg.name, newImg, e.target.files[0])
+
+
+            var reader = new FileReader();
+            reader.onload = function(event) {
+            
+            var span = document.getElementById('preveiw');
+            span.innerHTML = ['<img  title="" src="', event.target.result, '" />'].join('');
+         
+            };
+          
+            reader.readAsDataURL(file)
+
+
+          
            }
-     
+          
       
     };
 
@@ -394,6 +414,9 @@ export default function Settings() {
                   </div>
                   <div className='settings_col'>
 
+
+
+                  <div id='preveiw'></div>
                   <label className='avatar-label active_btn'>
                     
                       <input placeholder = "Укажите путь аватарки..." type="file" className='avatar-input'   accept="image/*"
@@ -401,8 +424,10 @@ export default function Settings() {
                   // onChange={(e) => setNewImg(e.target.value)}
                      onChange={onChangeImg}
                   />
-                  {newImg ? "Вы выбрали: " + newImg.name : "Выберите новую аватарку" } 
+                  {newImg ? "Ваш выбор: " + newImg.name : "Выберите новую аватарку" } 
                   </label>
+
+               
                   </div>
         
 
