@@ -13,6 +13,7 @@ import UserInfo from './UserInfo';
 
 import avatar1 from '../img/avatar1.png'; 
 import DialogForm from './DialogForm';
+import DialogFormSupport from './DialogFormSupport';
 import avatarNull from '../img/avatar.png'; 
 // import { getFirestore, collection, getDocs, addDoc, firestore, Timestamp, serverTimestamp } from 'firebase/firestore';                
 // import { initializeApp } from 'firebase/app';
@@ -24,14 +25,15 @@ import ScrollToBottom
 // { useScrollToBottom, useSticky } 
 from 'react-scroll-to-bottom'
 import {
-    // doc,
+    doc,
     getFirestore,
     collection,
-    // getDoc, 
+    getDoc, 
     // getDocs,
     orderBy,
     limit,
      query,
+    //  where ,
     // addDoc,
     // firestore,
     // Timestamp,
@@ -59,31 +61,31 @@ export default class Dialog  extends Component {
             dialogMenu: [
                 {
                     avatar: avatar1,
-                    name: 'Сергей Скударнов',
-                    lastMessege: 'Проджект менеджер',
+                    name: 'Иван Иванов',
+                    lastMessege: 'Ваш супер проджект менеджер',
                     // time: "9:35",
                     // status: '4',
                     online:''
         
                 },
-                {
-                    avatar: avatar1,
-                    name: 'Анастасия Усова',
-                    lastMessege: 'SEO-специалист',
-                    // time: "8:42",
-                    // status: '1',
-                    online:''
+                // {
+                //     avatar: avatar1,
+                //     name: 'Анастасия Усова',
+                //     lastMessege: 'SEO-специалист',
+                //     // time: "8:42",
+                //     // status: '1',
+                //     online:''
         
-                },
-                {
-                    avatar: avatar1,
-                    name: 'Михаил',
-                    lastMessege: 'Технический специалист',
-                    // time: "8:42",
-                    // status: '1',
-                    online:''
+                // },
+                // {
+                //     avatar: avatar1,
+                //     name: 'Михаил',
+                //     lastMessege: 'Технический специалист',
+                //     // time: "8:42",
+                //     // status: '1',
+                //     online:''
         
-                },
+                // },
                 // {
                 //     avatar: avatar1,
                 //     name: 'Сергей Скударнов',
@@ -126,62 +128,158 @@ export default class Dialog  extends Component {
             msg: [
 
             ],
+            msgSup:[],
+            uidList:[],
+            currentUserId:'',
             currentUserInfo:[],
-            currentUserRole:''
+            currentUserRole:'',
+            currentDialogId:'',
+            Sign:`<div>111</div>`
+
 
 
         }
         
-        // this.handleFormSubmit = this.handleFormSubmit.bind(this)
-        // this.handleNewPhraseChange = this.handleNewPhraseChange.bind(this)
+      
         this.getMessage = this.getMessage.bind(this)
+        this.changeDialog = this.changeDialog.bind(this)
        
 
     }
-    // handleNewPhraseChange(e) {
-    //     this.setState({
-    //         newPhrase: e.target.value
-    //     })
-    // }
- 
-
-
-    // handleFormSubmit(e) {
-    //     e.preventDefault()
-    //     let date= new Date()
-    //     let usertime = date.getHours() +":"+ (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes() )
-       
-    //     let phrase = {
-    //         id: Date.now(),
-    //         avatar: avatar1,
-    //         message: this.state.newPhrase,
-    //         time: usertime ,
-    //         status: 'user'
-    //     }
-    //     let tmp = this.state.chat
-    //     tmp.push(phrase)
-    //     this.setState({
-    //         chat: tmp,
-    //         newPhrase: ''
-    //     })
-       
-
-    // }
+  
     
    
-            getMessage() {
+            getMessage(e) {
                 try{
                     const auth = getAuth();
                     const userUid = auth.currentUser.uid
-                    // console.log(auth.currentUser.uid);
+                   
+                    this.setState({
+                        currentUserId:userUid
+                    })
                     const db = getFirestore()
-                    const chatRef = collection(db, 'chat')
-                    const q = query(chatRef, orderBy("timestamp", "asc"), limit(150));
-                    const  unsub = onSnapshot(q, (snapshot) => {
+
+                        // 
+                    const userRef = doc(db, 'users', userUid );
+
+                    let tmp2 =[]
+                         getDoc(userRef).then(docSnap => {
+                            
+                            
+                            this.setState({
+                                currentUserRole: docSnap.data().role})
+                                
+                            if(this.state.currentUserRole == "support"){
+                               
+                                const usersRef = collection(db, 'users')
+                                let  unsub = onSnapshot(query(usersRef), (snapshot) => {
+
+                                   
+                                    snapshot.forEach(doc => {
+                                        const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
+                                       if (userUid !== doc.data().uid && doc.data().role !== 'support' ) {
+                                        tmp2.push({
+                                            id:doc.data().uid,
+                                            photoURL: avatar,
+                                            displayName: doc.data().name,
+                                        
+                                        })
+                                       } 
+                                       
+
+                                      
+
+                                    })
+                                    this.setState({
+                                        uidList: tmp2
+                                    })
+                    
+                                   
+                                })
+                            } else {
+                                        
+                                        const chatRef = collection(db, 'users', userUid, 'chat')
+                                        this.setState({
+                                            currentDialogId:userUid
+                                        })
+                                        const q = query(chatRef, orderBy("timestamp", "asc"), limit(150));
+                                        const  unsub = onSnapshot(q, (snapshot) => {
+                                            const tmp = []
+                                                snapshot.forEach(doc => {
+                                                const utc = doc.data().timestamp
+                                    
+                                                //   const uid = 'oponent'
+                                                const uid = (userUid == doc.data().uid) ? 'user' : 'oponent'
+                                    
+                                                const local = moment(utc).local().format('HH:mm:ss YYYY-MM-DD ')
+                                                const avatar = doc.data().photoURL ? doc.data().photoURL : avatarNull
+                                                
+                                                const msg = {
+                                                    id: doc.id,
+                                                    message: doc.data().message,
+                                                    fileUpload:  doc.data().fileUpload,
+                                                    timestamp: local,
+                                                    photoURL: avatar,
+                                                    fileUpload: doc.data().fileUpload,
+                                                    displayName: doc.data().displayName,
+                                                    uid: uid,
+                                                    
+                                                }
+                                                tmp.push(msg)
+                                                
+                                                })
+                                        //   props.chat = tmp
+                                        
+                                        this.setState({
+                                            msg: tmp,})
+                                            // setMessages(tmp)
+                                            
+                                        });
+                                
+                                     
+                                
+                            }
+                                
+                        })
+                    
+                       
+                        // 
+                       
+                    
+                 
+               
+
+                } catch (e) {
+                    
+        
+                  
+                    console.error("Error adding document: ", e);
+        
+        
+                }
+                
+                  
+            }
+            changeDialog(id){
+                this.setState({currentDialogId: id })
+               
+                const auth = getAuth();
+                const userUid = auth.currentUser.uid
+               
+               
+                try{
+               
+                    
+                    const db = getFirestore()
+
+                    const chatRef = collection(db, 'users', id, 'chat')
+                   
+                    const b = query(chatRef, orderBy("timestamp", "asc"), limit(150));
+                    const  unsub = onSnapshot(b, (snapshot) => {
                         const tmp = []
                             snapshot.forEach(doc => {
                             const utc = doc.data().timestamp
-                
+                            
                             //   const uid = 'oponent'
                             const uid = (userUid == doc.data().uid) ? 'user' : 'oponent'
                 
@@ -202,13 +300,15 @@ export default class Dialog  extends Component {
                             tmp.push(msg)
                             
                             })
-                      //   props.chat = tmp
+                     
                    
                       this.setState({
-                        msg: tmp,})
-                        // setMessages(tmp)
+                        msgSup: tmp,})
+                      
                         
                     });
+                    
+                   
 
                 } catch (e) {
                     
@@ -219,20 +319,20 @@ export default class Dialog  extends Component {
         
                 }
                 
-                  
+
             }
-            
             
             componentDidMount(){
               
 
                 this.getMessage()
+               
             }
             componentWillUnmount(){
                 try{
                     const auth = getAuth();
                     const userUid = auth.currentUser.uid
-                    // console.log(auth.currentUser.uid);
+                   
                     const db = getFirestore()
                     const chatRef = collection(db, 'chat')
                     const q = query(chatRef, orderBy("timestamp", "asc"), limit(150));
@@ -282,19 +382,20 @@ export default class Dialog  extends Component {
             }
           
                 
-           
+          
          
     render() {
-// console.log(this.state.currentUserRole);
+
+
+        if(this.state.currentUserRole == 'user'){
+
 
         return (
             <div className="dialog">
                 <div className="title">
-                    Диалог проекта
+                    Диалог проекта 
                 </div>
-                {/* <div className="subtitle">
-                    Ваши диалоги:
-                </div> */}
+         
                 <div className="dialog-block">
                     <div className="left-block">
                         {/* <div className="dialog-row autor">
@@ -336,21 +437,8 @@ export default class Dialog  extends Component {
                     <div className="right-block">
                         <UserInfo dialogMenu={this.state.dialogMenu}/>
     
-                        {/* <div className="chat-block "> */}
                         <ScrollToBottom className="chat-block" >
-                                    {/* {this.state.chat.map((item, index )=>
-                                                (   
-                                                    <div className={`chat-row ${item.status}`} key={item.id}>
-                                                        <img src={item.avatar}  className="chat-avatar"/>
-                
-                                                        <div className="wrapper">
-                                                            <div className="chat-message"> {item.message}</div>  
-                                                            <div className="time-message ">{item.time}</div>
-                                                        </div>
-                                                    </div>
-            
-            
-                                            ))} */}
+                                 
                                      {this.state.msg.length > 0 && 
                                         this.state.msg.map( (message, index) => (
                                             <div className={`chat-row  ${message.uid}`} key={message.id}>
@@ -370,40 +458,18 @@ export default class Dialog  extends Component {
                                     }
                        
         
-                            {/* <div className="chat-row oponent">
-                                <img src={avatar1}  className="chat-avatar"/>
-                                <div className="wrapper">
-                                    <div className="chat-message"> Разнообразный и богатый опыт консультация с широким
-                                        активом влечет за собой процесс внедрения и модернизации
-                                        систем массового участия. Задача организации,
-                                        в особенности</div>  
-                                    <div className="time-message ">9:35</div>
-                                </div>
-                            </div>
-                            <div className="chat-row user">
-                                <img src={avatar1}  className="chat-avatar"/>
-                                <div className="wrapper">
-                                    <div className="chat-message"> Разнообразный и богатый опыт консультация с широким
-                                        активом влечет за собой процесс внедрения и модернизации
-                                        систем массового участия. Задача организации,
-                                        в особенности</div>  
-                                    <div className="time-message ">9:35</div>
-                                </div>
-                            </div> */}
-        </ScrollToBottom>
                           
-                        {/* </div> */}
-                        {/* <ChatForm/> */}
-                        
-
+                    </ScrollToBottom>
+                          
+                    <DialogFormSupport  curentUserId={this.state.currentUserId} uid={this.state.currentDialogId} send={this.state.send} getMessage={this.getMessage} />
+{/* 
                         <DialogForm
-                            // newPhrase={this.state.newPhrase} 
-                            // handleNewPhraseChange={this.handleNewPhraseChange} 
+                           
                             getMessage={this.getMessage} 
-                            // handleFormSubmit={this.handleFormSubmit} 
+                           
                             send={this.state.send} 
-                            // chat = {this.state.chat}
-                            />
+                           
+                            /> */}
                        
     
     
@@ -418,6 +484,99 @@ export default class Dialog  extends Component {
     
             </div>
         )
+     } else{
+        return (
+            <div className="dialog">
+            <div className="title">
+                Диалоги с клиентами
+            </div>
+          
+            <div className="dialog-block">
+                <div className="left-block">
+                                     
+                        {this.state.uidList.map((item, index )=>
+                                    ( 
+
+                                        <div className="dialog-row " key={index} onClick={() => this.changeDialog(item.id)}>
+                                                                
+                                            <img src={item.photoURL}  className="dialog-avatar"/>
+
+                                                <div className="dialog-preveiw">
+                                                    <div className="diallog-oponent"> {item.displayName}</div>
+                                                   
+                                                </div>
+                                            <div className="dialog-info">
+                                              
+                                              
+                                            </div>
+
+                                        </div>
+
+                                        // </Link>
+                                ))}
+                  
+
+
+                </div>
+
+                <div 
+              
+                className={`right-block  ${this.state.currentDialogId==""? "disabled" : ""}`}
+                
+                >
+                        <UserInfo dialogMenu={this.state.dialogMenu}/>
+                        {this.state.currentDialogId =="" ? "Для начала необходимо выбрать диалог" : ""}
+                       
+                        <ScrollToBottom className="chat-block" >
+                                   
+                                     {this.state.msgSup.length > 0 && 
+                                        this.state.msgSup.map( (message, index) => (
+                                            <div className={`chat-row  ${message.uid}`} key={message.id}>
+                                            <img src={`${message.photoURL}`}  className="chat-avatar"/>
+    
+                                            <div className="wrapper">
+                                                <div className="chat-message"> 
+                                                <div className='chat-message-name'>{message.displayName}</div>
+                                                {message.message}</div>  
+                                                <div className="time-message ">{message.timestamp}</div>
+                                            </div>
+                                            </div>
+
+
+
+                                        ))
+                                    }
+                       
+        
+                            
+                        </ScrollToBottom>
+                          
+                      <DialogFormSupport  curentUserId={this.state.currentUserId} uid={this.state.currentDialogId} send={this.state.send} getMessage={this.getMessage} />
+
+                        {/* <DialogFormSupport  
+                            // newPhrase={this.state.newPhrase} 
+                            // handleNewPhraseChange={this.handleNewPhraseChange} 
+                            getMessage={this.getMessage} 
+                            // handleFormSubmit={this.handleFormSubmit} 
+                            send={this.state.send} 
+                            // chat = {this.state.chat}
+                            />
+                        */}
+    
+    
+                    </div>
+    
+
+
+            </div>
+            
+
+
+
+
+        </div>
+            )
+    }
 
 
 } 
