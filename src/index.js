@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   
 } from "react-router-dom";
-
+import MetaTags from 'react-meta-tags';
 import reportWebVitals from './reportWebVitals';
 // import { initializeApp } from "firebase/app";
 // import firebase from "firebase";
@@ -105,6 +105,12 @@ ReactDOM.render(
         db
         
       } }>
+        <MetaTags>
+            <title>SEO кабинет DigitalRex</title>
+            <meta name="description" content="SEO кабинет от компании DigitalRex. Для наших клиентов. Удобный доступ к отчетам." />
+            <meta property="og:title" content="SEO кабинет" />
+            {/* <meta property="og:image" content="path/to/image.jpg" /> */}
+          </MetaTags>
         <React.StrictMode>
           <Router >
             <App />

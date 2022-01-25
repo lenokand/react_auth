@@ -43,7 +43,9 @@ return userlogin2 ?
         )}
 
         <Redirect to={MAIN_ROUTE}/>
+      
     </Switch>
+    
 )
 :
 (
@@ -53,6 +55,7 @@ return userlogin2 ?
         )}
 
         <Redirect to={LOGIN_ROUTE}/>
+        
     </Switch>
 )
 }
