@@ -145,6 +145,7 @@ menu {
 
     svg {
       fill: #BCBCBC;
+      transition: 300ms ease;
     }
 
     &:hover {
@@ -156,7 +157,10 @@ menu {
 
 
   }
+  .active .menu-item svg{
+    fill: #FF5F46;
 
+  }
 
 }
 

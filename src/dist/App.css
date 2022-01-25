@@ -124,8 +124,12 @@ menu {
 }
 .main_block .menu-item svg {
   fill: #BCBCBC;
+  transition: 300ms ease;
 }
 .main_block .menu-item:hover svg {
+  fill: #FF5F46;
+}
+.main_block .active .menu-item svg {
   fill: #FF5F46;
 }
 

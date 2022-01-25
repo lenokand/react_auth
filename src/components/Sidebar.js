@@ -1,8 +1,9 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
+    // Switch,
+    // Route,
+    NavLink,
     Link
   } from "react-router-dom";
 
@@ -37,47 +38,47 @@ function Sidebar() {
         <div className="sidebar">
             <nav>
                 {/* <Router > */}
-                    <Link to="/home">
+                    <NavLink to="/home" activeClassName="active" >
                     
                         <div className="menu-item">
                         {home}
                         </div >
-                    </Link>
+                    </NavLink>
                    
-                    <Link to="/seo">
+                    <NavLink  to="/seo" activeClassName="active">
                         <div className="menu-item">
                         
                         {seo}
                         
                         </div>
-                    </Link>
+                    </NavLink>
 
-                    <Link to="/dialog">
+                    <NavLink to="/dialog" activeClassName="active">
                         <div className="menu-item">
                             {dialog}
                             {/* <div className="pointer">3</div> */}
                         </div>
-                    </Link>
-                    <Link to="/docs">
+                    </NavLink>
+                    <NavLink to="/docs" activeClassName="active">
                         <div className="menu-item">
                         {docs}
                         
 
                         </div>
-                    </Link>
-                    <Link to="/notification">
+                    </NavLink>
+                    <NavLink to="/notification" activeClassName="active">
                         <div className="menu-item">
                             {notif}
                             {/* <div className="pointer">3</div>  */}
                         </div>
-                    </Link>
-                    <Link to="/settings">
+                    </NavLink>
+                    <NavLink to="/settings" activeClassName="active">
                         <div className="menu-item">
                          {settings}
                         
 
                         </div>
-                    </Link>
+                    </NavLink>
 
                 {/* </Router> */}
             </nav>
